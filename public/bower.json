@@ -1,0 +1,23 @@
+{
+  "name": "bower.json",
+  "authors": [
+    "Luqman <onakoyak@gmail.com>"
+  ],
+  "description": "bower components",
+  "main": "",
+  "keywords": [
+    "packages"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "resolutions": {
+    "jquery": ">=1.6"
+  }
+}
