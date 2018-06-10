@@ -31,7 +31,7 @@
                 <div class="row">
                   <div class="col-md-12 col-xm-12">
                     <div class="form-group">
-                        <input type="text" name="title" value="{{ old('title') }}" class="form-control" placeholder="Post Title" required>
+                        <input type="text" name="title" value="{{ old('title') }}" class="form-control" placeholder="Post Title" required v-model="title">
                         <span class="help-block text-red">
                             @if($errors->has('title'))
                                 {{ $errors->first('title')}}
@@ -41,11 +41,9 @@
                     </div>
                 </div>
                 <div class="row">
-                      <div class="col-md-12 col-xm-12">
-                          <div class="form-group">
-                              
-                          </div>
-                      </div>
+                <div class="form-group">
+                     <slug-widget url="{{ url('/') }}" subdirectory="blog" :title="title" @copied="slugCopied" @slug-changed="updateSlug"></slug-widget>                 <input type="hidden" v-model="slug" name="slug"/>
+                  </div>
                       <div class="col-md-12 col-xm-12">
                           <div class="form-group">
                               <textarea name="excerpt" id="excerpt" rows="3" class="form-control" placeholder="Excerpt..."></textarea>
@@ -73,7 +71,7 @@
                     </div>                    
                     <div class="col-md-12 col-xm-12">
                         <div class="form-group">
-                        <select name="tag[]" id="tag" class="form-control select2-multi" multiple="multiple">
+                        <select name="tags[]" class="form-control select2-multi" multiple="multiple">
                                 <option>Select tag...</option>
                             @foreach($tags as $tag)
                           <option value="{{ $tag->id }}">{{ $tag->name }}</option>
@@ -132,4 +130,28 @@
         </div>
     </div>
     <!-- /.row -->
+@endsection
+
+@section('vue')
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    title: '',
+                    slug: '',
+                    api_token: '{{Auth::user()->api_token}}'
+                },
+                methods: {
+                    updateSlug: function(val) {
+                      this.slug = val;
+                    },
+                    slugCopied: function(type, msg, val) {
+                      notifications.toast(msg, {type: `is-${type}`});
+                    }
+                  }
+            });
+        </script>
+        <script type="text/javascript">
+            $(".select2-multi").select2();
+          </script>
 @endsection

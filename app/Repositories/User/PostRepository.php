@@ -99,7 +99,7 @@ class PostRepository implements PostRepositoryInterface
         // $posts = $postsQuery->paginate();
     }
 
-      public function delete($id)
+         public function delete($id)
       {
           $this->post->delete($id);
       }
@@ -126,5 +126,10 @@ class PostRepository implements PostRepositoryInterface
       public function find($id)
     {
       return $this->post->findOrFail($id);
+    }
+
+    public function where($query)
+    {
+        return $this->post->where($query);
     }
 }

@@ -18,6 +18,8 @@ interface PostRepositoryInterface
 
   public function publish($id);
 
+  public function where($query);
+
   public function delete($id);
 
   public function withTrashed();

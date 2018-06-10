@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-        // $this->call(LaratrustSeeder::class);
+         $this->call(LaratrustSeeder::class);
       factory(App\User::class, 25)->create()->each(function ($u) {
         for ($i=0; $i <= 3; $i++) {
           $u->posts()->save(factory(App\Post::class)->make());

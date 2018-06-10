@@ -26,8 +26,7 @@
   <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
   <!-- Toastr -->
   <link rel="stylesheet" href="{{ asset('bower_components/toastr/toastr.min.css') }}">
-  <!-- Select2-->
-  <link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet" />
+  
   <!-- Bootstrap-Vue -->
   <!-- <link src="{{ asset('bower_components/bootstrap-vue/dist/bootstrap-vue.min.css') }}"></link> -->
 
@@ -41,6 +40,8 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
+  <!-- Select2-->
+  <link href="{{ asset('css/select2.css') }}" rel="stylesheet" />
 </head>
 <body class="hold-transition skin-black sidebar-mini">
 
@@ -67,10 +68,10 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+<!-- Select2 -->
+<script src="{{ asset('js/select2.js') }}"></script>
 <!-- Vue -->
 <!-- <script src="{{ asset('bower_components/bootstrap-vue/dist/bootstrap-vue.min.js') }}"></script> -->
-<!-- Select2 -->
-<script src="vendor/select2/dist/js/select2.min.js"></script>
 <!-- Bootstrap-Vue -->
 <!-- <script src="{{ asset('bower_components/vue/dist/vue.min.js') }}"></script> -->
 <!-- jQuery 3 -->
@@ -96,23 +97,6 @@
     @if(Session::has('info'))
         toastr.info("{{ Session::get('info') }}")
     @endif
-
-    {{--  $(function () {
-        $('.confirm').on('click', function (e) {
-            e.preventDefault();
-            var linkLocation = $(this).attr('href');
-
-            alertify.okBtn("Yes")
-                .cancelBtn("No")
-                .confirm("Are you sure you want to perform this action?", function () {
-                    window.location = linkLocation;
-                });
-        });
-    });  --}}
-
-    $(document).ready(function() {
-      $('.js-example-basic-multiple').select2();
-  });
 </script>
 <!-- <script>
   var app = new Vue({
@@ -120,7 +104,6 @@
     data: {}
   });
 </script> -->
-
 @yield('vue')
 @stack('scripts')
 </body>

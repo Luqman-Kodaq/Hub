@@ -138,4 +138,9 @@ class PostController extends Controller
     {
         //
     }
+
+    public function apiCheckUnique(Request $request)
+    {
+        return json_encode(!$this->post->where('slug', '=', $request->slug)->exists());
+    }
 }
