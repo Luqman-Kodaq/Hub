@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Repositories\User\RoleRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -12,12 +13,15 @@ use Carbon\Carbon;
 class UserController extends Controller
 {
     private $user;
+    private $role;
 
     public function __construct(
-        UserRepositoryInterface $userRepository
+        UserRepositoryInterface $userRepository,
+        RoleRepositoryInterface $roleRepository
     )
     {
        $this->user = $userRepository;
+       $this->role = $roleRepository;
     }
 
     /**
@@ -28,7 +32,7 @@ class UserController extends Controller
     public function index()
     {
         return view('user.users.index')
-        ->with('users', $this->user->all());
+                ->with('users', $this->user->all());
     }
 
     /**
@@ -38,7 +42,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.users.create');
+        return view('user.users.create')
+                ->with('roles', $this->role->all());
     }
 
     /**
@@ -82,7 +87,8 @@ class UserController extends Controller
         $user = $this->user->find($request->id);
 
         return view('user.users.edit')
-            ->with('user', $user);
+            ->with('user', $user)
+            ->with('roles', $this->role->all());
     }
 
     /**
@@ -112,6 +118,7 @@ class UserController extends Controller
     {
         $user = $this->user->find($request->id);
 
+        $user->profile->delete();
         $user->delete();
 
         return back()

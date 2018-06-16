@@ -20,6 +20,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Toastr -->
+  <link rel="stylesheet" href="{{ asset('bower_components/toastr/toastr.min.css') }}">
 </head>
 <body>
 
@@ -28,8 +30,12 @@
         <div id="app">
           @yield('content')        
         </div>
+
+        
         <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <!-- Toastr -->
+<script src="{{ asset('bower_components/toastr/toastr.min.js') }}"></script>
     <script>
             $(function () {
                 $('.confirm').on('click', function (e) {

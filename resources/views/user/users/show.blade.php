@@ -30,12 +30,11 @@
             <div class="box-body">
               <!-- Media -->
               <div class="media">
-                <!-- <div class="media-left">
-                @if(!empty($user->profile_photo))
-                  <img src="{{ asset('uploads/profile_photo/' .  $user->profile_photo) }}" alt="{{ $user->name }}" width="200" height="200" class="media-object">
-                @endif
-                </div> -->
                 <div class="media-body">
+                    @if(!empty($user->profile_photo))
+                    <img src="{{ asset('uploads/profile_photo/' .  $user->profile_photo) }}" alt="{{ $user->name }}" width="70" height="70" class="media-object" style="border-radius: 50%">
+                  @endif
+                  </div>
                     <label for="Name"><strong>Name</strong></label>
                     <div>
                       <p>{{ $user->name }}</p>
@@ -44,9 +43,23 @@
                     <div>
                       <p>{{ $user->email }}</p>
                     </div>
+                    <label for="Slug"><strong>Slug</strong></label>
+                    <div>
+                      <p>{{ $user->slug }}</p>
+                    </div>
                     <label for="Status"><strong>Online</strong></label>
                     <div>
                       <p>{{ $user->active ? "Yes" : "No" }}</p>
+                    </div>
+                    <label for="Role"><strong>Role</strong></label>
+                    <div>
+                        <ul>
+                            @forelse ($user->roles as $role)
+                              <li>{{$role->display_name}} ({{$role->description}})</li>
+                            @empty
+                            <p>This user has not been assigned any roles yet</p>
+                            @endforelse
+                          </ul>
                     </div>
                 </div>            
               </div>

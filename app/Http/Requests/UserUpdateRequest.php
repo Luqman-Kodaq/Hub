@@ -34,7 +34,8 @@ class UserUpdateRequest extends FormRequest
               Rule::unique('users')->ignore($request->id)
             ],
             'password'          => 'required|min:8|max:25',
-            'confirm_password'  => 'required|same:password'
+            'confirm_password'  => 'required|same:password',
+            'profile_photo' => 'required|image'
         ];
     }
 }

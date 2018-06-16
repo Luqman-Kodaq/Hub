@@ -55,9 +55,12 @@
                                 </tr>
                                 @endforeach
                             </tbody>
-                        </table>
+                        </table>                        
                     </div>
                     <!-- /.box-body -->
+                </div>
+                <div class="pull-right">
+                        {!! $users->links(); !!}
                 </div>
                 <!-- /.box -->
             </div>

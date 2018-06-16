@@ -4,7 +4,9 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="public/placeholder.jpg" class="img-circle" alt="">
+                    @if(!empty($user->profile_photo))
+                    <img src="{{ asset('uploads/profile_photo/' .  $user->profile_photo) }}" alt="{{ $user->name }}" width="70" height="70" class="media-object" style="border-radius: 50%">
+                  @endif
             </div>
             <div class="pull-left info">
                 <p></p>
@@ -61,7 +63,7 @@
                     </li>                    
                     <li class="treeview"><a href="javascript:void(0)"><i class="fa fa-circle-o"></i> Trash</a>
                         <ul class="treeview-menu">
-                            <li><a href=""><i class="fa fa-circle-o"></i> List Post</a>
+                            <li><a href="{{ route('post.trash') }}"><i class="fa fa-circle-o"></i> List Post</a>
                         </ul>
                     </li>
                 </ul>
@@ -139,7 +141,12 @@
                     <i class="fa fa-user"></i> <span>My Account</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href=""><i class="fa fa-circle-o"></i> Edit Profile</a></li>
+                    @if(Auth::check())
+                    <li>
+                        <a href="{{ route('profile.index', ['slug' => Auth::user()->slug ]) }}"><i class="fa fa-circle-o"></i> My Profile
+                        </a>
+                    </li>
+                    @endif
                     <li><a href="#"><i class="fa fa-circle-o"></i> Change Password</a></li>
                     <li><a href="{{route('logout')}}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();"><i class="fa fa-circle-o"></i> Logout</a></li>

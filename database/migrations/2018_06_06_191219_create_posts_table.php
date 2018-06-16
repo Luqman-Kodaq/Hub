@@ -26,11 +26,12 @@ class CreatePostsTable extends Migration
             $table->integer('dislike')->default(0);
             $table->integer('category_id')->unsigned();
             $table->unsignedInteger('user_id');
+            $table->integer('status')->default(0);
             $table->softDeletes();
             $table->timestamps();
 
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

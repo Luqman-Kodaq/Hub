@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Post;
 use Image;
+use Auth;
 
 class PostRepository implements PostRepositoryInterface
 {
@@ -22,12 +23,12 @@ class PostRepository implements PostRepositoryInterface
       return $this->post;
   }
 
- public function all()
-  {
-      return $this->post->published()->paginate();
-  }
+    public function all()
+    {
+        return $this->post->paginate(2);
+    }
 
-  public function store(Request $request)
+    public function store(Request $request)
   {
       $post = DB::transaction(function () use ($request) {
         $post = new $this->post();
@@ -63,7 +64,6 @@ class PostRepository implements PostRepositoryInterface
              $post->excerpt = $request->excerpt;
              $post->contents = $request->contents;
              $post->category_id = $request->category_id;
-             $post->user_id = $request->user();
 
              if ($request->hasFile('image')) {
               $image = $request->file('image');
@@ -84,52 +84,45 @@ class PostRepository implements PostRepositoryInterface
           });
     }
 
-    public function publish($id)
-    {
-          $this->post->published = $post;
-          $post->save();          
-    }
+        public function allPublished()
+        {
+            return $this->post->publish()->paginate(2);
+        }
 
-    public function drafts()
-    {
-        $postsQuery = $this->post->unpublished();
-        // if (Gate::denies('see-all-drafts')) {
-        //   $postsQuery = $postsQuery->where('user_id', Auth::user()->id);
-        // }
-        // $posts = $postsQuery->paginate();
-    }
+      public function published($id)
+      {
+        $post = $this->find($id);
+        $post->published = true;
+        $post->save();
+      }
 
-         public function delete($id)
+      public function temporaryDelete($id)
       {
           $this->post->delete($id);
       }
 
-      public  function withTrashed()
+      public  function onlyTrashed()
       {
           return $this->post->onlyTrashed()->get();
       }
 
       public function forceDelete($id)
       {
-          $post = $this->post->withTrashed()->where('id', $id)->first();
-
-          $post->forceDelete();          
+           return $this->post->withTrashed()->find($id);
       }
 
       public function restore($id)
       {
-        $post = $this->post->withTrashed()->where('id', $id)->first();
-
-        $post->restore();
+       return $this->post->withTrashed()->find($id);
       }
 
       public function find($id)
-    {
+      {
       return $this->post->findOrFail($id);
-    }
+      }
 
     public function where($query)
-    {
+      {
         return $this->post->where($query);
-    }
+      }
 }

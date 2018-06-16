@@ -22,13 +22,18 @@ Route::group(['prefix' => 'manage'], function() {
     // Home Controller
     Route::get('/home', 'DashboardController@dashboard')->name('home');
 
+     // Profile Controller
+     Route::get('/profile/{slug}', 'ProfileController@index')->name('profile.index');
+     Route::get('/profile/edit', 'ProfileController@edit')->name('profile.edit');
+     Route::post('/profile/update', 'ProfileController@update')->name('profile.update');
+
     // Users Controller
     Route::get('/users', 'UserController@index')->name('user.index');
     Route::get('/users/add', 'UserController@create')->name('user.create');
     Route::post('/users/add', 'UserController@store')->name('user.store');
-    Route::get('/users/show/{id}', 'UserController@show')->name('user.show');
+    Route::get('/users/show/{slug}', 'UserController@show')->name('user.show');
     Route::get('/users/edit/{id}', 'UserController@edit')->name('user.edit');
-    Route::post('/users/edit', 'UserController@update')->name('user.update');
+    Route::post('/users/edit/{id}', 'UserController@update')->name('user.update');
     Route::get('/users/delete', 'UserController@destroy')->name('user.destroy');
 
      // Posts Controller
@@ -36,11 +41,14 @@ Route::group(['prefix' => 'manage'], function() {
      Route::get('/posts/draft', 'PostController@drafts')->name('post_draft.index');
      Route::get('/posts/add', 'PostController@create')->name('post.create');
      Route::post('/posts/add', 'PostController@store')->name('post.store');
-     Route::post('/posts/publish', 'PostController@publish')->name('post.publish');
+     Route::get('/posts/publish/{id}', 'PostController@publish')->name('post.publish');
      Route::get('/posts/show/{id}', 'PostController@show')->name('post.show');
      Route::get('/posts/edit/{id}', 'PostController@edit')->name('post.edit');
-     Route::post('/posts/edit', 'PostController@update')->name('post.update');
-     Route::get('/posts/delete', 'PostController@destroy')->name('post.destroy');
+     Route::post('/posts/edit/{id}', 'PostController@update')->name('post.update');
+     Route::get('/posts/trash', 'PostController@onlyTrashed')->name('post.trash');
+     Route::get('/posts/restore/{id}', 'PostController@restore')->name('post.restore');
+     Route::get('/posts/delete', 'PostController@temporaryDelete')->name('post.destroy');
+     Route::get('/posts/terminate/{id}', 'PostController@forceDelete')->name('post.terminate');
 
     // Role Controller
     Route::get('roles', 'RoleController@index')->name('role.index');

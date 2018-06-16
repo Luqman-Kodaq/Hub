@@ -39,7 +39,7 @@ class RoleRepository implements RoleRepositoryInterface
             $role->save();
 
             if ($request->permissions){
-              $role->syncPermissions(explode(', ', $request->permissions));
+              $role->syncPermissions($request->permissions);
             }
         });
   }
@@ -53,7 +53,7 @@ class RoleRepository implements RoleRepositoryInterface
             $role->save();
 
             if ($request->permissions) {
-                $role->syncPermissions(explode(', ', $request->permissions));
+                $role->syncPermissions($request->permissions);
             }
     });
   }

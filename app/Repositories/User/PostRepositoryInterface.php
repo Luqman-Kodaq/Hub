@@ -14,15 +14,15 @@ interface PostRepositoryInterface
 
   public function update($id, Request $request); 
 
-  public function drafts();
+  public function published($id);
 
-  public function publish($id);
+  public function allPublished();
 
   public function where($query);
 
-  public function delete($id);
+  public function temporaryDelete($id);
 
-  public function withTrashed();
+  public function onlyTrashed();
 
   public function forceDelete($id);
 

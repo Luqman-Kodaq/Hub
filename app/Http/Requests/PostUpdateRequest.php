@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class PostUpdateRequest extends FormRequest
@@ -22,14 +23,14 @@ class PostUpdateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
         return [
-            'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
+            'slug'                     => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
             'title' => [
                  'required',
                  'max:255',
-                 Rule::unique('posts')->where('id', '<>', $id)
+                 Rule::unique('posts')->ignore($request->id)
                 ],
             'excerpt' => 'nullable',
             'contents' => 'required',

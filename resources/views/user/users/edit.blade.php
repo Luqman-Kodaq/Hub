@@ -29,11 +29,10 @@
                     <div class="box-body">
 
                         <form action="{{ route('user.update', ['id' => $user->id]) }}" enctype="multipart/form-data" method="post" accept-charset="utf-8">
-
+                                {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Name</label>
                                         <input type="text" name="name" value="{{ old('name', $user->name) }}" class="form-control" placeholder="User Name" required>
                                         <span class="help-block text-red">
                                             @if($errors->has('name'))
@@ -46,7 +45,6 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Email Address</label>
                                         <input type="text" name="email" value="{{ old('email', $user->email) }}" class="form-control" placeholder="Email Address" required>
                                         <span class="help-block text-red">
                                             @if($errors->has('email'))
@@ -57,7 +55,6 @@
                                 </div>
                                 <div class="col-md-6 col-xm-12">
                                     <div class="form-group">
-                                        <label>Password</label>
                                         <input type="password" name="password" value="{{ old('password') }}" class="form-control" placeholder="Password" required>
                                         <span class="help-block text-red">
                                             @if($errors->has('password'))
@@ -68,7 +65,6 @@
                                 </div>
                                 <div class="col-md-6 col-xm-12">
                                     <div class="form-group">
-                                        <label>Confirm Password</label>
                                         <input type="password" name="confirm_password" value="{{ old('confirm_password') }}" class="form-control" placeholder="Confirm Password" required>
                                         <span class="help-block text-red">
                                             @if($errors->has('confirm_password'))
@@ -77,6 +73,38 @@
                                         </span>
                                     </div>
                                 </div>
+                                <div class="col-md-8 col-xm-12">
+                                        <div class="form-group">
+                                            <input type="text" name="slug" value="{{ old('slug') }}" class="form-control" placeholder="Slug (preferably your name)" required>
+                                            <span class="help-block text-red">
+                                                @if($errors->has('slug'))
+                                                    {{ $errors->first('slug')}}
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-xm-12">
+                                            <div class="form-group">
+                                                <input type="file" name="profile_photo" class="form-control">
+                                            </div>
+                                        </div> 
+                                <div class="col-md-6 col-xm-12">
+                                <div class="form-group">
+                                <label for="role" class="control-label">Roles</label>
+		        				<input type="hidden" name="roles" :value="rolesSelected" />
+                                @foreach ($roles as $role)
+                                <div class="form-group">
+                                <b-form-group>
+                                    <b-form-radio-group name="roles" v-model="rolesSelected">
+		        					<b-form-radio value="{{$role->id}}">
+                                        {{$role->display_name}}                  
+                                    </b-form-radio>
+                                    </b-form-radio-group>
+                                </b-form-group>
+                                </div>
+		        				@endforeach
+                                </div> 
+                                </div>  
                             </div>
                             <hr>
                             <div class="row">
@@ -109,4 +137,14 @@
         </div>
         <!-- /.row -->
     </section>
+@endsection
+@section('vue')
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                rolesSelected: [{!! $user->roles->pluck('id') !!}]
+            }
+        });
+    </script>
 @endsection

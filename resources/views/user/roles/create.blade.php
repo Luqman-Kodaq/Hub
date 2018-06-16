@@ -73,7 +73,7 @@
                                         @foreach ($permissions as $permission)
                                         <div class="form-group">
                                         <b-form-group>
-                                            <b-form-checkbox-group id="permissions" name="permissions" v-model="permissionsSelected">
+                                            <b-form-checkbox-group id="permissions" name="permissions[]" v-model="permissionsSelected">
                                                 <b-form-checkbox value="{{ $permission->id }}">
                                               {{ $permission->display_name }} <em> ({{ $permission->description }})</em>
                                                 </b-form-checkbox>

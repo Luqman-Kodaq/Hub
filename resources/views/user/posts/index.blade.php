@@ -20,9 +20,6 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">Post Directory</h3>
-                        <div class="box-header-buttons pull-right">
-                                <a href="{{ route('post.create') }}" class="btn btn-primary btn-xs"><span class="fa fa-plus"></span> New Post</a>
-                        </div>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -30,8 +27,8 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>ID</th>
                                 <th>Author</th>
+                                <th>Image</th>
                                 <th>Title</th>
                                 <th>Content</th>
                                 <th>Created At</th>
@@ -39,13 +36,18 @@
                             </tr>
                             </thead>
                             <tbody>
+                                @if ($posts->count() > 0)
                                 @foreach($posts as $post)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $post->id }}</td>
-                                    <td>{{ $post->user_id }}</td>
+                                    <td>{{ $post->user->name }}</td>
+                                    <td>
+                                        @if(!empty($post->image))
+                                        <img src="{{ asset('uploads/post_photo/' .  $post->image) }}" alt="{{ $post->title }}" width="100" height="100" >
+                                      @endif
+                                    </td>
                                     <td>{{ $post->title }}</td>
-                                    <td>{{ substr(strip_tags($post->contents), 0, 50) }}{{ strlen(strip_tags($post->body)) > 50 ? "..." : "" }}</td>
+                                    <td>{{ substr(strip_tags($post->contents), 0, 50) }}{{ strlen(strip_tags($post->contents)) > 50 ? "..." : "" }}</td>
                                     <td>{{ date('M j, Y', strtotime($post->created_at)) }}</td>
                                     <td class="text-right">
                                         <div class="btn-group">
@@ -56,10 +58,18 @@
                                     </td>
                                 </tr>
                                 @endforeach
+                                @else
+                                <tr>
+                                        <th colspan="5" class="text-center">There no published posts yet</th>
+                                </tr>
+                                @endif
                             </tbody>
-                        </table>
+                        </table>                        
                     </div>
                     <!-- /.box-body -->
+                </div>
+                <div class="pull-right">
+                        {!! $posts->links(); !!}
                 </div>
                 <!-- /.box -->
             </div>

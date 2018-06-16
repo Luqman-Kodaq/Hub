@@ -8,24 +8,29 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Image;
+use Auth;
 
 class UserRepository implements UserRepositoryInterface
 {
   protected $user;
 
-  public function __construct(User $user)
+  public function __construct
+  (
+        User $user
+  )
   {
       $this->user = $user;
   }
 
   public function getInstance()
   {
-      return $this->user;
+      return 
+      $this->user;
   }
 
  public function all()
   {
-      return $this->user->all();
+      return $this->user->paginate(8);
   }
 
   public function allActive()
@@ -40,17 +45,23 @@ class UserRepository implements UserRepositoryInterface
       $user->name = $request->name;
       $user->email = $request->email;
       $user->password = Hash::make($request->password);
+      $user->slug = $request->slug;
 
-      // Save the Image
-      if ($request->hasFile('profile_photo')) {
-        $image = $request->file('profile_photo');
-        $filename = time(). '.' . $image->getClientOriginalExtension();
-        $location = public_path('uploads/profile_photo/' . $filename);
-        Image::make($image)->resize(150, 150)->save($location);
-
-        $user->profile_photo = $filename;
-      }
+         // Save the Image
+         if ($request->hasFile('profile_photo')) {
+          $image = $request->file('profile_photo');
+          $filename = time(). '.' . $image->getClientOriginalExtension();
+          $location = public_path('uploads/profile_photo/' . $filename);
+          Image::make($image)->resize(70, 70)->save($location);
+  
+          $user->profile_photo = $filename;
+        }
+      
       $user->save();
+
+      if ($request->roles) {
+        $user->syncRoles(explode(',', $request->roles));
+      }
 
     });
   }
@@ -62,7 +73,23 @@ class UserRepository implements UserRepositoryInterface
       $user->name = $request->name;
       $user->email = $request->email;
       $user->password = Hash::make($request->password);
+      $user->slug = str_slug($user->name);
+
+       // Save the Image
+       if ($request->hasFile('profile_photo')) {
+        $image = $request->file('profile_photo');
+        $filename = time(). '.' . $image->getClientOriginalExtension();
+        $location = public_path('uploads/profile_photo/' . $filename);
+        Image::make($image)->resize(70, 70)->save($location);
+
+        $user->profile_photo = $filename;
+      }
+
       $user->save();
+
+      if ($request->roles) {
+        $user->syncRoles(explode(',', $request->roles));
+      }
     });
   }
 
@@ -75,4 +102,9 @@ class UserRepository implements UserRepositoryInterface
   {
       return $this->user->findOrFail($id);
   }
+
+  public function where($query)
+      {
+        return $this->user->where($query);
+      }
 }

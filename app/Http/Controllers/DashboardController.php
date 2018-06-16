@@ -2,28 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\User\PermissionRepositoryInterface;
+use App\Repositories\User\RoleRepositoryInterface;
+use App\Repositories\User\PostRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     private $user;
-    private $permission;
+    private $role;
+    private $post;
 
     public function __construct(
         UserRepositoryInterface $userRepository,
-        PermissionRepositoryInterface $permissionRepository
+        RoleRepositoryInterface $roleRepository,
+        PostRepositoryInterface $postRepository
     )
     {
        $this->user = $userRepository;
-       $this->permission = $permissionRepository;
+       $this->role = $roleRepository;
+       $this->post = $postRepository;
     }
     
     public function dashboard()
     {
         return view('user.dashboard.index')
             ->with('users', $this->user->all())
-            ->with('permissions', $this->permission->all());
+            ->with('roles', $this->role->all())
+            ->with('posts', $this->post->all());
     }
 }

@@ -1,5 +1,12 @@
 @extends('layouts.master')
 
+@section('title', '| Create New Post')
+
+@section('headSection')
+<!-- Select2-->
+  <link href="{{ asset('bower_components/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
+@endsection
+
 @section('content')
 
   <!-- Content Header (Page header) -->
@@ -42,7 +49,8 @@
                 </div>
                 <div class="row">
                 <div class="form-group">
-                     <slug-widget url="{{ url('/') }}" subdirectory="blog" :title="title" @copied="slugCopied" @slug-changed="updateSlug"></slug-widget>                 <input type="hidden" v-model="slug" name="slug"/>
+                     <slug-widget url="{{ url('/') }}" subdirectory="blog" :title="title" @copied="slugCopied" @slug-changed="updateSlug"></slug-widget>
+                     <input type="hidden" v-model="slug" name="slug"/>
                   </div>
                       <div class="col-md-12 col-xm-12">
                           <div class="form-group">
@@ -71,8 +79,7 @@
                     </div>                    
                     <div class="col-md-12 col-xm-12">
                         <div class="form-group">
-                        <select name="tags[]" class="form-control select2-multi" multiple="multiple">
-                                <option>Select tag...</option>
+                        <select name="tags[]" class="form-control select2-multi" multiple="multiple" data-placeholder="Select tag...">
                             @foreach($tags as $tag)
                           <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                           @endforeach
@@ -151,7 +158,11 @@
                   }
             });
         </script>
-        <script type="text/javascript">
-            $(".select2-multi").select2();
-          </script>
+        <!-- Select2 -->
+    <script src="{{ asset('bower_components/select2/dist/js/select2.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+          $(".select2-multi").select2();
+        });
+      </script>
 @endsection

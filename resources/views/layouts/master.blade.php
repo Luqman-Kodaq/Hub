@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Content Hub | @yield('title')</title>
+  <title>Content Hub @yield('title')</title>
 
   <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -39,9 +39,7 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
-  <!-- Select2-->
-  <link href="{{ asset('css/select2.css') }}" rel="stylesheet" />
+@yield('headSection')
 </head>
 <body class="hold-transition skin-black sidebar-mini">
 
@@ -68,8 +66,6 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
-<!-- Select2 -->
-<script src="{{ asset('js/select2.js') }}"></script>
 <!-- Vue -->
 <!-- <script src="{{ asset('bower_components/bootstrap-vue/dist/bootstrap-vue.min.js') }}"></script> -->
 <!-- Bootstrap-Vue -->

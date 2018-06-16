@@ -15,9 +15,9 @@ class Post extends Model
 
     public function tags()
     {
-    	return $this->belongsToMany('App\Tag');
+    	return $this->belongsToMany('App\Tag', 'post_tag');
     }
-
+    
     public function category()
     {
         return $this->belongsTo('App\Category');
@@ -28,12 +28,12 @@ class Post extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function scopePublished($query)
+    public function scopePublish($query)
     {
         return $query->where('published', true);
     }
 
-    public function scopeUnpublished($query)
+    public function scopeUnpublish($query)
     {
         return $query->where('published', false);
     }

@@ -30,37 +30,52 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>ID</th>
                                 <th>Author</th>
+                                <th>Image</th>
                                 <th>Title</th>
                                 <th>Content</th>
-                                <th>Created At</th>
+                                <th>Status</th>
                                 <th class="text-right">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
+                                @if($posts->count() > 0)
                                 @foreach($posts as $post)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $post->id }}</td>
-                                    <td>{{ $post->user_id }}</td>
+                                    <td>{{ $post->user->name }}</td>
+                                    <td>
+                                        @if(!empty($post->image))
+                                        <img src="{{ asset('uploads/post_photo/' .  $post->image) }}" alt="{{ $post->title }}" width="100" height="100" >
+                                      @endif
+                                    </td>
                                     <td>{{ $post->title }}</td>
-                                    <td>{{ substr(strip_tags($post->contents), 0, 50) }}{{ strlen(strip_tags($post->body)) > 50 ? "..." : "" }}</td>
-                                    <td>{{ date('M j, Y', strtotime($post->created_at)) }}</td>
+                                    <td>{{ substr(strip_tags($post->contents), 0, 50) }}{{ strlen(strip_tags($post->contents)) > 50 ? "..." : "" }}</td>
+                                    <td>{{ $post->published ? "Published" : "Not Yet" }}</td>
                                     <td class="text-right">
                                         <div class="btn-group">
                                                 <a href="{{ route('post.show', $post->id) }}" class="btn btn-default btn-xs"><i class="fa fa-eye"></i></a>
-                                                <a href="{{ route('post.publish', $post->id) }}" class="btn btn-default btn-xs"><i class="fa fa-check"></i></a>
+                                                @if ($post->published == 0)
+                                                <a href="{{ route('post.publish', ['id' => $post->id]) }}" class="btn btn-default btn-xs" role="button"><i class="fa fa-check"></i></a>
+                                                @endif
                                                 <a href="{{ route('post.edit', ['id' => $post->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></a>
                                                 <a href="{{ route('post.destroy', ['id' => $post->id]) }}" class="btn btn-default btn-xs confirm"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
                                 </tr>
                                 @endforeach
+                                @else
+                                <tr>
+                                      <th colspan="5" class="text-center">No draft posts</th>
+                                </tr>
+                                @endif
                             </tbody>
-                        </table>
+                        </table>                       
                     </div>
                     <!-- /.box-body -->
+                    <div class="pull-right">
+                            {!! $posts->links(); !!}
+                    </div>
                 </div>
                 <!-- /.box -->
             </div>
