@@ -17,8 +17,6 @@
     <!-- Main content -->
     <section class="content">
 
-        @include('layouts.partials.message')
-
         <div class="row">
             <div class="col-md-6 col-md-offset-3 col-xs-12">
                 <div class="panel panel-default">
@@ -30,31 +28,31 @@
                     <div class="panel-body">       
                               <div class="col-md-8 col-md-offset-1 col-xm-12 text-center">
                                     @if(!empty($user->profile_photo))
-                                    <img src="{{ Storage::url($user->profile_photo) }}" alt="profile picture" width="140px" height="140px" style="border-radius: 50%">
+                                    <img src="{{ Storage::url($user->profile_photo) }}" alt="{{ Auth::user()->name }}" width="140px" height="140px" style="border-radius: 50%">
                                   @endif
                               </div>
                               <div class="form-group text-center">
                                   <div class="col-md-8 col-md-offset-1 col-xm-12">
                                       <label for="facebook"><strong>Facebook Id:</strong></label>
-                                        <p>{{ $user->facebook }}</p>
+                                        <p>{{ $user->profile->facebook }}</p>
                                   </div>
                               </div>
                               <div class="form-group text-center">
                                     <div class="col-md-8 col-md-offset-1 col-xm-12">
                                         <label for="twitter"><strong>Twitter Id:</strong></label>
-                                          {{-- <p>{{ $user->profile->twitter }}</p> --}}
+                                          <p>{{ $user->profile->twitter }}</p>
                                     </div>
                                 </div>
                                 <div class="form-group text-center">
                                         <div class="col-md-8 col-md-offset-1 col-xm-12">
                                             <label for="instagram"><strong>Instagram Id:</strong></label>
-                                              {{-- <p>{{ $user->profile->instagram }}</p> --}}
+                                              <p>{{ $user->profile->instagram }}</p>
                                         </div>
                                 </div>
                                 <div class="form-group text-center">
                                         <div class="col-md-8 col-md-offset-1 col-xm-12">
                                             <label for="about"><strong>Biography:</strong></label>
-                                              {{-- <p>{{ $user->profile->about }}</p> --}}
+                                              <p>{{ $user->profile->about }}</p>
                                         </div>
                                 </div>
                                 <div class="form-group pull-right">

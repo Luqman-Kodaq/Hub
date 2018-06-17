@@ -13,10 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('posts/{post}/comments', 'CommentController@index')->name('comment.index');
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('/posts/unique', 'PostController@apiCheckUnique')->name('api.posts.unique');    
+    Route::get('/posts/unique', 'PostController@apiCheckUnique')->name('api.posts.unique');
+    Route::post('posts/{post}/comment', 'CommentController@store');
 });

@@ -5,7 +5,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b></b>Hub</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Content Hub</b></span>
+        <span class="logo-lg"><b>{{ $settings->site_name }}</b></span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->
@@ -207,24 +207,25 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="{{ asset('uploads/profile_photo/' .  $user->profile_photo) }}" alt="{{ $user->name }}" class="user-image">
+                        <img src="{{ Storage::url(Auth::user()->profile_photo) }}" alt="{{ Auth::user()->name }}" class="user-image">
                         <span class="hidden-xs"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                                <img src="{{ asset('uploads/profile_photo/' .  $user->profile_photo) }}" alt="{{ $user->name }}" class="user-image">
-                                <p>
-                                
-                                <small>{{ $user->name}} since</small>
-                            </p>
+                               <img src="{{ Storage::url(Auth::user()->profile_photo) }}" alt="{{ Auth::user()->name }}" class="user-image">
+                                <p>{{ Auth::user()->name}}
+                                <small> since {{ Auth::user()->created_at->toFormattedDateString() }}</small>
+                                </p>
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="{{ route('profile.index', ['slug' => Auth::user()->slug ]) }}" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                                <a href="" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="{{route('logout')}}" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();" class="btn btn-default btn-flat">Sign out</a>
+                                @include('auth.logout')
                             </div>
                         </li>
                     </ul>

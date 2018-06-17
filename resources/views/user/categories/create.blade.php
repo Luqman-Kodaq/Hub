@@ -10,7 +10,7 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="{{ route('category.index') }}">Tag</a></li>
+      <li><a href="{{ route('category.index') }}">Category</a></li>
       <li class="active">New</li>
     </ol>
   </section>

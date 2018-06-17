@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TagStoreRequest;
 use App\Http\Requests\TagUpdateRequest;
 use App\Repositories\User\TagRepositoryInterface;
+use App\Repositories\User\SettingRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -12,12 +13,15 @@ class TagController extends Controller
 {
 
     private $tag;
+    private $setting;
 
     public function __construct(
-        TagRepositoryInterface $tagRepository
+        TagRepositoryInterface $tagRepository,
+        SettingRepositoryInterface $settingRepository
     )
     {
         $this->tag = $tagRepository;
+        $this->setting = $settingRepository;
     }
     /**
      * Display a listing of the resource.
@@ -27,7 +31,8 @@ class TagController extends Controller
     public function index()
     {
         return view('user.tags.index')
-                ->with('tags', $this->tag->all());
+                ->with('tags', $this->tag->all())
+                ->with('settings', $this->setting->first());
     }
 
     /**
@@ -37,7 +42,8 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('user.tags.create');
+        return view('user.tags.create')
+        ->with('settings', $this->setting->first());
     }
 
     /**
@@ -67,7 +73,8 @@ class TagController extends Controller
         $tag = $this->tag->find($request->id);
 
         return view('user.tags.edit')
-                ->with('tag', $tag);
+                ->with('tag', $tag)
+                ->with('settings', $this->setting->first());
     }
 
     /**

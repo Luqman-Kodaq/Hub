@@ -28,6 +28,11 @@ class Post extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function comments()
+    {
+        return $this->belongsTo('App\Comment');
+    }
+
     public function scopePublish($query)
     {
         return $query->where('published', true);

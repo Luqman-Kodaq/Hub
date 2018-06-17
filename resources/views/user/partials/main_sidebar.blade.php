@@ -4,9 +4,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                    @if(!empty($user->profile_photo))
-                    <img src="{{ asset('uploads/profile_photo/' .  $user->profile_photo) }}" alt="{{ $user->name }}" width="70" height="70" class="media-object" style="border-radius: 50%">
-                  @endif
+                    <img src="{{ Storage::url(Auth::user()->profile_photo) }}" alt="profile picture" width="140px" height="140px" style="border-radius: 50%">
             </div>
             <div class="pull-left info">
                 <p></p>
@@ -91,7 +89,7 @@
 
             <li class="treeview">
                 <a href="javascript:void(0)">
-                    <i class="fa fa-euro"></i> <span>Salary Setup</span> <i class="fa fa-angle-left pull-right"></i>
+                    <i class="fa fa-euro"></i> <span>Mail Management</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
                     <li><a href=""><i class="fa fa-circle-o"></i> Group Salary</a></li>
@@ -157,7 +155,7 @@
             <li class="treeview">
                 <a href="javascript:void(0)"><i class="fa fa-gears"></i> <span>Settings</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href=""><i class="fa fa-circle-o"></i> System Settings</a></li>
+                    <li><a href="{{ route('setting.edit') }}"><i class="fa fa-circle-o"></i> System Settings</a></li>
                 </ul>
             </li>
         </ul>

@@ -35,6 +35,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Post');
     }
 
+    public function comments()
+    {
+        return $this->belongsTo('App\Comment');
+    }
+
     public function profile()
     {
         return $this->hasOne('App\Profile');

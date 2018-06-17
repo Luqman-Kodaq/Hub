@@ -99,14 +99,6 @@
                   </div>
                   <hr>
                   <div class="row">
-                      <div class="col-md-2">
-                          <div class="form-group">
-                              <button class="btn btn-primary" type="submit" id="submit">
-                                  <i class="fa fa-check"></i> Save Draft
-                              </button>
-                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                          </div>
-                      </div>
                       <div class="col-md-8">
                           <div class="form-group">
                               <div class="checkbox">
@@ -126,15 +118,30 @@
       </div>
       <!-- /.col -->
       <div class="col-md-3 col-xs-12">
-          <div class="box">
-              <div class="box-header with-border">
-                  <h3 class="box-title">Profile</h3>
-                  <img src="https://placehold.it/50x50" alt="" class="card-img-top">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title text-center">Your Profile</h3>
                 </div>
-                <div class="box-body">
-                </div>
-            </div>
-        </div>
+                  <div class="box-body">
+                      <div class="col-md-12 col-xm-12 text-center">
+                              <img src="{{ Storage::url(Auth::user()->profile_photo) }}" alt="{{ Auth::user()->name }}" width="140px" height="140px" style="border-radius: 50%">
+                          <span class="hidden-xs"></span>
+                          </div>
+                      <hr>
+                      <div class="form-group text-center">
+                      <h4><strong>{{ Auth::user()->name }}</strong></h4>
+                      </div>
+                      <div class="col-md-2">
+                          <div class="form-group">
+                              <button class="btn btn-light" type="submit" id="submit">
+                                  <i class="fa fa-check"></i> Save Draft
+                              </button>
+                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
     </div>
     <!-- /.row -->
 @endsection

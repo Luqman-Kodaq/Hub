@@ -24,8 +24,12 @@ Route::group(['prefix' => 'manage'], function() {
 
      // Profile Controller
      Route::get('/profile/{slug}', 'ProfileController@index')->name('profile.index');
-     Route::get('/profile/edit', 'ProfileController@edit')->name('profile.edit');
-     Route::post('/profile/update', 'ProfileController@update')->name('profile.update');
+     Route::get('/profile/edit/profile', 'ProfileController@edit')->name('profile.edit');
+     Route::post('/profile/update/profile', 'ProfileController@update')->name('profile.update');
+
+     // Settings Controller
+     Route::get('/settings/edit', 'SettingController@edit')->name('setting.edit');
+     Route::post('/settings/update', 'SettingController@update')->name('setting.update');
 
     // Users Controller
     Route::get('/users', 'UserController@index')->name('user.index');

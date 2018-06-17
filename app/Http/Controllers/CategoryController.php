@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Repositories\User\CategoryRepositoryInterface;
+use App\Repositories\User\SettingRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -12,12 +13,15 @@ class CategoryController extends Controller
 {
 
     private $category;
+    private $setting;
 
     public function __construct(
-        CategoryRepositoryInterface $categoryRepository
+        CategoryRepositoryInterface $categoryRepository,
+        SettingRepositoryInterface $settingRepository
     )
     {
             $this->category = $categoryRepository;
+            $this->setting = $settingRepository;
     }
 
     /**
@@ -28,7 +32,8 @@ class CategoryController extends Controller
     public function index()
     {
              return view('user.categories.index')
-                     ->with('categories', $this->category->all());
+                     ->with('categories', $this->category->all())
+                     ->with('settings', $this->setting->first());
     }
 
     /**
@@ -38,7 +43,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('user.categories.create');
+        return view('user.categories.create')
+        ->with('settings', $this->setting->first());
     }
 
     /**
@@ -68,7 +74,8 @@ class CategoryController extends Controller
         $category = $this->category->find($request->id);
 
         return view('user.categories.edit')
-                ->with('category', $category);
+                ->with('category', $category)
+                ->with('settings', $this->setting->first());
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Http\Requests\RoleStoreRequest;
 use App\Http\Requests\RoleUpdateRequest;
 use App\Repositories\User\RoleRepositoryInterface;
 use App\Repositories\User\PermissionRepositoryInterface;
+use App\Repositories\User\SettingRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,14 +14,17 @@ class RoleController extends Controller
 {
     private $role;
     private $permission;
+    private $setting;
 
     public function __construct(
             RoleRepositoryInterface $roleRepository,
-            PermissionRepositoryInterface $permissionRepository
+            PermissionRepositoryInterface $permissionRepository,
+            SettingRepositoryInterface $settingRepository
     )
     {
         $this->role = $roleRepository;
         $this->permission = $permissionRepository;
+        $this->setting = $settingRepository;
     }
 
     /**
@@ -31,7 +35,8 @@ class RoleController extends Controller
     public function index()
     {
             return view('user.roles.index')
-                ->with('roles', $this->role->all());
+                ->with('roles', $this->role->all())
+                ->with('settings', $this->setting->first());
     }
 
     /**
@@ -42,7 +47,8 @@ class RoleController extends Controller
     public function create()
     {
             return view('user.roles.create')
-                        ->with('permissions', $this->permission->all());
+                        ->with('permissions', $this->permission->all())
+                        ->with('settings', $this->setting->first());
     }
 
     /**
@@ -72,7 +78,8 @@ class RoleController extends Controller
         $role = $this->role->find($id);
 
         return view('user.roles.show')
-                ->with('role', $role);
+                ->with('role', $role)
+                ->with('settings', $this->setting->first());
     }
 
     /**
@@ -87,7 +94,8 @@ class RoleController extends Controller
 
             return view('user.roles.edit')
                     ->with('role', $role)
-                    ->with('permissions', $this->permission->all());
+                    ->with('permissions', $this->permission->all())
+                    ->with('settings', $this->setting->first());
     }
 
     /**

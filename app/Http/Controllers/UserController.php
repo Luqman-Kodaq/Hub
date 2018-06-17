@@ -6,6 +6,7 @@ use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\User\RoleRepositoryInterface;
+use App\Repositories\User\SettingRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -14,14 +15,17 @@ class UserController extends Controller
 {
     private $user;
     private $role;
+    private $setting;
 
     public function __construct(
         UserRepositoryInterface $userRepository,
-        RoleRepositoryInterface $roleRepository
+        RoleRepositoryInterface $roleRepository,
+        SettingRepositoryInterface $settingRepository
     )
     {
        $this->user = $userRepository;
        $this->role = $roleRepository;
+       $this->setting = $settingRepository;
     }
 
     /**
@@ -32,7 +36,8 @@ class UserController extends Controller
     public function index()
     {
         return view('user.users.index')
-                ->with('users', $this->user->all());
+                ->with('users', $this->user->all())
+                ->with('settings', $this->setting->first());
     }
 
     /**
@@ -43,7 +48,8 @@ class UserController extends Controller
     public function create()
     {
         return view('user.users.create')
-                ->with('roles', $this->role->all());
+                ->with('roles', $this->role->all())
+                ->with('settings', $this->setting->first());
     }
 
     /**
@@ -73,7 +79,8 @@ class UserController extends Controller
         $user = $this->user->find($id);
 
         return view('user.users.show')
-            ->with('user', $user);
+            ->with('user', $user)
+            ->with('settings', $this->setting->first());
     }
 
     /**
@@ -88,7 +95,8 @@ class UserController extends Controller
 
         return view('user.users.edit')
             ->with('user', $user)
-            ->with('roles', $this->role->all());
+            ->with('roles', $this->role->all())
+            ->with('settings', $this->setting->first());
     }
 
     /**

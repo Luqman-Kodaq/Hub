@@ -7,6 +7,7 @@ use App\Http\Requests\PostUpdateRequest;
 use App\Repositories\User\PostRepositoryInterface;
 use App\Repositories\User\CategoryRepositoryInterface;
 use App\Repositories\User\TagRepositoryInterface;
+use App\Repositories\User\SettingRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,16 +17,19 @@ class PostController extends Controller
     private $post;
     private $category;
     private $tag;
+    private $setting;
 
     public function __construct(
         PostRepositoryInterface $postRepository,
         CategoryRepositoryInterface  $categoryRepository,
-        TagRepositoryInterface  $tagRepository
+        TagRepositoryInterface  $tagRepository,
+        SettingRepositoryInterface $settingRepository
     )
     {
         $this->post = $postRepository;
         $this->category = $categoryRepository;
         $this->tag = $tagRepository;
+        $this->setting = $settingRepository;
     }
 
     /**
@@ -36,7 +40,8 @@ class PostController extends Controller
     public function index()
     {
         return view('user.posts.index')
-        ->with('posts', $this->post->allPublished());
+        ->with('posts', $this->post->allPublished())
+        ->with('settings', $this->setting->first());
     }
 
     /**
@@ -48,7 +53,8 @@ class PostController extends Controller
     {
         return view('user.posts.create')
             ->with('categories', $this->category->all())
-            ->with('tags', $this->tag->all());
+            ->with('tags', $this->tag->all())
+            ->with('settings', $this->setting->first());
     }
 
     /**
@@ -78,7 +84,8 @@ class PostController extends Controller
             $post = $this->post->find($id);
 
             return view('user.posts.show')
-            ->with('post', $post);
+            ->with('post', $post)
+            ->with('settings', $this->setting->first());
     }
 
     /**
@@ -94,7 +101,8 @@ class PostController extends Controller
         return view('user.posts.draftEdit')
                 ->with('post', $post)
                 ->with('categories', $this->category->all())
-                ->with('tags', $this->tag->all());
+                ->with('tags', $this->tag->all())
+                ->with('settings', $this->setting->first());
     }
 
     /**
@@ -105,7 +113,8 @@ class PostController extends Controller
     public function drafts()
     {
         return view('user.posts.draftIndex')
-                ->with('posts', $this->post->all());
+                ->with('posts', $this->post->all())
+                ->with('settings', $this->setting->first());
     }
 
     /*    
@@ -161,7 +170,8 @@ class PostController extends Controller
     public function onlyTrashed(Request $request)
     {
         return view('user.posts.trashedPosts')
-                ->with('posts', $this->post->onlyTrashed());
+                ->with('posts', $this->post->onlyTrashed())
+                ->with('settings', $this->setting->first());
     }
 
     /**

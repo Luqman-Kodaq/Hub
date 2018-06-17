@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PermissionStoreRequest;
 use App\Http\Requests\PermissionUpdateRequest;
 use App\Repositories\User\PermissionRepositoryInterface;
+use App\Repositories\User\SettingRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -12,12 +13,15 @@ class PermissionController extends Controller
 {
 
     private $permission;
+    private $setting;
 
     public function __construct(
-        PermissionRepositoryInterface $permissionRepository
+        PermissionRepositoryInterface $permissionRepository,
+        SettingRepositoryInterface $settingRepository
     )
     {
         $this->permission = $permissionRepository;
+        $this->setting = $settingRepository;
     }
 
     /**
@@ -28,7 +32,8 @@ class PermissionController extends Controller
     public function index()
     {
         return view('user.permissions.index')
-            ->with('permissions', $this->permission->all());
+            ->with('permissions', $this->permission->all())
+            ->with('settings', $this->setting->first());
     }
 
     /**
@@ -38,7 +43,8 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('user.permissions.create');
+        return view('user.permissions.create')
+        ->with('settings', $this->setting->first());
     }
 
     /**
@@ -68,7 +74,8 @@ class PermissionController extends Controller
         $permission = $this->permission->find($request->id);
 
         return view('user.permissions.show')
-            ->with('permission', $permission);
+            ->with('permission', $permission)
+            ->with('settings', $this->setting->first());
     }
 
     /**
@@ -81,7 +88,9 @@ class PermissionController extends Controller
     {
         $permission = $this->permission->find($request->id);
 
-        return view('user.permissions.edit')->with('permission', $permission);
+        return view('user.permissions.edit')
+                ->with('permission', $permission)
+                ->with('settings', $this->setting->first());
     }
 
     /**
