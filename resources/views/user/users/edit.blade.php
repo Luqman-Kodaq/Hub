@@ -71,17 +71,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="col-md-8 col-xm-12">
-                                        <div class="form-group">
-                                            <input type="text" name="slug" value="{{ old('slug') }}" class="form-control" placeholder="Slug (preferably your name)" required>
-                                            <span class="help-block text-red">
-                                                @if($errors->has('slug'))
-                                                    {{ $errors->first('slug')}}
-                                                @endif
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-xm-12">
+                                    <div class="col-md-12 col-xm-12">
                                             <div class="form-group">
                                                 <input type="file" name="profile_photo" class="form-control">
                                             </div>

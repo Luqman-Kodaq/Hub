@@ -118,7 +118,15 @@
       </div>
       <!-- /.col -->
       <div class="col-md-3 col-xs-12">
-            <div class="box">
+                      <div class="thumbnail">
+                        <img src="..." alt="...">
+                        <div class="caption">
+                          <h3>Thumbnail label</h3>
+                          <p>...</p>
+                          <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                        </div>
+                  </div>
+            {{--  <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title text-center">Your Profile</h3>
                 </div>
@@ -140,7 +148,7 @@
                           </div>
                       </div>
                   </div>
-              </div>
+              </div>  --}}
           </div>
     </div>
     <!-- /.row -->

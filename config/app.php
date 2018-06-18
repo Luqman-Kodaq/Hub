@@ -156,6 +156,8 @@ return [
          */
         Intervention\Image\ImageServiceProvider::class,
         Laratrust\LaratrustServiceProvider::class,
+        DevMarketer\LaraFlash\LaraFlashServiceProvider::class,
+        DevMarketer\EasyNav\EasyNavServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -204,10 +206,12 @@ return [
         'Gate' => Illuminate\Support\Facades\Gate::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'LaraFlash' => DevMarketer\LaraFlash\LaraFlashFacade::class,
         'Laratrust'=> Laratrust\LaratrustFacade::class,
         'Lang' => Illuminate\Support\Facades\Lang::class,
         'Log' => Illuminate\Support\Facades\Log::class,
         'Mail' => Illuminate\Support\Facades\Mail::class,
+        'Nav' => DevMarketer\EasyNav\EasyNavFacade::class,
         'Notification' => Illuminate\Support\Facades\Notification::class,
         'Password' => Illuminate\Support\Facades\Password::class,
         'Queue' => Illuminate\Support\Facades\Queue::class,

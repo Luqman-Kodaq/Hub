@@ -68,6 +68,22 @@ class UserController extends Controller
             ->with('success', 'New user added succesfully');
     }
 
+    public function makeAdmin(Request $request)
+    {
+        $user = $this->user->admin($request->id);
+
+        return back()
+                ->with('success', 'User made admin successfully');
+    }
+
+    public function notAdmin(Request $request)
+    {
+        $user = $this->user->notAdmin($request->id);
+
+        return back()
+                ->with('success', 'User removed from admin successfully');
+    }
+
     /**
      * Display the specified resource.
      *

@@ -32,7 +32,7 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Email Address</th>
-                                <th>Active</th>
+                                <th>Status</th>
                                 <th>Created At</th>
                                 <th class="text-right">Actions</th>
                             </tr>
@@ -43,7 +43,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{{ $user->active ? "Yes" : "No" }}</td>
+                                    <td>{{ $user->admin ? "Admin" : "User" }}</td>
                                     <td>{{ date('M j, Y', strtotime($user->created_at)) }}</td>
                                     <td class="text-right">
                                         <div class="btn-group">

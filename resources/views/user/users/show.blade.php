@@ -32,7 +32,7 @@
               <div class="media">
                 <div class="media-body">
                     @if(!empty($user->profile_photo))
-                    <img src="{{ asset('uploads/profile_photo/' .  $user->profile_photo) }}" alt="{{ $user->name }}" width="70" height="70" class="media-object" style="border-radius: 50%">
+                    <img src="{{ Storage::url(Auth::user()->profile_photo) }}" alt="{{ Auth::user()->name }}" class="user-image"width="70" height="70" style="border-radius: 50%">
                   @endif
                   </div>
                     <label for="Name"><strong>Name</strong></label>
@@ -49,7 +49,7 @@
                     </div>
                     <label for="Status"><strong>Online</strong></label>
                     <div>
-                      <p>{{ $user->active ? "Yes" : "No" }}</p>
+                      <p>{{ $user->admin ? "Admin" : "User" }}</p>
                     </div>
                     <label for="Role"><strong>Role</strong></label>
                     <div>

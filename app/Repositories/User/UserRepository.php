@@ -38,6 +38,20 @@ class UserRepository implements UserRepositoryInterface
     return $this->user->ofStatusActive()->get();
   }
 
+  public function admin($id)
+  {
+      $user = $this->find($id);
+      $user->admin = 1;
+      $user->save();
+  }
+
+  public function notAdmin($id)
+  {
+      $user = $this->find($id);
+      $user->admin = 0;
+      $user->save();
+  }
+
   public function store(Request $request)
   {
     DB::transaction(function () use ($request) {
@@ -45,7 +59,6 @@ class UserRepository implements UserRepositoryInterface
       $user->name = $request->name;
       $user->email = $request->email;
       $user->password = Hash::make($request->password);
-      $user->slug = $request->slug;
 
          // Save the Image
          if ($request->hasFile('profile_photo')) {
@@ -73,7 +86,6 @@ class UserRepository implements UserRepositoryInterface
       $user->name = $request->name;
       $user->email = $request->email;
       $user->password = Hash::make($request->password);
-      $user->slug = str_slug($user->name);
 
        // Save the Image
        if ($request->hasFile('profile_photo')) {

@@ -26,7 +26,7 @@ class PermissionStoreRequest extends FormRequest
     public function rules(Request $request)
     {
 
-            if ($request->has('name|display_name|description')) {
+            if ($request->has('name')) {
                 return [
                 'name'  =>  'required|max:255|alphadash|unique:permissions,name',
                 'display_name'              => 'required|max:255',

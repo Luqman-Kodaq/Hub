@@ -34,7 +34,7 @@ class PermissionRepository implements PermissionRepositoryInterface
       DB::transaction(function () use ($request) {
         if ($request->permission_type == 'basic') {
         $permission = new $this->permission();
-        $permission->name = $request->name;
+        $permission->name = str_slug($request->name);
         $permission->display_name = $request->display_name;
         $permission->description = $request->description;
         $permission->save(); 

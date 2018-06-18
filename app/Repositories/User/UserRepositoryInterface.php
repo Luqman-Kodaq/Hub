@@ -12,6 +12,10 @@ interface UserRepositoryInterface
 
   public function allActive();
 
+  public function admin($id);
+
+  public function notAdmin($id);
+
   public function store(Request $request);
 
   public function update($id, Request $request);

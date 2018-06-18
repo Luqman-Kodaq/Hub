@@ -33,9 +33,12 @@ class UserUpdateRequest extends FormRequest
               'email',
               Rule::unique('users')->ignore($request->id)
             ],
-            'password'          => 'required|min:8|max:25',
-            'confirm_password'  => 'required|same:password',
-            'profile_photo' => 'required|image'
+            'password'          => [
+                'required',
+                'min:8|max:25',
+                Rule::unique('users')->ignore($request->id)
+            ],
+            'confirm_password'  => 'required|same:password'
         ];
     }
 }

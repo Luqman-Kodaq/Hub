@@ -37,6 +37,8 @@ Route::group(['prefix' => 'manage'], function() {
     Route::post('/users/add', 'UserController@store')->name('user.store');
     Route::get('/users/show/{slug}', 'UserController@show')->name('user.show');
     Route::get('/users/edit/{id}', 'UserController@edit')->name('user.edit');
+    Route::get('/users/admin/{$id}', 'UserController@makeAdmin')->name('user.admin');
+    Route::get('/users/unadmin/{$id}', 'UserController@notAdmin')->name('user.unadmin');
     Route::post('/users/edit/{id}', 'UserController@update')->name('user.update');
     Route::get('/users/delete', 'UserController@destroy')->name('user.destroy');
 

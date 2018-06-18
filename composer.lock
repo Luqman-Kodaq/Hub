@@ -4,8 +4,125 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5a9a9277685d134292286cd33ef7369e",
+    "content-hash": "3e08902b988a22364162bfe4c851d950",
     "packages": [
+        {
+            "name": "devmarketer/easynav",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DevMarketer/LaravelEasyNav.git",
+                "reference": "517a7d5a35f443574c0ce883d458849cae7b3330"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DevMarketer/LaravelEasyNav/zipball/517a7d5a35f443574c0ce883d458849cae7b3330",
+                "reference": "517a7d5a35f443574c0ce883d458849cae7b3330",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "4.7.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "DevMarketer\\EasyNav\\EasyNavServiceProvider"
+                    ],
+                    "aliases": {
+                        "Nav": "DevMarketer\\EasyNav\\EasyNavFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "DevMarketer\\EasyNav": "src/"
+                },
+                "files": [
+                    "src/DevMarketer/EasyNav/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "J. Alexander Curtis",
+                    "email": "jalexandercurtis@gmail.com"
+                }
+            ],
+            "description": "Making managing navigation in Laravel easy.",
+            "homepage": "https://github.com/DevMarketer/LaravelEasyNav",
+            "keywords": [
+                "active",
+                "easy",
+                "easynav",
+                "helpers",
+                "laravel",
+                "nav"
+            ],
+            "time": "2017-10-16T16:14:15+00:00"
+        },
+        {
+            "name": "devmarketer/laraflash",
+            "version": "v1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DevMarketer/LaraFlash.git",
+                "reference": "9dad87b942b75b7bbda8c397cf4af5e14e6291a9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DevMarketer/LaraFlash/zipball/9dad87b942b75b7bbda8c397cf4af5e14e6291a9",
+                "reference": "9dad87b942b75b7bbda8c397cf4af5e14e6291a9",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "DevMarketer\\LaraFlash\\LaraFlashServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaraFlash": "DevMarketer\\LaraFlash\\LaraFlashFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "DevMarketer\\LaraFlash": "src/"
+                },
+                "files": [
+                    "src/DevMarketer/LaraFlash/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "J. Alexander Curtis",
+                    "email": "jalexandercurtis@gmail.com"
+                }
+            ],
+            "description": "A powerful and flexible flash notifications system. Improving over built-in Laravel Flash messaging functionality.",
+            "homepage": "https://github.com/DevMarketer/LaraFlash",
+            "keywords": [
+                "flash",
+                "laraflash",
+                "laravel",
+                "messages",
+                "notifications",
+                "session"
+            ],
+            "time": "2017-11-14T23:05:12+00:00"
+        },
         {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "0.1",
@@ -208,6 +325,49 @@
                 "schedule"
             ],
             "time": "2018-04-06T15:51:55+00:00"
+        },
+        {
+            "name": "drewm/mailchimp-api",
+            "version": "v2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/drewm/mailchimp-api.git",
+                "reference": "f532fa26cd6e7d17c9ba40a757d8c6bfee47dace"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/drewm/mailchimp-api/zipball/f532fa26cd6e7d17c9ba40a757d8c6bfee47dace",
+                "reference": "f532fa26cd6e7d17c9ba40a757d8c6bfee47dace",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "7.0.*",
+                "vlucas/phpdotenv": "^2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DrewM\\MailChimp\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Drew McLellan",
+                    "email": "drew.mclellan@gmail.com",
+                    "homepage": "http://allinthehead.com/"
+                }
+            ],
+            "description": "Super-simple, minimum abstraction MailChimp API v3 wrapper",
+            "homepage": "https://github.com/drewm/mailchimp-api",
+            "time": "2018-02-16T15:31:05+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -1563,6 +1723,66 @@
                 "roles"
             ],
             "time": "2018-03-05T13:21:52+00:00"
+        },
+        {
+            "name": "spatie/laravel-newsletter",
+            "version": "4.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-newsletter.git",
+                "reference": "f25f1fa2d12e6266d488069e59a0cdd9f9a28a83"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-newsletter/zipball/f25f1fa2d12e6266d488069e59a0cdd9f9a28a83",
+                "reference": "f25f1fa2d12e6266d488069e59a0cdd9f9a28a83",
+                "shasum": ""
+            },
+            "require": {
+                "drewm/mailchimp-api": "^2.4",
+                "illuminate/support": "~5.5.0|~5.6.0",
+                "php": "~7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "^6.3|^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Newsletter\\NewsletterServiceProvider"
+                    ],
+                    "aliases": {
+                        "Newsletter": "Spatie\\Newsletter\\NewsletterFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Newsletter\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://murze.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Manage newsletters in Laravel",
+            "homepage": "https://github.com/spatie/laravel-newsletter",
+            "keywords": [
+                "laravel",
+                "mailchimp",
+                "newsletter"
+            ],
+            "time": "2018-03-10T07:53:32+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
