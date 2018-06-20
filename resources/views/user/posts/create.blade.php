@@ -99,15 +99,20 @@
                   </div>
                   <hr>
                   <div class="row">
-                      <div class="col-md-8">
+                        <div class="col-md-2">
                           <div class="form-group">
+                              <button class="btn btn-sm btn-success" type="submit" id="submit">
+                                <i class="fa fa-check"></i> Save Draft
+                            </button><input type="hidden" name="_token" value="{{ csrf_token() }}">
+                          </div>
+                        </div>
+                        <div class="col-md-8">
                               <div class="checkbox">
                                   <label>
                                       <input type="checkbox" name="redirect" checked> Redirect to profile after submission
                                   </label>
                               </div>
                           </div>
-                      </div>
                   </div>
                   <div class="clearfix"></div>
             </form>
@@ -117,38 +122,21 @@
         <!-- /.box -->
       </div>
       <!-- /.col -->
-      <div class="col-md-3 col-xs-12">
-                      <div class="thumbnail">
-                        <img src="..." alt="...">
-                        <div class="caption">
-                          <h3>Thumbnail label</h3>
-                          <p>...</p>
-                          <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+             <div class="col-md-3 col-xs-12">
+                      <div class="thumbnail" style="border-radius: 5%">
+                        <img src="{{ Storage::url(Auth::user()->profile_photo) }}" alt="{{ Auth::user()->name }}" style="border-radius: 5%">
+                        <span class="hidden-xs"></span>
+                        <div class="caption form-group">
+                        <div class="form-group text-center">
+                          <h3><strong>{{ Auth::user()->name }}</strong></h3>
+                          <p>{{ Auth::user()->profile->about }}</p>
+                        </div>
+                        <div class="form-group">
+                         <a href="{{ route('post.index') }}" class="btn btn-sm btn-info btn-block pull-right" role="button" style=""> <i class="fa fa-"></i> Cancel</a>
                         </div>
                   </div>
-            {{--  <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title text-center">Your Profile</h3>
                 </div>
-                  <div class="box-body">
-                      <div class="col-md-12 col-xm-12 text-center">
-                              <img src="{{ Storage::url(Auth::user()->profile_photo) }}" alt="{{ Auth::user()->name }}" width="140px" height="140px" style="border-radius: 50%">
-                          <span class="hidden-xs"></span>
-                          </div>
-                      <hr>
-                      <div class="form-group text-center">
-                      <h4><strong>{{ Auth::user()->name }}</strong></h4>
-                      </div>
-                      <div class="col-md-2">
-                          <div class="form-group">
-                              <button class="btn btn-light" type="submit" id="submit">
-                                  <i class="fa fa-check"></i> Save Draft
-                              </button>
-                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                          </div>
-                      </div>
-                  </div>
-              </div>  --}}
+                  
           </div>
     </div>
     <!-- /.row -->

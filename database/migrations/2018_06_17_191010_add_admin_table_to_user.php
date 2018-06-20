@@ -14,7 +14,7 @@ class AddAdminTableToUser extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('admin')->default(0)->after('password');
+            $table->boolean('admin')->default(false)->after('password');
         });
     }
 

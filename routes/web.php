@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['prefix' => 'manage'], function() {
+Route::group(['prefix' => 'manage', 'middleware' => 'admin'], function() {
 
     // Home Controller
     Route::get('/home', 'DashboardController@dashboard')->name('home');
@@ -28,65 +28,79 @@ Route::group(['prefix' => 'manage'], function() {
      Route::post('/profile/update/profile', 'ProfileController@update')->name('profile.update');
 
      // Settings Controller
-     Route::get('/settings/edit', 'SettingController@edit')->name('setting.edit');
-     Route::post('/settings/update', 'SettingController@update')->name('setting.update');
+     Route::prefix('settings')->middleware('role:superadministrator|administrator')->group(function() {
+     Route::get('/edit', 'SettingController@edit')->name('setting.edit');
+     Route::post('/update', 'SettingController@update')->name('setting.update');
+    });
 
     // Users Controller
-    Route::get('/users', 'UserController@index')->name('user.index');
-    Route::get('/users/add', 'UserController@create')->name('user.create');
-    Route::post('/users/add', 'UserController@store')->name('user.store');
-    Route::get('/users/show/{slug}', 'UserController@show')->name('user.show');
-    Route::get('/users/edit/{id}', 'UserController@edit')->name('user.edit');
-    Route::get('/users/admin/{$id}', 'UserController@makeAdmin')->name('user.admin');
-    Route::get('/users/unadmin/{$id}', 'UserController@notAdmin')->name('user.unadmin');
-    Route::post('/users/edit/{id}', 'UserController@update')->name('user.update');
-    Route::get('/users/delete', 'UserController@destroy')->name('user.destroy');
+    Route::prefix('users')->middleware('role:superadministrator|administrator')->group(function() {
+    Route::get('/', 'UserController@index')->name('user.index');
+    Route::get('/add', 'UserController@create')->name('user.create');
+    Route::post('/add', 'UserController@store')->name('user.store');
+    Route::get('/show/{slug}', 'UserController@show')->name('user.show');
+    Route::get('/edit/{id}', 'UserController@edit')->name('user.edit');
+    Route::get('/admin/{id}', 'UserController@makeAdmin')->name('user.admin');
+    Route::get('/unadmin/{id}', 'UserController@notAdmin')->name('user.unadmin');
+    Route::post('/edit/{id}', 'UserController@update')->name('user.update');
+    Route::get('/delete', 'UserController@destroy')->name('user.destroy');
+    });
 
      // Posts Controller
-     Route::get('/posts', 'PostController@index')->name('post.index');
-     Route::get('/posts/draft', 'PostController@drafts')->name('post_draft.index');
-     Route::get('/posts/add', 'PostController@create')->name('post.create');
-     Route::post('/posts/add', 'PostController@store')->name('post.store');
-     Route::get('/posts/publish/{id}', 'PostController@publish')->name('post.publish');
-     Route::get('/posts/show/{id}', 'PostController@show')->name('post.show');
-     Route::get('/posts/edit/{id}', 'PostController@edit')->name('post.edit');
-     Route::post('/posts/edit/{id}', 'PostController@update')->name('post.update');
-     Route::get('/posts/trash', 'PostController@onlyTrashed')->name('post.trash');
-     Route::get('/posts/restore/{id}', 'PostController@restore')->name('post.restore');
-     Route::get('/posts/delete', 'PostController@temporaryDelete')->name('post.destroy');
-     Route::get('/posts/terminate/{id}', 'PostController@forceDelete')->name('post.terminate');
+     Route::prefix('posts')->middleware('role:superadministrator|administrator|editor|author')->group(function() {
+     Route::get('/', 'PostController@index')->name('post.index');
+     Route::get('/draft', 'PostController@drafts')->name('post_draft.index');
+     Route::get('/add', 'PostController@create')->name('post.create');
+     Route::post('/add', 'PostController@store')->name('post.store');
+     Route::get('/publish/{id}', 'PostController@publish')->name('post.publish');
+     Route::get('/show/{id}', 'PostController@show')->name('post.show');
+     Route::get('/edit/{id}', 'PostController@edit')->name('post.edit');
+     Route::post('/edit/{id}', 'PostController@update')->name('post.update');
+     Route::get('/trash', 'PostController@onlyTrashed')->name('post.trash');
+     Route::get('/restore/{id}', 'PostController@restore')->name('post.restore');
+     Route::get('/delete', 'PostController@temporaryDelete')->name('post.destroy');
+     Route::get('/terminate/{id}', 'PostController@forceDelete')->name('post.terminate');
+     });
 
     // Role Controller
-    Route::get('roles', 'RoleController@index')->name('role.index');
-    Route::get('/roles/add', 'RoleController@create')->name('role.create');
-    Route::post('/roles/add', 'RoleController@store')->name('role.store');
-    Route::get('/roles/show/{id}', 'RoleController@show')->name('role.show');
-    Route::get('/roles/edit/{id}', 'RoleController@edit')->name('role.edit');
-    Route::post('/roles/edit/{id}', 'RoleController@update')->name('role.update');
-    Route::get('/roles/delete', 'RoleController@destroy')->name('role.destroy');
+    Route::prefix('roles')->middleware('role:superadministrator')->group(function() {
+    Route::get('/', 'RoleController@index')->name('role.index');
+    Route::get('/add', 'RoleController@create')->name('role.create');
+    Route::post('/add', 'RoleController@store')->name('role.store');
+    Route::get('/show/{id}', 'RoleController@show')->name('role.show');
+    Route::get('/edit/{id}', 'RoleController@edit')->name('role.edit');
+    Route::post('/edit/{id}', 'RoleController@update')->name('role.update');
+    Route::get('/delete', 'RoleController@destroy')->name('role.destroy');
+    });
 
      // Permission Controller
-     Route::get('permissions', 'PermissionController@index')->name('permission.index');
-     Route::get('/permissions/add', 'PermissionController@create')->name('permission.create');
-     Route::post('/permissions/add', 'PermissionController@store')->name('permission.store');
-     Route::get('/permissions/show/{id}', 'PermissionController@show')->name('permission.show');
-     Route::get('/permissions/edit/{id}', 'PermissionController@edit')->name('permission.edit');
-     Route::post('/permissions/edit', 'PermissionController@update')->name('permission.update');
-     Route::get('/permissions/delete', 'PermissionController@destroy')->name('permission.destroy');
+     Route::prefix('permissions')->middleware('role:superadministrator')->group(function() {
+     Route::get('/', 'PermissionController@index')->name('permission.index');
+     Route::get('/add', 'PermissionController@create')->name('permission.create');
+     Route::post('/add', 'PermissionController@store')->name('permission.store');
+     Route::get('/show/{id}', 'PermissionController@show')->name('permission.show');
+     Route::get('/edit/{id}', 'PermissionController@edit')->name('permission.edit');
+     Route::post('/edit', 'PermissionController@update')->name('permission.update');
+     Route::get('/delete', 'PermissionController@destroy')->name('permission.destroy');
+     });
 
       //Tag Controller
-      Route::get('tags', 'TagController@index')->name('tag.index');
-      Route::get('/tags/add', 'TagController@create')->name('tag.create');
-      Route::post('/tags/add', 'TagController@store')->name('tag.store');
-      Route::get('/tags/edit/{id}', 'TagController@edit')->name('tag.edit');
-      Route::post('/tags/edit', 'TagController@update')->name('tag.update');
-      Route::get('/tags/delete', 'TagController@destroy')->name('tag.destroy');
+      Route::prefix('tags')->middleware('role:superadministrator|administrator|editor')->group(function() {
+      Route::get('/', 'TagController@index')->name('tag.index');
+      Route::get('/add', 'TagController@create')->name('tag.create');
+      Route::post('/add', 'TagController@store')->name('tag.store');
+      Route::get('/edit/{id}', 'TagController@edit')->name('tag.edit');
+      Route::post('/edit', 'TagController@update')->name('tag.update');
+      Route::get('/delete', 'TagController@destroy')->name('tag.destroy');
+      });
 
       //Category Controller
-      Route::get('categories', 'CategoryController@index')->name('category.index');
-      Route::get('/categories/add', 'CategoryController@create')->name('category.create');
-      Route::post('/categories/add', 'CategoryController@store')->name('category.store');
-      Route::get('/categories/edit/{id}', 'CategoryController@edit')->name('category.edit');
-      Route::post('/categories/edit', 'CategoryController@update')->name('category.update');
-      Route::get('/categories/delete', 'CategoryController@destroy')->name('category.destroy');
+      Route::prefix('categories')->middleware('role:superadministrator|administrator|editor')->group(function() {
+      Route::get('/', 'CategoryController@index')->name('category.index');
+      Route::get('/add', 'CategoryController@create')->name('category.create');
+      Route::post('/add', 'CategoryController@store')->name('category.store');
+      Route::get('/edit/{id}', 'CategoryController@edit')->name('category.edit');
+      Route::post('/edit', 'CategoryController@update')->name('category.update');
+      Route::get('/delete', 'CategoryController@destroy')->name('category.destroy');
+      });
 });

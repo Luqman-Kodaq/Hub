@@ -72,16 +72,16 @@
                               </span>
                           </div>
                       </div>
-                        <div class="col-md-4 col-xm-12">
+                        {{--  <div class="col-md-6 col-xm-12">
                                 <div class="form-group">
                                     <input type="file" name="profile_photo" class="form-control" accept="image/*">
                                 </div>
-                            </div> 
-                      <div class="col-md-6 col-xm-12">
+                            </div>  --}}
+                        <div class="col-md-6 col-xm-12">
                           <div class="form-group">
                                 <label for="role" class="control-label">Roles</label>
                                   <input type="hidden" name="roles" :value="rolesSelected" />
-                                        @foreach ($roles as $role)
+                                     @foreach ($roles as $role)
                                      <div class="form-group">
                                          <b-form-group>
                                         <b-form-radio-group name="roles" v-model="rolesSelected">
@@ -91,15 +91,9 @@
                                         </b-form-radio-group>
                                         </b-form-group>
                                      </div>
-                                        @endforeach
+                                    @endforeach
                           </div>
-                      </div>                     
-                      <!-- <div class="col-md-4 col-xm-12">
-                          <div class="form-group">
-                              <label>Profile Photo</label>
-                              <input type="file" name="profile_photo"  class="form-control">
-                          </div>
-                      </div>     -->                  
+                      </div>
                   </div>
                   <hr>
                   <div class="row">

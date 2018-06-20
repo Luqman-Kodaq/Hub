@@ -51,6 +51,12 @@
                                         </span>
                                     </div>
                                 </div>
+                                <div class="col-md-12 col-xm-12">
+                                        <div class="form-group">
+                                            <input type="file" name="profile_photo" class="form-control">
+                                        </div>
+                                </div> 
+                                @if(empty($user->password))
                                 <div class="col-md-6 col-xm-12">
                                     <div class="form-group">
                                         <input type="password" name="password" value="{{ old('password') }}" class="form-control" placeholder="Password" required>
@@ -71,15 +77,11 @@
                                         </span>
                                     </div>
                                 </div>
-                                    <div class="col-md-12 col-xm-12">
-                                            <div class="form-group">
-                                                <input type="file" name="profile_photo" class="form-control">
-                                            </div>
-                                        </div> 
+                                @endif
                                 <div class="col-md-6 col-xm-12">
                                 <div class="form-group">
                                 <label for="role" class="control-label">Roles</label>
-		        				<input type="hidden" name="roles" :value="rolesSelected" />
+		        				{{--  <input type="hidden" name="roles" value="rolesSelected" />  --}}
                                 @foreach ($roles as $role)
                                 <div class="form-group">
                                 <b-form-group>
@@ -111,6 +113,7 @@
                                                 <input name="redirect" type="checkbox" checked> Redirect to user list after submission
                                             </label>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +134,7 @@
         var app = new Vue({
             el: '#app',
             data: {
-                rolesSelected: [{!! $user->roles->pluck('id') !!}]
+                rolesSelected: {!! $user->roles->pluck('id') !!}
             }
         });
     </script>

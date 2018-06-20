@@ -4,7 +4,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Profile
+                {{ $user->name }} Profile
             <small>Details</small>
         </h1>
         <ol class="breadcrumb">
@@ -16,59 +16,32 @@
 
     <!-- Main content -->
     <section class="content">
-
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3 col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title text-center">
-                            {{ $user->name }} Profile </h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="panel-body">       
-                              <div class="col-md-8 col-md-offset-1 col-xm-12 text-center">
-                                    @if(!empty($user->profile_photo))
-                                    <img src="{{ Storage::url($user->profile_photo) }}" alt="{{ Auth::user()->name }}" width="140px" height="140px" style="border-radius: 50%">
-                                  @endif
-                              </div>
-                              <div class="form-group text-center">
-                                  <div class="col-md-8 col-md-offset-1 col-xm-12">
-                                      <label for="facebook"><strong>Facebook Id:</strong></label>
-                                        <p>{{ $user->profile->facebook }}</p>
-                                  </div>
-                              </div>
-                              <div class="form-group text-center">
-                                    <div class="col-md-8 col-md-offset-1 col-xm-12">
-                                        <label for="twitter"><strong>Twitter Id:</strong></label>
-                                          <p>{{ $user->profile->twitter }}</p>
-                                    </div>
-                                </div>
-                                <div class="form-group text-center">
-                                        <div class="col-md-8 col-md-offset-1 col-xm-12">
-                                            <label for="instagram"><strong>Instagram Id:</strong></label>
-                                              <p>{{ $user->profile->instagram }}</p>
-                                        </div>
-                                </div>
-                                <div class="form-group text-center">
-                                        <div class="col-md-8 col-md-offset-1 col-xm-12">
-                                            <label for="about"><strong>Biography:</strong></label>
-                                              <p>{{ $user->profile->about }}</p>
-                                        </div>
-                                </div>
-                                <div class="form-group pull-right">
-                                      <div class="col-md-8 col-md-offset-1 col-xm-12">
-                                    @if(Auth::id() == $user->id)
-                                      <a href="{{ route('profile.edit') }}" class="btn btn-sm btn-info">Edit profile</a>
-                                    @endif
-                                      </div>
-                                </div>
-                            </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
-            </div>
-            <!-- /.col -->
+            <div class="row">
+        <div class="col-md-3 col-md-offset-4 col-xs-12">
+            <div class="thumbnail" style="border-radius: 5%">
+              <img src="{{ Storage::url(Auth::user()->profile_photo) }}" alt="{{ Auth::user()->name }}" style="border-radius: 5%">
+              <span class="hidden-xs"></span>
+              <div class="caption form-group text-center">
+                <h3><strong>{{ Auth::user()->name }}</strong></h3>
+                <p>{{ Auth::user()->profile->about }}</p>
+                <label for="facebook"><strong>Facebook Id:</strong></label>
+                    <p>{{ $user->profile->facebook }}</p>
+                <label for="twitter"><strong>Twitter Id:</strong></label>
+                    <p>{{ $user->profile->twitter }}</p>
+                <label for="instagram"><strong>Instagram Id:</strong></label>
+                    <p>{{ $user->profile->instagram }}</p>
+              </div>
+              <div>
+                <p>
+                    @if(Auth::id() == $user->id)
+                        <a href="{{ route('profile.edit') }}" class="btn btn-sm btn-info" style="border-radius: 30%">Edit profile</a>
+                      @endif
+               <a href="{{ route('home') }}" class="btn btn-sm btn-info pull-right" role="button" style="border-radius: 30%"> <i class="fa fa-"></i> Cancel</a>
+              </p>
+              </div>
         </div>
+        </div>
+    </div>
         <!-- /.row -->
     </section>
 @endsection

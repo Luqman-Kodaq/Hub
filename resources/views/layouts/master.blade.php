@@ -64,6 +64,7 @@
 <!-- /.wrapper -->
 
 
+<script src="{{ asset('bower_components/tinymce/tinymce.min.js') }}"></script>
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 <!-- Vue -->

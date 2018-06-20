@@ -41,14 +41,14 @@ class UserRepository implements UserRepositoryInterface
   public function admin($id)
   {
       $user = $this->find($id);
-      $user->admin = 1;
+      $user->admin = true;
       $user->save();
   }
 
   public function notAdmin($id)
   {
       $user = $this->find($id);
-      $user->admin = 0;
+      $user->admin = false;
       $user->save();
   }
 

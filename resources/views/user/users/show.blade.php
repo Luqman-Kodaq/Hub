@@ -25,6 +25,15 @@
               <div class="box-header-buttons pull-right">
                   <a href="{{ route('user.edit' , ['id' => $user->id]) }}" class="btn btn-primary btn-xs"><span class="fa fa-plus"></span> Edit User</a>
               </div>
+              @if($user->admin)
+              <div class="form-group pull-right">
+                <a href="{{ route('user.unadmin', ['id' => $user->id]) }}" class="btn btn-success btn-xs" role="button" value="0"><i class="fa fa-user"></i> Remove from Admin</a>
+              </div>                     
+                @else
+                <div class="form-group pull-right">
+                  <a href="{{ route('user.admin', ['id' => $user->id]) }}" class="btn btn-default btn-xs" role="button" name="admin" value="1"><i class="fa fa-user"></i> Make Admin</a>
+                </div>
+                @endif
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -49,7 +58,7 @@
                     </div>
                     <label for="Status"><strong>Online</strong></label>
                     <div>
-                      <p>{{ $user->admin ? "Admin" : "User" }}</p>
+                      <p>{{ $user->admin ? "This person is an admin" : "This person is not an admin" }}</p>
                     </div>
                     <label for="Role"><strong>Role</strong></label>
                     <div>

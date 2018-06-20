@@ -142,7 +142,7 @@ class UserController extends Controller
     {
         $user = $this->user->find($request->id);
 
-        $user->profile->delete();
+        // $user->profile->delete();
         $user->delete();
 
         return back()
