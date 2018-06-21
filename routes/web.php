@@ -34,7 +34,7 @@ Route::group(['prefix' => 'manage', 'middleware' => 'admin'], function() {
     });
 
     // Users Controller
-    Route::prefix('users')->middleware('role:superadministrator|administrator')->group(function() {
+    Route::prefix('users')->group(function() {
     Route::get('/', 'UserController@index')->name('user.index');
     Route::get('/add', 'UserController@create')->name('user.create');
     Route::post('/add', 'UserController@store')->name('user.store');
@@ -47,7 +47,7 @@ Route::group(['prefix' => 'manage', 'middleware' => 'admin'], function() {
     });
 
      // Posts Controller
-     Route::prefix('posts')->middleware('role:superadministrator|administrator|editor|author')->group(function() {
+     Route::prefix('posts')->group(function() {
      Route::get('/', 'PostController@index')->name('post.index');
      Route::get('/draft', 'PostController@drafts')->name('post_draft.index');
      Route::get('/add', 'PostController@create')->name('post.create');
@@ -63,7 +63,7 @@ Route::group(['prefix' => 'manage', 'middleware' => 'admin'], function() {
      });
 
     // Role Controller
-    Route::prefix('roles')->middleware('role:superadministrator')->group(function() {
+    Route::prefix('roles')->group(function() {
     Route::get('/', 'RoleController@index')->name('role.index');
     Route::get('/add', 'RoleController@create')->name('role.create');
     Route::post('/add', 'RoleController@store')->name('role.store');
@@ -74,7 +74,7 @@ Route::group(['prefix' => 'manage', 'middleware' => 'admin'], function() {
     });
 
      // Permission Controller
-     Route::prefix('permissions')->middleware('role:superadministrator')->group(function() {
+     Route::prefix('permissions')->group(function() {
      Route::get('/', 'PermissionController@index')->name('permission.index');
      Route::get('/add', 'PermissionController@create')->name('permission.create');
      Route::post('/add', 'PermissionController@store')->name('permission.store');
@@ -104,3 +104,6 @@ Route::group(['prefix' => 'manage', 'middleware' => 'admin'], function() {
       Route::get('/delete', 'CategoryController@destroy')->name('category.destroy');
       });
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

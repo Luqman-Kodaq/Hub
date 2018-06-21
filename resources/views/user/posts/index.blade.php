@@ -51,7 +51,9 @@
                                     <td>{{ date('M j, Y', strtotime($post->created_at)) }}</td>
                                     <td class="text-right">
                                         <div class="btn-group">
+                                                @can ('posts.view', Auth::user())
                                                 <a href="{{ route('post.show', $post->id) }}" class="btn btn-default btn-xs"><i class="fa fa-eye"></i></a>
+                                                @endcan
                                                 <a href="{{ route('post.edit', ['id' => $post->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></a>
                                                 <a href="{{ route('post.destroy', ['id' => $post->id]) }}" class="btn btn-default btn-xs confirm"><i class="fa fa-trash"></i></a>
                                         </div>

@@ -47,7 +47,9 @@
                     <i class="fa fa-dollar"></i> <span>Post Management</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
+                    @can ('posts.create', Auth::user())
                    <li><a href="{{ route('post.create') }}"><i class="fa fa-circle-o"></i> New Post</a></li>
+                   @endcan
                     <li class="treeview"><a href="javascript:void(0)"><i class="fa fa-circle-o"></i>Published</a>
                         <ul class="treeview-menu">
                             <li><a href="{{ route('post.index') }}"><i class="fa fa-circle-o"></i> Recent Post</a></li>
