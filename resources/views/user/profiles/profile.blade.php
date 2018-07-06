@@ -34,9 +34,9 @@
               <div>
                 <p>
                     @if(Auth::id() == $user->id)
-                        <a href="{{ route('profile.edit') }}" class="btn btn-sm btn-info" style="border-radius: 30%">Edit profile</a>
+                        <a href="{{ route('profile.edit') }}" class="btn btn-sm btn-info" style="border-radius: 50px">Edit profile</a>
                       @endif
-               <a href="{{ route('home') }}" class="btn btn-sm btn-info pull-right" role="button" style="border-radius: 30%"> <i class="fa fa-"></i> Cancel</a>
+               <a href="{{ route('home') }}" class="btn btn-sm btn-info pull-right" role="button" style="border-radius: 50px"> <i class="fa fa-"></i> Cancel</a>
               </p>
               </div>
         </div>

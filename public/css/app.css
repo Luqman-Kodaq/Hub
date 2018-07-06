@@ -10816,3 +10816,20 @@ table.b-table > tbody > tr.b-table-details > td {
   border-top: none;
 }
 
+/* ========================================
+   	  ============ NAVBAR ===========
+   ======================================== */
+
+.login {
+  border-radius: 15px;
+  color: #333333;
+  background: none;
+  font-size: 14px;
+  -webkit-transition: background 500ms ease;
+  transition: background 500ms ease;
+}
+
+.login:hover {
+  background: #f4f4f4;
+}
+

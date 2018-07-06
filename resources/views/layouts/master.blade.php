@@ -86,7 +86,7 @@
 <!-- Toastr -->
 <script src="{{ asset('bower_components/toastr/toastr.min.js') }}"></script>
 
-<script>
+ <script>
     @if(Session::has('success'))
         toastr.success("{{ Session::get('success') }}")
     @endif
@@ -94,7 +94,7 @@
     @if(Session::has('info'))
         toastr.info("{{ Session::get('info') }}")
     @endif
-</script>
+ </script>
 <!-- <script>
   var app = new Vue({
     el: '#app',

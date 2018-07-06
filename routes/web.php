@@ -11,16 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PagesController@welcome')->name('pages');
+
+Route::get('/posts', 'FrontendController@fetchAllPosts')->name('allPosts');
+Route::get('/posts/single', 'FrontendController@fetchSinglePost')->name('singlePost');
 
 Auth::routes();
 
-Route::group(['prefix' => 'manage', 'middleware' => 'admin'], function() {
+Route::group(['prefix' => 'manage', 'middleware' => 'auth'], function() {
 
     // Home Controller
-    Route::get('/home', 'DashboardController@dashboard')->name('home');
+    Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard_home');
 
      // Profile Controller
      Route::get('/profile/{slug}', 'ProfileController@index')->name('profile.index');

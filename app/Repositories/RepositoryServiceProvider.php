@@ -24,8 +24,12 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
       /*
-     * Binding for Project Repositories...
+     * Binding for Frontend Repositories...
      */
+    $this->app->bind(
+        'App\Repositories\FrontEnd\FrontendRepositoryInterface',
+        'App\Repositories\FrontEnd\FrontendRepository'
+    );
 
      /*
      * Binding for User Repositories...

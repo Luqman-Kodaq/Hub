@@ -25,7 +25,7 @@ class PostRepository implements PostRepositoryInterface
 
     public function all()
     {
-        return $this->post->paginate(2);
+        return $this->post->get();
     }
 
     public function store(Request $request)
@@ -86,7 +86,7 @@ class PostRepository implements PostRepositoryInterface
 
         public function allPublished()
         {
-            return $this->post->publish()->paginate(2);
+            return $this->post->publish()->get();
         }
 
       public function published($id)

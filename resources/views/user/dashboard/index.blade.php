@@ -133,7 +133,9 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
+                                    @if(!empty($post->user->name))
                                     <th>Author</th>
+                                    @endif
                                     <th>Image</th>
                                     <th>Title</th>
                                     <th>Content</th>
@@ -145,7 +147,9 @@
                                         @foreach($posts as $post)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
+                                            @if(!empty($post->user->name))
                                             <td>{{ $post->user->name }}</td>
+                                            @endif
                                             <td>
                                                 @if(!empty($post->image))
                                                 <img src="{{ asset('uploads/post_photo/' .  $post->image) }}" alt="{{ $post->title }}" width="100" height="100" >

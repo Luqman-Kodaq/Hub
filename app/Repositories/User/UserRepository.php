@@ -88,14 +88,12 @@ class UserRepository implements UserRepositoryInterface
       $user->password = Hash::make($request->password);
 
        // Save the Image
-       if ($request->hasFile('profile_photo')) {
-        $image = $request->file('profile_photo');
-        $filename = time(). '.' . $image->getClientOriginalExtension();
-        $location = public_path('uploads/profile_photo/' . $filename);
-        Image::make($image)->resize(70, 70)->save($location);
-
-        $user->profile_photo = $filename;
-      }
+       if($request->hasFile('profile_photo'))
+       {
+           Auth::user()->update([
+               'profile_photo' => $request->profile_photo->store('public/uploads/profile_photo')
+           ]);
+       }
 
       $user->save();
 

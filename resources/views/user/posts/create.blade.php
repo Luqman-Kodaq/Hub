@@ -3,8 +3,15 @@
 @section('title', '| Create New Post')
 
 @section('headSection')
-<!-- Select2-->
-  <link href="{{ asset('bower_components/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
+<link rel="stylesheet" href="{{ asset('bower_components/select2/dist/css/select2.min.css') }}">
+
+    {{--  <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('bower_components/tinymce/jquery.tinymce.min.js') }}"></script>
+    <script src="{{ asset('bower_components/tinymce/tinymce.min.js') }}"></script>  --}}
+
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+
+    <script>tinymce.init({ selector:'textarea' });</script>
 @endsection
 
 @section('content')

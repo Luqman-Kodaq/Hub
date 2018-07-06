@@ -19,5 +19,8 @@
   ],
   "resolutions": {
     "jquery": ">=1.6"
+  },
+  "dependencies": {
+    "datatables.net-bs": "^2.1.1"
   }
 }

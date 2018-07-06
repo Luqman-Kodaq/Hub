@@ -16,5 +16,19 @@ class DatabaseSeeder extends Seeder
     //   factory('App\User', 13)->create();
     //   factory('App\Profile', 20)->create();
         // $this->call(SettingsTableSeeder::class);
+
+        $user = App\User::create([
+            'name' => 'Abu Muhsin',
+            'email' => 'abumuhsin@gmail.com',
+            'password' => bcrypt('contenthub'),
+            'admin' => 1,
+            'slug' => str_slug('abu muhsin'),
+            'gender' => 1,
+            'active' => 1
+        ]);
+
+        App\Profile::create([
+            'user_id' => $user->id
+        ]);
     }
 }

@@ -13,6 +13,22 @@ use Illuminate\Http\Request;
 |
 */
 
+// // List Posts
+// Route::get('posts', 'PostController@index');
+
+// // List Single Post
+// Route::get('post/{id}', 'UserPostController@show');
+
+// // Create New Post
+// Route::post('post', 'UserPostController@store');
+
+// // Update Post
+// Route::put('post', 'UserPostController@store');
+// // Delete Post
+// Route::delete('post/{id}', 'UserPostController@destroy');
+
+
+
 Route::get('posts/{post}/comments', 'CommentController@index')->name('comment.index');
 
 Route::middleware('auth:api')->group(function () {

@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('headSection')
+<link rel="stylesheet" href="{{ asset('bower_components/datatables.net.bs/dataTables.bootstrap.min.css') }}">
+@endsection
+
 @section('content')
 	 <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -23,7 +27,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table id="table" class="table table-hover datatable-exportable">
+                        <table id="table" class="table table-hover">
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -70,9 +74,6 @@
                     </div>
                     <!-- /.box-body -->
                 </div>
-                <div class="pull-right">
-                        {!! $posts->links(); !!}
-                </div>
                 <!-- /.box -->
             </div>
             <!-- /.col -->
@@ -80,3 +81,13 @@
         <!-- /.row -->
     </section>
 @endsection
+@push('scripts')
+    <script src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable();
+        });
+    </script>
+@endpush

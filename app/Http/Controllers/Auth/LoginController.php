@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Repositories\User\SettingRepositoryInterface;
 
 class LoginController extends Controller
 {
+    private $settings;
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -32,8 +34,23 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
+
+    public function __construct(
+        SettingRepositoryInterface $settingRepository
+    )
     {
         $this->middleware('guest')->except('logout');
+        $this->setting = $settingRepository;
+    }
+
+     /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLoginForm()
+    {
+        return view('auth.login')
+            ->with('settings', $this->setting->first());
     }
 }

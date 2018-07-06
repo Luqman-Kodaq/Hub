@@ -40,9 +40,7 @@
               <!-- Media -->
               <div class="media">
                 <div class="media-body">
-                    @if(!empty($user->profile_photo))
-                    <img src="{{ Storage::url(Auth::user()->profile_photo) }}" alt="{{ Auth::user()->name }}" class="user-image"width="70" height="70" style="border-radius: 50%">
-                  @endif
+                    <img src="{{ Storage::url(Auth::user()->profile_photo) }}" alt="{{ Auth::user()->name }}" class="user-image"width="170" height="170" style="border-radius: 5px">
                   </div>
                     <label for="Name"><strong>Name</strong></label>
                     <div>
