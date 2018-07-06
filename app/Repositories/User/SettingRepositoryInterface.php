@@ -8,6 +8,8 @@ interface SettingRepositoryInterface
 {
   public function getInstance();
 
+  public function all();
+
   public function update(Request $request);
 
   public function find($id);

@@ -74,7 +74,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.6;
   color: #212529;
   text-align: left;
   background-color: #fff;
@@ -2222,7 +2222,7 @@ pre code {
   width: 100%;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.6;
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
@@ -2282,7 +2282,7 @@ pre code {
 }
 
 select.form-control:not([size]):not([multiple]) {
-  height: calc(2.25rem + 2px);
+  height: calc(2.35rem + 2px);
 }
 
 select.form-control:focus::-ms-value {
@@ -2301,7 +2301,7 @@ select.form-control:focus::-ms-value {
   padding-bottom: calc(0.375rem + 1px);
   margin-bottom: 0;
   font-size: inherit;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .col-form-label-lg {
@@ -2324,7 +2324,7 @@ select.form-control:focus::-ms-value {
   padding-top: 0.375rem;
   padding-bottom: 0.375rem;
   margin-bottom: 0;
-  line-height: 1.5;
+  line-height: 1.6;
   color: #212529;
   background-color: transparent;
   border: solid transparent;
@@ -2811,7 +2811,7 @@ select.form-control-lg:not([size]):not([multiple]),
   border: 1px solid transparent;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.6;
   border-radius: 0.25rem;
   -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
@@ -4069,7 +4069,7 @@ input[type="button"].btn-block {
   margin-bottom: 0;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.6;
   color: #495057;
   text-align: center;
   white-space: nowrap;
@@ -4106,7 +4106,7 @@ input[type="button"].btn-block {
 .custom-control {
   position: relative;
   display: block;
-  min-height: 1.5rem;
+  min-height: 1.6rem;
   padding-left: 1.5rem;
 }
 
@@ -4153,7 +4153,7 @@ input[type="button"].btn-block {
 
 .custom-control-label::before {
   position: absolute;
-  top: 0.25rem;
+  top: 0.3rem;
   left: -1.5rem;
   display: block;
   width: 1rem;
@@ -4169,7 +4169,7 @@ input[type="button"].btn-block {
 
 .custom-control-label::after {
   position: absolute;
-  top: 0.25rem;
+  top: 0.3rem;
   left: -1.5rem;
   display: block;
   width: 1rem;
@@ -4227,9 +4227,9 @@ input[type="button"].btn-block {
 .custom-select {
   display: inline-block;
   width: 100%;
-  height: calc(2.25rem + 2px);
+  height: calc(2.35rem + 2px);
   padding: 0.375rem 1.75rem 0.375rem 0.75rem;
-  line-height: 1.5;
+  line-height: 1.6;
   color: #495057;
   vertical-align: middle;
   background: #fff url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
@@ -4287,7 +4287,7 @@ input[type="button"].btn-block {
   position: relative;
   display: inline-block;
   width: 100%;
-  height: calc(2.25rem + 2px);
+  height: calc(2.35rem + 2px);
   margin-bottom: 0;
 }
 
@@ -4295,7 +4295,7 @@ input[type="button"].btn-block {
   position: relative;
   z-index: 2;
   width: 100%;
-  height: calc(2.25rem + 2px);
+  height: calc(2.35rem + 2px);
   margin: 0;
   opacity: 0;
 }
@@ -4320,9 +4320,9 @@ input[type="button"].btn-block {
   right: 0;
   left: 0;
   z-index: 1;
-  height: calc(2.25rem + 2px);
+  height: calc(2.35rem + 2px);
   padding: 0.375rem 0.75rem;
-  line-height: 1.5;
+  line-height: 1.6;
   color: #495057;
   background-color: #fff;
   border: 1px solid #ced4da;
@@ -4336,9 +4336,9 @@ input[type="button"].btn-block {
   bottom: 0;
   z-index: 3;
   display: block;
-  height: 2.25rem;
+  height: 2.35rem;
   padding: 0.375rem 0.75rem;
-  line-height: 1.5;
+  line-height: 1.6;
   color: #495057;
   content: "Browse";
   background-color: #e9ecef;
@@ -4592,8 +4592,8 @@ input[type="button"].btn-block {
 
 .navbar-brand {
   display: inline-block;
-  padding-top: 0.3125rem;
-  padding-bottom: 0.3125rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
   margin-right: 1rem;
   font-size: 1.25rem;
   line-height: inherit;
@@ -6199,7 +6199,7 @@ button.close {
 
 .modal-title {
   margin-bottom: 0;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .modal-body {
@@ -6269,7 +6269,7 @@ button.close {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-style: normal;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.6;
   text-align: left;
   text-align: start;
   text-decoration: none;
@@ -6394,7 +6394,7 @@ button.close {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-style: normal;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.6;
   text-align: left;
   text-align: start;
   text-decoration: none;
@@ -10411,425 +10411,397 @@ a.text-dark:focus {
   }
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  -webkit-transition: opacity .15s linear;
-  transition: opacity .15s linear;
+body {
+  background: whitesmoke;
+  font-family: "Roboto", sans-serif;
+  line-height: 1.6;
+  padding: 130px;
 }
 
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
+#loginContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: top;
+      -ms-flex-pack: top;
+          justify-content: top;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-/* workaround for https://github.com/bootstrap-vue/bootstrap-vue/issues/1560 */
-
-/* source: _input-group.scss */
-
-.input-group > .input-group-prepend > .b-dropdown > .btn,
-.input-group > .input-group-append:not(:last-child) > .b-dropdown > .btn,
-.input-group > .input-group-append:last-child > .b-dropdown:not(:last-child):not(.dropdown-toggle) > .btn {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.input-group > .input-group-append > .b-dropdown > .btn,
-.input-group > .input-group-prepend:not(:first-child) > .b-dropdown > .btn,
-.input-group > .input-group-prepend:first-child > .b-dropdown:not(:first-child) > .btn {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-/* Special styling for type=range and type=color input */
-
-input.form-control[type="range"],
-input.form-control[type="color"] {
-  height: 2.25rem;
-}
-
-input.form-control.form-control-sm[type="range"],
-.input-group-sm > input.form-control[type="range"],
-.input-group-sm > .input-group-prepend > input.form-control.input-group-text[type="range"],
-.input-group-sm > .input-group-append > input.form-control.input-group-text[type="range"],
-.input-group-sm > .input-group-prepend > input.form-control.btn[type="range"],
-.input-group-sm > .input-group-append > input.form-control.btn[type="range"],
-input.form-control.form-control-sm[type="color"],
-.input-group-sm > input.form-control[type="color"],
-.input-group-sm > .input-group-prepend > input.form-control.input-group-text[type="color"],
-.input-group-sm > .input-group-append > input.form-control.input-group-text[type="color"],
-.input-group-sm > .input-group-prepend > input.form-control.btn[type="color"],
-.input-group-sm > .input-group-append > input.form-control.btn[type="color"] {
-  height: 1.9375rem;
-}
-
-input.form-control.form-control-lg[type="range"],
-.input-group-lg > input.form-control[type="range"],
-.input-group-lg > .input-group-prepend > input.form-control.input-group-text[type="range"],
-.input-group-lg > .input-group-append > input.form-control.input-group-text[type="range"],
-.input-group-lg > .input-group-prepend > input.form-control.btn[type="range"],
-.input-group-lg > .input-group-append > input.form-control.btn[type="range"],
-input.form-control.form-control-lg[type="color"],
-.input-group-lg > input.form-control[type="color"],
-.input-group-lg > .input-group-prepend > input.form-control.input-group-text[type="color"],
-.input-group-lg > .input-group-append > input.form-control.input-group-text[type="color"],
-.input-group-lg > .input-group-prepend > input.form-control.btn[type="color"],
-.input-group-lg > .input-group-append > input.form-control.btn[type="color"] {
-  height: 3rem;
-}
-
-/* Less padding on type=color */
-
-input.form-control[type="color"] {
-  padding: 0.25rem 0.25rem;
-}
-
-input.form-control.form-control-sm[type="color"],
-.input-group-sm > input.form-control[type="color"],
-.input-group-sm > .input-group-prepend > input.form-control.input-group-text[type="color"],
-.input-group-sm > .input-group-append > input.form-control.input-group-text[type="color"],
-.input-group-sm > .input-group-prepend > input.form-control.btn[type="color"],
-.input-group-sm > .input-group-append > input.form-control.btn[type="color"] {
-  padding: 0.125rem 0.125rem;
-}
-
-/* Add support for fixed layout table */
-
-table.b-table.b-table-fixed {
-  table-layout: fixed;
-}
-
-/* Busy table styling */
-
-table.b-table[aria-busy='false'] {
-  opacity: 1;
-}
-
-table.b-table[aria-busy='true'] {
-  opacity: 0.6;
-}
-
-/* Sort styling */
-
-table.b-table > thead > tr > th,
-table.b-table > tfoot > tr > th {
+#loginCard {
+  background: #fff;
   position: relative;
+  width: 600px;
+  margin-top: 100px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  -webkit-box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.1), 0 6px 10px 5px rgba(0, 0, 0, 0.1), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.1), 0 6px 10px 5px rgba(0, 0, 0, 0.1), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
-table.b-table > thead > tr > th.sorting,
-table.b-table > tfoot > tr > th.sorting {
-  padding-right: 1.5em;
-  cursor: pointer;
-}
-
-table.b-table > thead > tr > th.sorting::before,
-table.b-table > thead > tr > th.sorting::after,
-table.b-table > tfoot > tr > th.sorting::before,
-table.b-table > tfoot > tr > th.sorting::after {
-  position: absolute;
-  bottom: 0;
-  display: block;
-  opacity: 0.4;
-  padding-bottom: inherit;
-  font-size: inherit;
-  line-height: 180%;
-}
-
-table.b-table > thead > tr > th.sorting::before,
-table.b-table > tfoot > tr > th.sorting::before {
-  right: 0.75em;
-  content: '\2191';
-}
-
-table.b-table > thead > tr > th.sorting::after,
-table.b-table > tfoot > tr > th.sorting::after {
-  right: 0.25em;
-  content: '\2193';
-}
-
-table.b-table > thead > tr > th.sorting_asc::after,
-table.b-table > thead > tr > th.sorting_desc::before,
-table.b-table > tfoot > tr > th.sorting_asc::after,
-table.b-table > tfoot > tr > th.sorting_desc::before {
+#inputPassword {
+  position: relative;
+  padding: 5px 5px 0px 5px;
+  margin: 0px 5px 0px 5px;
   opacity: 1;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
-/* Stacked table layout */
-
-/* Derived from http://blog.adrianroselli.com/2017/11/a-responsive-accessible-table.html */
-
-/* Always stacked */
-
-table.b-table.b-table-stacked {
+#inputPassword input {
+  position: relative;
   width: 100%;
-}
-
-table.b-table.b-table-stacked,
-table.b-table.b-table-stacked > tbody,
-table.b-table.b-table-stacked > tbody > tr,
-table.b-table.b-table-stacked > tbody > tr > td,
-table.b-table.b-table-stacked > tbody > tr > th,
-table.b-table.b-table-stacked > caption {
-  display: block;
-}
-
-/* Hide stuff we can't deal with, or shouldn't show */
-
-table.b-table.b-table-stacked > thead,
-table.b-table.b-table-stacked > tfoot,
-table.b-table.b-table-stacked > tbody > tr.b-table-top-row,
-table.b-table.b-table-stacked > tbody > tr.b-table-bottom-row {
-  display: none;
-}
-
-/* inter-row top border */
-
-table.b-table.b-table-stacked > tbody > tr > :first-child {
-  border-top-width: 0.4rem;
-}
-
-/* convert TD/TH contents to "cells". Caveat: child elements become cells! */
-
-table.b-table.b-table-stacked > tbody > tr > [data-label] {
-  display: grid;
-  grid-template-columns: 40% auto;
-  grid-gap: 0.25rem 1rem;
-}
-
-/* generate row cell "heading" */
-
-table.b-table.b-table-stacked > tbody > tr > [data-label]::before {
-  content: attr(data-label);
-  display: inline;
-  text-align: right;
-  overflow-wrap: break-word;
+  border: none;
+  font-size: 20px;
   font-weight: bold;
-  font-style: normal;
+  outline: 0;
+  background: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
-@media all and (max-width: 575.99px) {
-  /* Under SM */
-
-  table.b-table.b-table-stacked-sm {
-    width: 100%;
-  }
-
-  table.b-table.b-table-stacked-sm,
-  table.b-table.b-table-stacked-sm > tbody,
-  table.b-table.b-table-stacked-sm > tbody > tr,
-  table.b-table.b-table-stacked-sm > tbody > tr > td,
-  table.b-table.b-table-stacked-sm > tbody > tr > th,
-  table.b-table.b-table-stacked-sm > caption {
-    display: block;
-  }
-
-  /* hide stuff we can't deal with, or shouldn't show */
-
-  table.b-table.b-table-stacked-sm > thead,
-  table.b-table.b-table-stacked-sm > tfoot,
-  table.b-table.b-table-stacked-sm > tbody > tr.b-table-top-row,
-  table.b-table.b-table-stacked-sm > tbody > tr.b-table-bottom-row {
-    display: none;
-  }
-
-  /* inter-row top border */
-
-  table.b-table.b-table-stacked-sm > tbody > tr > :first-child {
-    border-top-width: 0.4rem;
-  }
-
-  /* convert TD/TH contents to "cells". Caveat: child elements become cells! */
-
-  table.b-table.b-table-stacked-sm > tbody > tr > [data-label] {
-    display: grid;
-    grid-template-columns: 40% auto;
-    grid-gap: 0.25rem 1rem;
-  }
-
-  /* generate row cell "heading" */
-
-  table.b-table.b-table-stacked-sm > tbody > tr > [data-label]::before {
-    content: attr(data-label);
-    display: inline;
-    text-align: right;
-    overflow-wrap: break-word;
-    font-weight: bold;
-    font-style: normal;
-  }
+#inputPassword #input-label {
+  position: absolute;
+  pointer-events: none;
+  top: 18px;
+  left: 20px;
+  font-size: 15px;
+  font-weight: bold;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
-@media all and (max-width: 767.99px) {
-  /* under MD  */
-
-  table.b-table.b-table-stacked-md {
-    width: 100%;
-  }
-
-  table.b-table.b-table-stacked-md,
-  table.b-table.b-table-stacked-md > tbody,
-  table.b-table.b-table-stacked-md > tbody > tr,
-  table.b-table.b-table-stacked-md > tbody > tr > td,
-  table.b-table.b-table-stacked-md > tbody > tr > th,
-  table.b-table.b-table-stacked-md > caption {
-    display: block;
-  }
-
-  /* hide stuff we can't deal with, or shouldn't show */
-
-  table.b-table.b-table-stacked-md > thead,
-  table.b-table.b-table-stacked-md > tfoot,
-  table.b-table.b-table-stacked-md > tbody > tr.b-table-top-row,
-  table.b-table.b-table-stacked-md > tbody > tr.b-table-bottom-row {
-    display: none;
-  }
-
-  /* inter-row top border */
-
-  table.b-table.b-table-stacked-md > tbody > tr > :first-child {
-    border-top-width: 0.4rem;
-  }
-
-  /* convert TD/TH contents to "cells". Caveat: child elements become cells! */
-
-  table.b-table.b-table-stacked-md > tbody > tr > [data-label] {
-    display: grid;
-    grid-template-columns: 40% auto;
-    grid-gap: 0.25rem 1rem;
-  }
-
-  /* generate row cell "heading" */
-
-  table.b-table.b-table-stacked-md > tbody > tr > [data-label]::before {
-    content: attr(data-label);
-    display: inline;
-    text-align: right;
-    overflow-wrap: break-word;
-    font-weight: bold;
-    font-style: normal;
-  }
-}
-
-@media all and (max-width: 991.99px) {
-  /* under LG  */
-
-  table.b-table.b-table-stacked-lg {
-    width: 100%;
-  }
-
-  table.b-table.b-table-stacked-lg,
-  table.b-table.b-table-stacked-lg > tbody,
-  table.b-table.b-table-stacked-lg > tbody > tr,
-  table.b-table.b-table-stacked-lg > tbody > tr > td,
-  table.b-table.b-table-stacked-lg > tbody > tr > th,
-  table.b-table.b-table-stacked-lg > caption {
-    display: block;
-  }
-
-  /* hide stuff we can't deal with, or shouldn't show */
-
-  table.b-table.b-table-stacked-lg > thead,
-  table.b-table.b-table-stacked-lg > tfoot,
-  table.b-table.b-table-stacked-lg > tbody > tr.b-table-top-row,
-  table.b-table.b-table-stacked-lg > tbody > tr.b-table-bottom-row {
-    display: none;
-  }
-
-  /* inter-row top border */
-
-  table.b-table.b-table-stacked-lg > tbody > tr > :first-child {
-    border-top-width: 0.4rem;
-  }
-
-  /* convert TD/TH contents to "cells". Caveat: child elements become cells! */
-
-  table.b-table.b-table-stacked-lg > tbody > tr > [data-label] {
-    display: grid;
-    grid-template-columns: 40% auto;
-    grid-gap: 0.25rem 1rem;
-  }
-
-  /* generate row cell "heading" */
-
-  table.b-table.b-table-stacked-lg > tbody > tr > [data-label]::before {
-    content: attr(data-label);
-    display: inline;
-    text-align: right;
-    overflow-wrap: break-word;
-    font-weight: bold;
-    font-style: normal;
-  }
-}
-
-@media all and (max-width: 1199.99px) {
-  /* under XL  */
-
-  table.b-table.b-table-stacked-xl {
-    width: 100%;
-  }
-
-  table.b-table.b-table-stacked-xl,
-  table.b-table.b-table-stacked-xl > tbody,
-  table.b-table.b-table-stacked-xl > tbody > tr,
-  table.b-table.b-table-stacked-xl > tbody > tr > td,
-  table.b-table.b-table-stacked-xl > tbody > tr > th,
-  table.b-table.b-table-stacked-xl > caption {
-    display: block;
-  }
-
-  /* hide stuff we can't deal with, or shouldn't show */
-
-  table.b-table.b-table-stacked-xl > thead,
-  table.b-table.b-table-stacked-xl > tfoot,
-  table.b-table.b-table-stacked-xl > tbody > tr.b-table-top-row,
-  table.b-table.b-table-stacked-xl > tbody > tr.b-table-bottom-row {
-    display: none;
-  }
-
-  /* inter-row top border */
-
-  table.b-table.b-table-stacked-xl > tbody > tr > :first-child {
-    border-top-width: 0.4rem;
-  }
-
-  /* convert TD/TH contents to "cells". Caveat: child elements become cells! */
-
-  table.b-table.b-table-stacked-xl > tbody > tr > [data-label] {
-    display: grid;
-    grid-template-columns: 40% auto;
-    grid-gap: 0.25rem 1rem;
-  }
-
-  /* generate row cell "heading" */
-
-  table.b-table.b-table-stacked-xl > tbody > tr > [data-label]::before {
-    content: attr(data-label);
-    display: inline;
-    text-align: right;
-    overflow-wrap: break-word;
-    font-weight: bold;
-    font-style: normal;
-  }
-}
-
-/* Details row styling */
-
-table.b-table > tbody > tr.b-table-details > td {
-  border-top: none;
-}
-
-/* ========================================
-   	  ============ NAVBAR ===========
-   ======================================== */
-
-.login {
-  border-radius: 15px;
-  color: #333333;
-  background: none;
+#inputPassword input:valid + #input-label {
+  top: 6px;
+  left: 30.5px;
+  margin-left: 0 !important;
   font-size: 14px;
-  -webkit-transition: background 500ms ease;
-  transition: background 500ms ease;
+  font-weight: normal;
+  color: #9e9e9e;
 }
 
-.login:hover {
-  background: #f4f4f4;
+#inputPassword #inputProgressPassword {
+  border-bottom: 3px solid #428bca;
+  width: 100%;
+  -webkit-transition: width 0.6s ease-in-out;
+  transition: width 0.6s ease-in-out;
+}
+
+#inputEmail {
+  position: relative;
+  padding: 5px 5px 0px 5px;
+  margin: 0px 5px 0px 5px;
+  opacity: 1;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+}
+
+#inputEmail input {
+  position: relative;
+  width: 100%;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  outline: 0;
+  background: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+#inputEmail #input-label {
+  position: absolute;
+  pointer-events: none;
+  top: 18px;
+  left: 20px;
+  font-size: 15px;
+  font-weight: bold;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+
+#inputEmail input:valid + #input-label {
+  top: 6px;
+  left: 30.5px;
+  margin-left: 0 !important;
+  font-size: 14px;
+  font-weight: normal;
+  color: #9e9e9e;
+}
+
+#inputProgressEmail {
+  border-bottom: 3px solid #428bca;
+  width: 100%;
+  -webkit-transition: width 0.6s ease-in-out;
+  transition: width 0.6s ease-in-out;
+}
+
+.error .input-progress {
+  border-color: #ff2d26;
+}
+
+#btn {
+  width: 95%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-left: 20px;
+}
+
+#checkbox {
+  text-decoration: none;
+  margin-left: 13rem;
+}
+
+.loginText {
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+#registerContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: top;
+      -ms-flex-pack: top;
+          justify-content: top;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#registerCard {
+  background: #fff;
+  position: relative;
+  width: 600px;
+  margin-top: 100px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  -webkit-box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.1), 0 6px 10px 5px rgba(0, 0, 0, 0.1), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.1), 0 6px 10px 5px rgba(0, 0, 0, 0.1), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+#inputRegisterProgress {
+  border-bottom: 3px solid #428bca;
+  width: 100%;
+  -webkit-transition: width 0.6s ease-in-out;
+  transition: width 0.6s ease-in-out;
+}
+
+#inputRegisterName {
+  position: relative;
+  padding: 5px 5px 0px 5px;
+  margin: 0px 5px 0px 5px;
+  opacity: 1;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+}
+
+#inputRegisterName input {
+  position: relative;
+  width: 100%;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  outline: 0;
+  background: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+#inputRegisterName #inputRegisterNameLabel {
+  position: absolute;
+  pointer-events: none;
+  top: 18px;
+  left: 20px;
+  font-size: 15px;
+  font-weight: bold;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+
+#inputRegisterName input:valid + #inputRegisterNameLabel {
+  top: 6px;
+  left: 5px;
+  margin-left: 0 !important;
+  font-size: 14px;
+  font-weight: normal;
+  color: #9e9e9e;
+}
+
+#inputRegisterEmail {
+  position: relative;
+  padding: 5px 5px 0px 5px;
+  margin: 0px 5px 0px 5px;
+  opacity: 1;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+}
+
+#inputRegisterEmail input {
+  position: relative;
+  width: 100%;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  outline: 0;
+  background: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+#inputRegisterEmail #inputRegisterEmailLabel {
+  position: absolute;
+  pointer-events: none;
+  top: 18px;
+  left: 20px;
+  font-size: 15px;
+  font-weight: bold;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+
+#inputRegisterEmail input:valid + #inputRegisterEmailLabel {
+  top: 6px;
+  left: 5px;
+  margin-left: 0 !important;
+  font-size: 14px;
+  font-weight: normal;
+  color: #9e9e9e;
+}
+
+#inputRegisterEmail #inputRegisterProgressEmail {
+  border-bottom: 3px solid #428bca;
+  width: 100%;
+  -webkit-transition: width 0.6s ease-in-out;
+  transition: width 0.6s ease-in-out;
+}
+
+#gender {
+  border: none;
+  font-weight: bold;
+  outline: 0;
+  background: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+#genderDiv {
+  width: 50%;
+  padding: 5px 5px 0px 5px;
+  margin: 0px 5px 0px 5px;
+}
+
+#inputRegisterProgressGender {
+  border-bottom: 3px solid #428bca;
+  width: 100%;
+  -webkit-transition: width 0.6s ease-in-out;
+  transition: width 0.6s ease-in-out;
+}
+
+#inputRegisterPassword {
+  position: relative;
+  padding: 5px 5px 0px 5px;
+  margin: 0px 5px 0px 5px;
+  opacity: 1;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+}
+
+#inputRegisterPassword input {
+  position: relative;
+  width: 100%;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  outline: 0;
+  background: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+#inputRegisterPassword #inputRegisterPasswordLabel {
+  position: absolute;
+  pointer-events: none;
+  top: 18px;
+  left: 20px;
+  font-size: 15px;
+  font-weight: bold;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+
+#inputRegisterPassword input:valid + #inputRegisterPasswordLabel {
+  top: 6px;
+  left: 5px;
+  margin-left: 0 !important;
+  font-size: 14px;
+  font-weight: normal;
+  color: #9e9e9e;
+}
+
+#inputRegisterPassword #inputRegisterProgressPassword {
+  border-bottom: 3px solid #428bca;
+  width: 100%;
+  -webkit-transition: width 0.6s ease-in-out;
+  transition: width 0.6s ease-in-out;
+}
+
+#inputRegisterConfirm {
+  position: relative;
+  padding: 5px 5px 0px 5px;
+  margin: 0px 5px 0px 5px;
+  opacity: 1;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+}
+
+#inputRegisterConfirm input {
+  position: relative;
+  width: 100%;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  outline: 0;
+  background: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+#inputRegisterConfirm #inputRegisterConfirmLabel {
+  position: absolute;
+  pointer-events: none;
+  top: 18px;
+  left: 20px;
+  font-size: 15px;
+  font-weight: bold;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+
+#inputRegisterConfirm input:valid + #inputRegisterConfirmLabel {
+  top: 6px;
+  left: 5px;
+  margin-left: 0 !important;
+  font-size: 14px;
+  font-weight: normal;
+  color: #9e9e9e;
+}
+
+#inputRegisterConfirm #inputRegisterProgressConfirm {
+  border-bottom: 3px solid #428bca;
+  width: 100%;
+  -webkit-transition: width 0.6s ease-in-out;
+  transition: width 0.6s ease-in-out;
 }
 

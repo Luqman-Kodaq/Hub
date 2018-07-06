@@ -10,6 +10,8 @@ interface PostRepositoryInterface
 
   public function all();
 
+  public function latest();
+
   public function store(Request $request);
 
   public function update($id, Request $request); 

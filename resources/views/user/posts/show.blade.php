@@ -44,7 +44,7 @@
                   <div class="row">
                     <div class="col-md-8 col-md-offset-1 col-xm-12">
                         @if(!empty($post->image))
-                        <img src="{{ asset('uploads/post_photo/' .  $post->image) }}" alt="{{ $post->name }}" width="850" height="800" class="media-object">
+                        <img src="{{ $post->image }}" alt="{{ $post->name }}" width="850" height="800" class="media-object">
                         @endif
                         <hr>
                         <p><strong> Published: {{ $post->created_at }}</strong> </p>

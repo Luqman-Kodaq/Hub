@@ -26,7 +26,7 @@ class PostUpdateRequest extends FormRequest
     public function rules(Request $request)
     {
         return [
-            'slug'                     => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
+            // 'slug'                     => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
             'title' => [
                  'required',
                  'max:255',

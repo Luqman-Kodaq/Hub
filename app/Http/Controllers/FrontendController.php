@@ -24,14 +24,14 @@ class FrontendController extends Controller
 
     public function fetchAllPosts()
     {
-        $posts = $this->post->all();
-        return response()->json($posts);
+        $posts = $this->post->latest();
+        return response()->json($posts, 200);
     }
 
-    public function fetchSinglePost()
+    public function fetchSinglePost($slug)
     {
-        $post = $this->post->find($id);
+        $post = $this->post->find($slug);
 
-        return response()->json($post);
+        return response()->json($post, 200);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SettingsUpdateRequest;
 use App\Repositories\User\SettingRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class SettingController extends Controller
 {
@@ -22,11 +23,11 @@ class SettingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function index($setting)
-    // {
-    //         return view('user.settings.setting')
-    //                 ->with('settings', $this->setting->first());
-    // }
+    public function index()
+    {
+        $setting = $this->setting->first();
+        return response()->json($setting);
+    }
 
     public function edit()
     {

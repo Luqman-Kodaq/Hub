@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <b>{{ $settings->site_name }}</b>
@@ -9,20 +9,32 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
+                    <ul class="navbar-nav navRoutes">
+                        <li class="nav-item">
+                            <a href="{{ route('pages') }}" class="navlink">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('allPosts') }}" class="navlink">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="navlink">About</a>
+                        </li>                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto navLogs">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a class="btn btn-outline-secondary nav-link mr-2 login" href="{{ route('login') }}">{{ __('Sign In') }}</a></li>
-                            <li><a class="btn btn-outline-light nav-link login" href="{{ route('register') }}">{{ __('Sign Up') }}</a></li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-secondary navlink mr-2" href="{{ route('login') }}">{{ __('LOG IN') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-secondary navlink" href="{{ route('register') }}">{{ __('JOIN') }}</a>
+                            </li>
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    Hello {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">

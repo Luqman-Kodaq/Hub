@@ -141,15 +141,20 @@
       </div>
       <!-- /.col -->
       <div class="col-md-3 col-xs-12">
-          <div class="box">
-              <div class="box-header with-border">
-                  <h3 class="box-title">Profile</h3>
-                  <img src="https://placehold.it/50x50" alt="" class="card-img-top">
-                </div>
-                <div class="box-body">
-                </div>
-            </div>
-        </div>
+        <div class="thumbnail" style="border-radius: 5%">
+          <img src="{{ Storage::url(Auth::user()->profile_photo) }}" alt="{{ Auth::user()->name }}" style="border-radius: 5%">
+          <span class="hidden-xs"></span>
+          <div class="caption form-group">
+          <div class="form-group text-center">
+            <h3><strong>{{ Auth::user()->name }}</strong></h3>
+            <p>{{ Auth::user()->profile->about }}</p>
+          </div>
+          <div class="form-group">
+           <a href="{{ route('post.index') }}" class="btn btn-sm btn-info btn-block pull-right" role="button" style=""> <i class="fa fa-"></i> Cancel</a>
+          </div>
+    </div>
+  </div>    
+</div>
     </div>
     <!-- /.row -->
 @endsection

@@ -43,7 +43,7 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'gender' => 'required|bool'
+            'gender' => 'required|string'
         ]);
     }
 
@@ -55,7 +55,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if($data['gender'])
+        if($data['gender' == 'Male'])
         {
             $profile_photo = 'public/defaults/male.png';
         }else{

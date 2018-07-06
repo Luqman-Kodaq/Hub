@@ -13,8 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UsersTableSeeder::class);
         //  $this->call(LaratrustSeeder::class);
-    //   factory('App\User', 13)->create();
-    //   factory('App\Profile', 20)->create();
+        //   factory('App\User', 13)->create();
+        //   factory('App\Profile', 20)->create();
         // $this->call(SettingsTableSeeder::class);
 
         $user = App\User::create([

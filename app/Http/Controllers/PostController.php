@@ -32,6 +32,16 @@ class PostController extends Controller
         $this->setting = $settingRepository;
     }
 
+    // public function fetchAllPosts()
+    // {
+    //     return response()->json($this->post->all(), 200);
+    // }
+
+    // public function fetchSinglePost()
+    // {
+    //     return response()->json($this->post->find($id), 200);
+    // }
+
     /**
      * Display a listing of the resource.
      *

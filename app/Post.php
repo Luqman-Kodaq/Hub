@@ -9,9 +9,16 @@ class Post extends Model
 {
     use SoftDeletes;
 
+    protected $post_photo = './uploads/post_photo/';
+
     protected $fillable = ['user_id', 'slug', 'title', 'excerpt', 'contents', 'category_id'];
 
     protected $dates = ['deleted_at'];
+
+    public function getPhotoAttribute()
+    {
+        return $this->post_photo . $image;
+    }
 
     public function tags()
     {

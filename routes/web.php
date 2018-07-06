@@ -11,13 +11,27 @@
 |
 */
 
+/* ========================================
+   	  ============ FRONTEND ===========
+   ======================================== */
+
 Route::get('/', 'PagesController@welcome')->name('pages');
 
-Route::get('/posts', 'FrontendController@fetchAllPosts')->name('allPosts');
-Route::get('/posts/single', 'FrontendController@fetchSinglePost')->name('singlePost');
+// Route::get('/{any}', function(){
+//     return view('welcome');
+// })->where('any', '.*');
+
+Route::get('posts', 'FrontendController@fetchAllPosts')->name('allPosts');
+Route::get('post/{slug}', 'FrontendController@fetchSinglePost')->name('singlePost');
+
+// // Settings 
+Route::get('/index', 'SettingController@index')->name('setting.index');
 
 Auth::routes();
 
+/* ========================================
+   	  ============ BACKEND ===========
+   ======================================== */
 Route::group(['prefix' => 'manage', 'middleware' => 'auth'], function() {
 
     // Home Controller

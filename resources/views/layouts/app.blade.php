@@ -19,14 +19,31 @@
 </head>
 <body>
     <div id="app">
-            @include('_includes.nav.main')  
-
+            <div class="container">
             @yield('content')
+            <app></app>        
+        </div>
     </div>
-
+    @yield('vue')
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    
-    @yield('vue')
+    <script src="{{ asset('bower_components/scrollreveal/dist/scrollreveal.min.js') }}"></script>
+    <script>
+        window.sr = ScrollReveal();
+        sr.reveal('#loginContainer', {
+            duration: 2000,
+            origin: 'top'
+        });
+        sr.reveal('#registerContainer', {
+            duration: 2000,
+            origin: 'top'
+        });
+    </script>
+    {{-- <script>
+        window.App = {!! json_encode([
+            'user' => Auth::user(),
+            'image' => "{{ asset('uploads/post_photo/1528623742.jpeg') }}"
+        ]) !!}
+    </script> --}}
 </body>
 </html>

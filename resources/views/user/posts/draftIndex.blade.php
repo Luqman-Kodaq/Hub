@@ -47,10 +47,10 @@
                                 @foreach($posts as $post)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $post->user->name }}</td>
+                                    <td>{{ Auth::user()->name }}</td>
                                     <td>
                                         @if(!empty($post->image))
-                                        <img src="{{ asset('uploads/post_photo/' .  $post->image) }}" alt="{{ $post->title }}" width="100" height="100" >
+                                        <img src="{{ $post->image }}" alt="{{ $post->title }}" width="100" height="100" >
                                       @endif
                                     </td>
                                     <td>{{ $post->title }}</td>

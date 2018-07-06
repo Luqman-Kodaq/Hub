@@ -1,24 +1,18 @@
 <template>
 <div class="container">
-  <div>
-    <transition name="fade">
-        <router-view></router-view>
-    </transition>
-  </div>
+<navbar></navbar>
+<router-view></router-view>
 </div>
 </template>
 
-<style>
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .5s
-  }
-    .fade-enter, .fade-leave-active {
-      opacity: 0
-    }
-</style>
-
 <script>
-  export default {
-
-  }
+    import Navbar from './Navbar';
+    export default {
+        components: {
+            Navbar
+        }
+    }   
 </script>
+
+<style>
+</style>

@@ -142,8 +142,7 @@
                          <a href="{{ route('post.index') }}" class="btn btn-sm btn-info btn-block pull-right" role="button" style=""> <i class="fa fa-"></i> Cancel</a>
                         </div>
                   </div>
-                </div>
-                  
+                </div>                  
           </div>
     </div>
     <!-- /.row -->
@@ -152,7 +151,7 @@
 @section('vue')
         <script>
             var app = new Vue({
-                el: '#app',
+                el: '#master',
                 data: {
                     title: '',
                     slug: '',

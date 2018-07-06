@@ -14,12 +14,16 @@ class SettingRepository implements SettingRepositoryInterface
     public function __construct(Setting $setting)
     {
         $this->setting = $setting;
-        // $this->setting->firstOrCreate(['id' => 1]);
     }
 
     public function getInstance()
     {
       return $this->setting;
+    }
+
+    public function all()
+    {
+        $setting = $this->setting->all();
     }
 
     public function update(Request $request)
@@ -39,7 +43,7 @@ class SettingRepository implements SettingRepositoryInterface
 
     public function find($id)
 	{
-		return $this->systemSettings->findOrFail($id);
+		return $this->setting->findOrFail($id);
 	}
 
     public function first()

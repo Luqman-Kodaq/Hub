@@ -49,7 +49,7 @@
   @include('user.partials.main_sidebar')
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" id="app">
+  <div class="content-wrapper" id="master">
     @yield('content')
     <!-- /.content -->
   </div>

@@ -43,14 +43,14 @@ class LoginController extends Controller
         $this->setting = $settingRepository;
     }
 
-     /**
-     * Show the application's login form.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showLoginForm()
-    {
-        return view('auth.login')
-            ->with('settings', $this->setting->first());
-    }
+    //  /**
+    //  * Show the application's login form.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function showLoginForm()
+    // {
+    //     return view('auth.login')
+    //         ->with('settings', $this->setting->first());
+    // }
 }
