@@ -27,25 +27,9 @@ class TagRepository implements TagRepositoryInterface
         return $this->tag->all();
     }
 
-    public function store(Request $request)
-    {
-        DB::transaction(function () use ($request) {
-          $tag = new $this->tag();
-          $tag->name = $request->name;
+    public function store(Request $request){}
 
-          $tag->save();
-        });
-    }
-
-    public function update($id, Request $request)
-    {
-        DB::transaction(function () use ($id, $request) {
-          $tag = $this->find($id);
-          $tag->name = $request->name;
-
-          $tag->save();
-        });
-    }
+    public function update($id, Request $request){}
 
     public function delete($id)
   {

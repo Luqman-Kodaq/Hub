@@ -28,9 +28,9 @@ class FrontendController extends Controller
         return response()->json($posts, 200);
     }
 
-    public function fetchSinglePost($slug)
+    public function fetchSinglePost(Request $request)
     {
-        $post = $this->post->find($slug);
+        $post = $this->post->find($request->id);
 
         return response()->json($post, 200);
     }

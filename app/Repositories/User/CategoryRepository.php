@@ -27,25 +27,9 @@ class CategoryRepository implements CategoryRepositoryInterface
         return $this->category->all();
     }
 
-    public function store(Request $request) 
-    {
-      DB::transaction(function () use ($request) {
-        $category = new $this->category();
-        $category->name = $request->name;
+    public function store(Request $request){}
 
-        $category->save();
-      });
-    }
-
-    public function update($id, Request $request)
-    {
-      DB::transaction(function () use ($id, $request) {
-        $category = $this->find($id);
-        $category->name = $request->name;
-
-        $category->save();
-      });
-    }
+    public function update($id, Request $request){}
 
     public function delete($id)
     {

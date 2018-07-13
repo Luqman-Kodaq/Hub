@@ -1,6 +1,6 @@
 <template>
 <div>
-        <div class="container-fluid hero-section d-flex align-content-center justify-content-center flex-wrap ml-auto">
+      <div class="container-fluid hero-section d-flex align-content-center justify-content-center flex-wrap ml-auto">
             <h2 class="title">Welcome to Content Lounge</h2>
         </div>
         <div class="container">
@@ -8,13 +8,13 @@
                 <div class="col-md-12">
                     <div class="row">
                             <!-- Card -->
-                            <div class="col-md-4 card" v-for="post in posts" :key="post.id">
-                                <router-link :to="{name: 'SingleBlog', params: {slug: post.slug}}">
+                            <div  class="col-md-4 card" v-for="post in posts" :key="post.id">
+                                <router-link :to="{name: 'SingleBlog', params: {id: post.id}}">
                                         <!-- Card image -->
                                         <img class="card-img-top" :src="post.image" :alt="post.title">
 
                                         <!-- Card content -->
-                                        <div class="card-body">
+                                        <div class="card-img-overlay">
 
                                             <!-- Title -->
                                             <h4 class="card-title"><a>{{post.title}}</a></h4>

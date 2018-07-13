@@ -10,8 +10,6 @@ interface UserRepositoryInterface
 
   public function all();
 
-  public function allActive();
-
   public function admin($id);
 
   public function notAdmin($id);

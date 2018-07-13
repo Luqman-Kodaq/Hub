@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Profile\ProfileResource;
+use App\Http\Resources\Profile\ProfileCollection;
 use Carbon\Carbon;
 use App\Profile;
 use App\Setting;
@@ -18,40 +21,25 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug)
+    public function index()
     {
-        $user = User::where('slug', $slug)->first();
-       return view('user.profiles.profile')
-                ->with('user', $user)
-                ->with('settings', Setting::first());
+            return ProfileCollection::collection(Profile::first()->get());
     }
 
-    public function edit()
+    public function update(Profile $profile, Request $r)
     {
-        return view('user.profiles.edit')
-                ->with('info',  Auth::user()->profile)
-                ->with('settings', Setting::first());        
-    }
+           $r['about'] = $r->bio;
+           unset($r['bio']);
 
-    public function update(ProfileUpdateRequest $r)
-    {
-        Auth::user()->profile()->update([
-            'about' => $r->about,            
-            'facebook' => $r->facebook,
-            'twitter' => $r->twitter,
-            'instagram' => $r->instagram
-        ]);
+           $profile->update($r->all());
 
-        if($r->hasFile('profile_photo'))
-        {
-            Auth::user()->update([
-                'profile_photo' => $r->profile_photo->store('public/uploads/profile_photo')
-            ]);
-        }
-        
-        $redirect_to = $r->has('redirect') ? redirect()->route('profile.index', ['slug' => Auth::user()->slug ]) : back();
-
-        return $redirect_to
-                ->with('success', 'Profile updated successfully');
+            if($r->hasFile('profile_photo'))
+            {
+                Auth::user()->update([
+                    'profile_photo' => $r->profile_photo->store('public/uploads/profile_photo')
+                ]);
+            }
+            $profile->save();        
+            return response(['data' => new ProfileResource($profile)], Response::HTTP_CREATED);
     }
 }

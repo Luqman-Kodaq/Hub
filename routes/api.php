@@ -13,21 +13,45 @@ use Illuminate\Http\Request;
 |
 */
 
-// // List Posts
-// Route::get('posts', 'PostController@index');
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
-// // List Single Post
-// Route::get('post/{id}', 'UserPostController@show');
+// Route::group([ 'prefix' => 'auth'], function () {
+    Route::post('/register', 'AuthController@register');
+    // Route::post('login', 'AuthController@login');
+    // Route::post('logout', 'AuthController@logout');
+    // Route::post('refresh', 'AuthController@refresh');
+    // Route::post('me', 'AuthController@me');
 
-// // Create New Post
-// Route::post('post', 'UserPostController@store');
+// });
 
-// // Update Post
-// Route::put('post', 'UserPostController@store');
-// // Delete Post
-// Route::delete('post/{id}', 'UserPostController@destroy');
+Route::group(['prefix' => 'manage'], function(){
+    // User Controller
+    Route::apiResource('/users', 'UserController');
 
+    // Post Controller
+    Route::apiResource('/posts', 'PostController');
 
+    // Profile Controller
+    Route::apiResource('/profile', 'ProfileController');
+
+    // Settings Controller
+    Route::get('/settings', 'SettingController@index')->name('setting.index');
+    Route::put('/setting/{id}', 'SettingController@update')->name('setting.update');
+
+    // Role Controller
+    Route::apiResource('/roles','RoleController');
+
+    // Permission Controller
+    Route::apiResource('/permissions', 'PermissionController');
+
+    // Tag Controller
+    Route::apiResource('/tags', 'TagController');
+
+    // Category Controller
+    Route::apiResource('/categories', 'CategoryController');
+});
 
 Route::get('posts/{post}/comments', 'CommentController@index')->name('comment.index');
 

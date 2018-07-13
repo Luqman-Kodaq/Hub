@@ -6,9 +6,14 @@ use App\Http\Requests\PostStoreRequest;
 use App\Http\Requests\PostUpdateRequest;
 use App\Repositories\User\PostRepositoryInterface;
 use App\Repositories\User\CategoryRepositoryInterface;
+use Symfony\Component\HttpFoundation\Response;
 use App\Repositories\User\TagRepositoryInterface;
 use App\Repositories\User\SettingRepositoryInterface;
+use App\Http\Resources\Post\PostResource;
+use App\Http\Resources\Post\PostCollection;
 use Illuminate\Http\Request;
+use App\Post;
+use Auth;
 use App\Http\Controllers\Controller;
 
 class PostController extends Controller
@@ -32,16 +37,6 @@ class PostController extends Controller
         $this->setting = $settingRepository;
     }
 
-    // public function fetchAllPosts()
-    // {
-    //     return response()->json($this->post->all(), 200);
-    // }
-
-    // public function fetchSinglePost()
-    // {
-    //     return response()->json($this->post->find($id), 200);
-    // }
-
     /**
      * Display a listing of the resource.
      *
@@ -49,38 +44,43 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('user.posts.index')
-        ->with('posts', $this->post->allPublished())
-        ->with('settings', $this->setting->first());
+        return PostCollection::collection($this->post->all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('user.posts.create')
-            ->with('categories', $this->category->all())
-            ->with('tags', $this->tag->all())
-            ->with('settings', $this->setting->first());
-    }
-
-    /**
+     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostStoreRequest $request)
+    public function store(Request $request)
     {
-        $this->post->store($request);
+        // return $request->all();
+        $request['user_id'] = $request->author;
+           unset($request['author']);
 
-        $redirect_to = $request->has('redirect') ? redirect()->route('post.index') : back();
+        $post = new Post();
+        $post->slug = $request->slug;
+        $post->title = $request->title;
+        $post->excerpt = $request->excerpt;
+        $post->contents = $request->contents;
+        $post->category_id = $request->category_id;
+        $post->user_id = $request->user_id;
+        
+        // Save the Image
+       if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $filename = time(). '.' . $image->getClientOriginalExtension();
+        $location = public_path('uploads/post_photo/' . $filename);
+        Image::make($image)->resize(800, 400)->save($location);
 
-        return $redirect_to
-                ->with('success', 'New post added successfully');
+        $post->image = asset("uploads/post_photo/$filename");
+      }
+
+      $post->tags()->sync($request->tags, false);
+
+      $post->save();
+      return response(['data' => new PostResource($post)], Response::HTTP_CREATED);
     }
 
     /**
@@ -93,26 +93,7 @@ class PostController extends Controller
     {
             $post = $this->post->find($id);
 
-            return view('user.posts.show')
-            ->with('post', $post)
-            ->with('settings', $this->setting->first());
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request)
-    {
-        $post = $this->post->find($request->id);
-
-        return view('user.posts.draftEdit')
-                ->with('post', $post)
-                ->with('categories', $this->category->all())
-                ->with('tags', $this->tag->all())
-                ->with('settings', $this->setting->first());
+            return new PostResource($post);
     }
 
     /**
@@ -120,12 +101,7 @@ class PostController extends Controller
      * 
      * @return \illuminate\Http\Response
      */
-    public function drafts()
-    {
-        return view('user.posts.draftIndex')
-                ->with('posts', $this->post->all())
-                ->with('settings', $this->setting->first());
-    }
+    public function drafts(){}
 
     /*    
      *  Published Posts 
@@ -133,9 +109,6 @@ class PostController extends Controller
         public function publish(Request $request)
         {
             $post = $this->post->published($request->id);
-            
-            return back()
-                ->with('success', 'Post published successfully');
         }
 
     /**
@@ -145,30 +118,50 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PostUpdateRequest $request)
+    public function update(Request $request, $id)
     {
-        $this->post->update($request->id, $request);
+        $request['user_id'] = $request->author;
+           unset($request['author']);
 
-        $redirect_to = $request->has('redirect') ? redirect()->route('post_draft.index') : back();
+           $post = Post::find($id);
+            $post->title = $request->title;
+            $post->excerpt = $request->excerpt;
+            $post->contents = $request->contents;
+            $post->category_id = $request->category_id;
+            $post->user_id = $request->user_id;
 
-        return $redirect_to
-            ->with('success', 'Post updated successfully');
+            if ($request->hasFile('image')) {
+             $image = $request->file('image');
+             $filename = time(). '.' . $image->getClientOriginalExtension();
+             $location = public_path('uploads/post_photo/' . $filename);
+             Image::make($image)->resize(800, 400)->save($location);
+     
+           $post->image = asset("uploads/post_photo/$filename");              
+           }          
+
+           if (isset($request->tags)) {
+             $post->tags()->sync($request->tags);
+         } else {
+             $post->tags()->sync(array());
+         }
+
+        $post->save();
+       return response(['data' => new PostResource($post)], Response::HTTP_CREATED);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from table.
      *
      * @param  int  $request
      * @return \Illuminate\Http\Response
      */
-    public function temporaryDelete(Request $request)
+    public function temporaryDelete($id)
     {
-        $post = $this->post->find($request->id);
+        $post = $this->post->find($id);
 
         $post->delete();
 
-        return back()
-            ->with('success', 'Post trashed successfully');
+        return response(null, response::HTTP_NO_CONTENT);
     }
 
      /**
@@ -177,12 +170,7 @@ class PostController extends Controller
      * @param int $request
      * @return \Illuminate\Http\Response 
      */
-    public function onlyTrashed(Request $request)
-    {
-        return view('user.posts.trashedPosts')
-                ->with('posts', $this->post->onlyTrashed())
-                ->with('settings', $this->setting->first());
-    }
+    public function onlyTrashed(Request $request){}
 
     /**
      * Remove the specified resource completely from storage.
@@ -190,13 +178,13 @@ class PostController extends Controller
      * @param int $request
      * @return \Illuminate\Http\Response 
      */
-    public function forceDelete(Request $request)
+    public function destroy($id)
     {
-        $post = $this->post->forceDelete($request->id);
+        $post = $this->post->forceDelete($id);
 
         $post->forceDelete();
-        return back()
-                ->with('success', 'Post deleted permanently');
+
+        return response(null, response::HTTP_NO_CONTENT);
     }
 
      /**
@@ -208,9 +196,10 @@ class PostController extends Controller
     public function restore(Request $request)
     {
         $post = $this->post->restore($request->id);
+
         $post->restore();
-        return back()
-                ->with('success', 'Post restored successfully');
+
+        return new PostResource($post);
     }
 
     public function apiCheckUnique(Request $request)

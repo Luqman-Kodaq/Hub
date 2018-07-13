@@ -5,27 +5,23 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Repositories\User\UserRepositoryInterface;
-use App\Repositories\User\RoleRepositoryInterface;
-use App\Repositories\User\SettingRepositoryInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
+use App\Http\Resources\User\UserResource;
+use App\Http\Resources\User\UserCollection;
+use Illuminate\Support\Facades\Hash;
+use App\User;
 
 class UserController extends Controller
 {
     private $user;
-    private $role;
-    private $setting;
 
     public function __construct(
-        UserRepositoryInterface $userRepository,
-        RoleRepositoryInterface $roleRepository,
-        SettingRepositoryInterface $settingRepository
+        UserRepositoryInterface $userRepository
     )
     {
        $this->user = $userRepository;
-       $this->role = $roleRepository;
-       $this->setting = $settingRepository;
     }
 
     /**
@@ -35,24 +31,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user.users.index')
-                ->with('users', $this->user->all())
-                ->with('settings', $this->setting->first());
+        return UserCollection::collection($this->user->all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('user.users.create')
-                ->with('roles', $this->role->all())
-                ->with('settings', $this->setting->first());
-    }
-
-    /**
+     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -60,28 +42,38 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
-        $this->user->store($request);
-
-        $redirect_to = $request->has('redirect') ? redirect()->route('user.index') : back();
-
-        return $redirect_to
-            ->with('success', 'New user added succesfully');
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->gender = $request->gender;
+        $user->password = Hash::make($request->password);
+    
+        // Save the Image
+            if ($request->hasFile('profile_photo')) {
+            $image = $request->file('profile_photo');
+            $filename = time(). '.' . $image->getClientOriginalExtension();
+            $location = public_path('uploads/profile_photo/' . $filename);
+            Image::make($image)->resize(70, 70)->save($location);
+    
+            $user->profile_photo = asset("uploads/profile_photo/$filename");
+            }
+            
+            if ($request->roles) {
+            $user->syncRoles(explode(',', $request->roles));
+            }
+    
+            $user->save();
+            return response(['data' => new UserResource($user)], Response::HTTP_CREATED);
     }
 
     public function makeAdmin(Request $request)
     {
         $user = $this->user->admin($request->id);
-
-        return back()
-                ->with('success', 'User made admin successfully');
     }
 
     public function notAdmin(Request $request)
     {
         $user = $this->user->notAdmin($request->id);
-
-        return back()
-                ->with('success', 'User removed from admin successfully');
     }
 
     /**
@@ -93,26 +85,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = $this->user->find($id);
-
-        return view('user.users.show')
-            ->with('user', $user)
-            ->with('settings', $this->setting->first());
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request)
-    {
-        $user = $this->user->find($request->id);
-
-        return view('user.users.edit')
-            ->with('user', $user)
-            ->with('roles', $this->role->all())
-            ->with('settings', $this->setting->first());
+        return new UserResource($user);
     }
 
     /**
@@ -122,14 +95,27 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserUpdateRequest $request)
+    public function update(UserUpdateRequest $request, $id)
     {
-        $this->user->update($request->id, $request);
+      $user = User::find($id);
+      $user->name = $request->name;
+      $user->email = $request->email;
+      $user->password = Hash::make($request->password);
 
-        $redirect_to = $request->has('redirect') ? redirect()->route('user.index') : back();
+       // Save the Image
+       if($request->hasFile('profile_photo'))
+       {
+           Auth::user()->update([
+               'profile_photo' => $request->profile_photo->store('public/uploads/profile_photo')
+           ]);
+       }
 
-        return $redirect_to
-            ->with('success', 'User updated successfully');
+       if ($request->roles) {
+        $user->syncRoles(explode(',', $request->roles));
+      }
+
+       $user->save();
+       return response(['data' => new UserResource($user)], Response::HTTP_CREATED);
     }
 
     /**
@@ -138,14 +124,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $user = $this->user->find($request->id);
+        $user = $this->user->find($id);
 
-        // $user->profile->delete();
         $user->delete();
 
-        return back()
-            ->with('success', 'User deleted successfully');
+        return response('Data Removed Successfully', Response::HTTP_NO_CONTENT);
     }
 }

@@ -6,8 +6,12 @@ use App\Http\Requests\TagStoreRequest;
 use App\Http\Requests\TagUpdateRequest;
 use App\Repositories\User\TagRepositoryInterface;
 use App\Repositories\User\SettingRepositoryInterface;
+use Symfony\Component\HttpFoundation\Response;
+use App\Http\Resources\Tag\TagResource;
+use App\Http\Resources\Tag\TagCollection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Tag;
 
 class TagController extends Controller
 {
@@ -30,20 +34,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        return view('user.tags.index')
-                ->with('tags', $this->tag->all())
-                ->with('settings', $this->setting->first());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('user.tags.create')
-        ->with('settings', $this->setting->first());
+        return TagCollection::collection($this->tag->all());
     }
 
     /**
@@ -54,27 +45,12 @@ class TagController extends Controller
      */
     public function store(TagStoreRequest $request)
     {
-        $this->tag->store($request);
+          $tag = new Tag();
+          $tag->name = $request->name;
 
-            $redirect_to = $request->has('redirect') ? redirect()->route('tag.index') : back();
+          $tag->save();
 
-            return $redirect_to
-                    ->with('success', 'New tag added successfully');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request)
-    {
-        $tag = $this->tag->find($request->id);
-
-        return view('user.tags.edit')
-                ->with('tag', $tag)
-                ->with('settings', $this->setting->first());
+          return response(['data' => new TagResource($tag)], response::HTTP_CREATED);
     }
 
     /**
@@ -84,14 +60,14 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(TagUpdateRequest $request)
+    public function update(TagUpdateRequest $request, $id)
     {
-        $this->tag->update($request->id, $request);
+          $tag = $this->tag->find($id);
+          $tag->name = $request->name;
 
-        $redirect_to = $request->has('redirect') ? redirect()->route('tag.index') : back();
+          $tag->save();
 
-        return $redirect_to
-            ->with('success', 'Tag updated successfully');
+          return response(['data' => new TagResource($tag)], response::HTTP_CREATED);
     }
 
     /**
@@ -100,13 +76,12 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $tag = $this->tag->find($request->id);
+        $tag = $this->tag->find($id);
 
         $tag->delete();
 
-        return back()
-        ->with('success', 'Tag deleted successfully');
+       return response(null, response::HTTP_NO_CONTENT);
     }
 }

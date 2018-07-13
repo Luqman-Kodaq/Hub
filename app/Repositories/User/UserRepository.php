@@ -3,8 +3,10 @@
 namespace App\Repositories\User;
 
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\DB;
-
+use App\Http\Resources\User\UserResource;
+use App\Http\Resources\User\UserCollection;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Image;
@@ -14,8 +16,7 @@ class UserRepository implements UserRepositoryInterface
 {
   protected $user;
 
-  public function __construct
-  (
+  public function __construct(
         User $user
   )
   {
@@ -30,78 +31,30 @@ class UserRepository implements UserRepositoryInterface
 
  public function all()
   {
-      return $this->user->paginate(8);
-  }
-
-  public function allActive()
-  {
-    return $this->user->ofStatusActive()->get();
+      return $this->user->all();
   }
 
   public function admin($id)
   {
       $user = $this->find($id);
       $user->admin = true;
-      $user->save();
+      if ($user->save()) {
+        return new UserResource($user);
+      }
   }
 
   public function notAdmin($id)
   {
       $user = $this->find($id);
       $user->admin = false;
-      $user->save();
-  }
-
-  public function store(Request $request)
-  {
-    DB::transaction(function () use ($request) {
-      $user = new $this->user();
-      $user->name = $request->name;
-      $user->email = $request->email;
-      $user->password = Hash::make($request->password);
-
-         // Save the Image
-         if ($request->hasFile('profile_photo')) {
-          $image = $request->file('profile_photo');
-          $filename = time(). '.' . $image->getClientOriginalExtension();
-          $location = public_path('uploads/profile_photo/' . $filename);
-          Image::make($image)->resize(70, 70)->save($location);
-  
-          $user->profile_photo = $filename;
-        }
-      
-      $user->save();
-
-      if ($request->roles) {
-        $user->syncRoles(explode(',', $request->roles));
+      if ($user->save()) {
+        return new UserResource($user);
       }
-
-    });
   }
 
-  public function update($id, Request $request)
-  {
-    DB::transaction(function () use ($id, $request) {
-      $user = $this->find($id);
-      $user->name = $request->name;
-      $user->email = $request->email;
-      $user->password = Hash::make($request->password);
+  public function store(Request $request){}
 
-       // Save the Image
-       if($request->hasFile('profile_photo'))
-       {
-           Auth::user()->update([
-               'profile_photo' => $request->profile_photo->store('public/uploads/profile_photo')
-           ]);
-       }
-
-      $user->save();
-
-      if ($request->roles) {
-        $user->syncRoles(explode(',', $request->roles));
-      }
-    });
-  }
+  public function update($id, Request $request){}
 
   public function delete($id)
   {

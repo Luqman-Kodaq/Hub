@@ -2,14 +2,14 @@
 
 namespace App;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable
 {
-    use LaratrustUserTrait;
-    use Notifiable;
+    use HasApiTokens, LaratrustUserTrait, Notifiable;
 
     protected $table = 'users';
     /**
@@ -32,12 +32,12 @@ class User extends Authenticatable
 
     public function posts()
     {
-        return $this->hasMany('App\Post');
+        return $this->hasMany('App\Post', 'user_id');
     }
 
     public function comments()
     {
-        return $this->belongsTo('App\Comment');
+        return $this->hasManyThrough('App\Comment', 'App\Post', 'user_id', 'post_id');
     }
 
     public function profile()

@@ -10687,26 +10687,15 @@ body {
   transition: width 0.6s ease-in-out;
 }
 
-#gender {
-  border: none;
+#genderLabel {
+  position: absolute;
+  pointer-events: none;
+  top: 18px;
+  left: 20px;
+  font-size: 15px;
   font-weight: bold;
-  outline: 0;
-  background: transparent;
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-
-#genderDiv {
-  width: 50%;
-  padding: 5px 5px 0px 5px;
-  margin: 0px 5px 0px 5px;
-}
-
-#inputRegisterProgressGender {
-  border-bottom: 3px solid #428bca;
-  width: 100%;
-  -webkit-transition: width 0.6s ease-in-out;
-  transition: width 0.6s ease-in-out;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 #inputRegisterPassword {

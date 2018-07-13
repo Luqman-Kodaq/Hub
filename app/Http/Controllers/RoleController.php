@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RoleStoreRequest;
+use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\RoleUpdateRequest;
 use App\Repositories\User\RoleRepositoryInterface;
 use App\Repositories\User\PermissionRepositoryInterface;
 use App\Repositories\User\SettingRepositoryInterface;
+use App\Http\Resources\Role\RoleResource;
+use App\Http\Resources\Role\RoleCollection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
+use App\Role;
 
 class RoleController extends Controller
 {
@@ -34,21 +39,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-            return view('user.roles.index')
-                ->with('roles', $this->role->all())
-                ->with('settings', $this->setting->first());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-            return view('user.roles.create')
-                        ->with('permissions', $this->permission->all())
-                        ->with('settings', $this->setting->first());
+        return RoleCollection::collection($this->role->all());
     }
 
     /**
@@ -59,12 +50,16 @@ class RoleController extends Controller
      */
     public function store(RoleStoreRequest $request)
     {
-            $this->role->store($request);
+        $role = new Role();
+        $role->display_name = $request->display_name;
+        $role->name = $request->name;
+        $role->description = $request->description;
+        $role->save();
 
-            $redirect_to = $request->has('redirect') ? redirect()->route('role.index') : back();
-
-            return $redirect_to
-                    ->with('success', 'New role added successfully');
+       return response(['data' => new RoleResource($role)], Response::HTTP_CREATED);
+        if ($request->permissions){
+          $role->syncPermissions($request->permissions);
+        }
     }
 
     /**
@@ -77,25 +72,7 @@ class RoleController extends Controller
     {
         $role = $this->role->find($id);
 
-        return view('user.roles.show')
-                ->with('role', $role)
-                ->with('settings', $this->setting->first());
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request)
-    {
-            $role = $this->role->find($request->id);
-
-            return view('user.roles.edit')
-                    ->with('role', $role)
-                    ->with('permissions', $this->permission->all())
-                    ->with('settings', $this->setting->first());
+        return new RoleResource($role);
     }
 
     /**
@@ -105,14 +82,17 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RoleUpdateRequest $request)
+    public function update(RoleUpdateRequest $request, $id)
     {
-            $this->role->update($request->id, $request);
+        $role = Role::find($id);
+        $role->display_name = $request->display_name;
+        $role->description = $request->description;
+        $role->save();
 
-            $redirect_to = $request->has('redirect') ? redirect()->route('role.index') : back();
-
-            return $redirect_to
-                ->with('success', 'Role updated successfully');
+       return response(['data' => new RoleResource($role)], Response::HTTP_CREATED);
+        if ($request->permissions) {
+            $role->syncPermissions($request->permissions);
+        }
     }
 
     /**
@@ -121,13 +101,12 @@ class RoleController extends Controller
      * @param  int  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-            $role = $this->role->find($request->id);
+            $role = $this->role->find($id);
 
             $role->delete();
 
-            return back()
-                    ->with('success', 'Role deleted successfully');
+            return response(null, response::HTTP_NO_CONTENT);
     }
 }

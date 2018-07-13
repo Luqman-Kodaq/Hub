@@ -10,6 +10,8 @@ interface PostRepositoryInterface
 
   public function all();
 
+  public function paginate();
+
   public function latest();
 
   public function store(Request $request);
@@ -29,6 +31,8 @@ interface PostRepositoryInterface
   public function forceDelete($id);
 
   public function restore($id);
+
+  public function with($post);
 
   public function find($id);
 }

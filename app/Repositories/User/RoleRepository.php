@@ -29,34 +29,9 @@ class RoleRepository implements RoleRepositoryInterface
         return $this->role->all();
   }
 
-  public function store(Request $request)
-  {
-    DB::transaction(function () use ($request) {
-            $role = new $this->role();
-            $role->display_name = $request->display_name;
-            $role->name = $request->name;
-            $role->description = $request->description;
-            $role->save();
+  public function store(Request $request){}
 
-            if ($request->permissions){
-              $role->syncPermissions($request->permissions);
-            }
-        });
-  }
-
-  public function update($id, Request $request)
-  {
-    DB::transaction(function () use ($id, $request) {
-            $role = $this->find($id);
-            $role->display_name = $request->display_name;
-            $role->description = $request->description;
-            $role->save();
-
-            if ($request->permissions) {
-                $role->syncPermissions($request->permissions);
-            }
-    });
-  }
+  public function update($id, Request $request){}
 
   public function delete($id)
   {

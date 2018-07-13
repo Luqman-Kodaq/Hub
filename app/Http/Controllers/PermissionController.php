@@ -5,23 +5,23 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PermissionStoreRequest;
 use App\Http\Requests\PermissionUpdateRequest;
 use App\Repositories\User\PermissionRepositoryInterface;
-use App\Repositories\User\SettingRepositoryInterface;
+use App\Http\Resources\Permission\PermissionResource;
+use App\Http\Resources\Permission\PermissionCollection;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Permission;
 
 class PermissionController extends Controller
 {
 
     private $permission;
-    private $setting;
 
     public function __construct(
-        PermissionRepositoryInterface $permissionRepository,
-        SettingRepositoryInterface $settingRepository
+        PermissionRepositoryInterface $permissionRepository
     )
     {
         $this->permission = $permissionRepository;
-        $this->setting = $settingRepository;
     }
 
     /**
@@ -31,20 +31,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        return view('user.permissions.index')
-            ->with('permissions', $this->permission->all())
-            ->with('settings', $this->setting->first());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('user.permissions.create')
-        ->with('settings', $this->setting->first());
+       return PermissionCollection::collection($this->permission->all());
     }
 
     /**
@@ -55,12 +42,30 @@ class PermissionController extends Controller
      */
     public function store(PermissionStoreRequest $request)
     {
-        $this->permission->store($request);
-
-        $redirect_to = $request->has('redirect') ? redirect()->route('permission.index') : back();
-
-        return $redirect_to
-                ->with('success', 'New permission added successfully');
+        // if ($request->permission_type == 'basic') {
+            $permission = new Permission();
+            $permission->name = str_slug($request->name);
+            $permission->display_name = $request->display_name;
+            $permission->description = $request->description;
+            $permission->save();
+            return response(['data' => new PermissionResource($permission)], Response::HTTP_CREATED);
+        //   } elseif ($request->permission_type == 'crud') {
+        //     $crud = explode(',', $request->crud_selected);
+        //     if (count($crud) > 0) {
+        //       foreach ($crud as $x) {
+        //         $name = strtolower($x) . '-' . strtolower($request->resource);
+        //         $display_name = ucwords($x . " " . $request->resource);
+        //         $description = "Allows a user to " . strtoupper($x) . ' a ' . ucwords($request->resource);
+    
+        //         $permission = new Permission();
+        //         $permission->name = $name;
+        //         $permission->display_name = $display_name;
+        //         $permission->description = $description;
+        //         $permission->save();
+        //         return response(['data' => new PermissionResource($permission)], Response::HTTP_CREATED);
+        //       }
+        //   }
+        //   }
     }
 
     /**
@@ -69,28 +74,11 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show($id)
     {
-        $permission = $this->permission->find($request->id);
+        $permission = $this->permission->find($id);
 
-        return view('user.permissions.show')
-            ->with('permission', $permission)
-            ->with('settings', $this->setting->first());
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request)
-    {
-        $permission = $this->permission->find($request->id);
-
-        return view('user.permissions.edit')
-                ->with('permission', $permission)
-                ->with('settings', $this->setting->first());
+        return new PermissionResource($permission);
     }
 
     /**
@@ -100,14 +88,14 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PermissionUpdateRequest $request)
+    public function update(PermissionUpdateRequest $request, $id)
     {
-        $this->permission->update($request->id, $request);
+        $permission = Permission::find($id);
+        $permission->display_name = $request->display_name;
+        $permission->description = $request->description;
+        $permission->save();
 
-        $redirect_to = $request->has('redirect') ? redirect()->route('permission.index') : back();
-
-        return $redirect_to
-                        ->with('success', 'Permission updated successfully');
+        return response(['data' => new PermissionResource($permission)], response::HTTP_CREATED);
     }
 
     /**
@@ -116,13 +104,12 @@ class PermissionController extends Controller
      * @param  int  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $permission = $this->permission->find($request->id);
+        $permission = $this->permission->find($id);
 
         $permission->delete();
 
-        return back()
-                ->with('success', 'Permission deleted successfully');
+        return response(null, response::HTTP_NO_CONTENT);
     }
 }

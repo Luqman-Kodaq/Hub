@@ -1,6 +1,7 @@
 <template>
 <div class="container">
-    <h5>Hello Post</h5>
+    <h5>{{ post.title }}</h5>
+    <img class="card-img-top" :src="post.image" :alt="post.title">
 </div>
 </template>
 
@@ -13,10 +14,10 @@ export default {
   },
 
   methods: {
-      fetchSingle(slug) {
-        axios.get("post/"+slug)
+      fetchSingle(id) {
+        axios.get("shows/"+id)
           .then(res => {
-          console.log(res.data);
+          this.post = res.data;
           })
           .catch(err => {
           console.log(err);
@@ -25,7 +26,7 @@ export default {
   },
 
   created: function(){
-    this.fetchSingle(this.$route.params.slug);
+    this.fetchSingle(this.$route.params.id);
   }
 }
 </script>

@@ -28,17 +28,9 @@ class SettingRepository implements SettingRepositoryInterface
 
     public function update(Request $request)
     {
-        DB::transaction(function () use ($request) {
-            $setting = $this->first();
-            $setting->site_name = $request->site_name;
-            $setting->address = $request->address;
-            $setting->contact_us = $request->contact_us;
-            $setting->contact_email = $request->contact_email;
-            $setting->about_us = $request->about_us;
-            $setting->our_services = $request->our_services;
-
-            $setting->save();
-        });
+        // DB::transaction(function () use ($request) {
+           
+        // });
     }
 
     public function find($id)
