@@ -19,10 +19,10 @@ class PostResource extends JsonResource
             'image' => $this->image,
             'title' => $this->title,
             'excerpt' => $this->excerpt,
-            'content' => $this->contents,
+            'contents' => $this->contents,
             'like' => $this->like,
             'dislike' => $this->dislike,
-            'author' => $this->user_id,
+            'user_id' => $this->user_id,
             'category' => $this->category_id,
             'tag' => $this->tags
         ];

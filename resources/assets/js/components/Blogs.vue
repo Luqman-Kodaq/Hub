@@ -35,22 +35,22 @@
 <!-- Card -->
 </template>
 
-<script>
-    export default{
-        data() {
-            return {
-                posts: []
-            }
-        },
+//  <script>
+//     export default{
+//         data() {
+//             return {
+//                 posts: []
+//             }
+//         },
         
-        mounted() {
-                axios.get("posts")
-                    .then(res => {
-                    this.posts = res.data;
-                    })
-                    .catch(err => {
-                    console.log(err);
-                });
-        }
-    }
-</script>
+//         mounted() {
+//                 axios.get("posts")
+//                     .then(res => {
+//                     this.posts = res.data;
+//                     })
+//                     .catch(err => {
+//                     console.log(err);
+//                 });
+//         }
+//     }
+// </script>

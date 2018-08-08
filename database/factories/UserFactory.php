@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,8 +13,9 @@ use Faker\Generator as Faker;
 | model instances for testing / seeding your application's database.
 |
 */
+$user = App\User::class;
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define($user, function (Faker $faker) {
     static $password;
 
     return [
@@ -21,6 +23,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'gender' => rand(0, 1),
+        // 'profile_photo' => $user->gender == 1 ? 'public/defaults/male.png' : 'public/defaults/female.png',
         'api_token' => str_random(60),
         'remember_token' => str_random(10),
     ];

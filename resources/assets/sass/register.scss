@@ -12,15 +12,13 @@ $error: #ff2d26;
 #registerCard {
   background: #fff;
   position: relative;
-  width: 600px;
-  margin-top: 100px;
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
+  width: 500px;
+  border-radius: 15px;
   box-shadow: 0 16px 24px 2px rgba(0, 0,0, 0.1), 0 6px 10px 5px rgba(0, 0, 0, 0.1), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
 #inputRegisterProgress {
-  border-bottom: 3px solid $primary;
+  border-bottom: 1px solid $primary;
   width: 100%;
   transition: width 0.6s ease-in-out;
 }
@@ -101,19 +99,11 @@ $error: #ff2d26;
       }
 
       #inputRegisterProgressEmail{
-        border-bottom: 3px solid $primary;
+        border-bottom: 1px solid $primary;
         width: 100%;
         transition: width 0.6s ease-in-out;
       }
 }
-
-// #gender {
-//         border: none;
-//         font-weight: bold;
-//         outline: 0;
-//         background: transparent;
-//         box-shadow: none;
-// }
 
   #genderLabel {
         position: absolute;
@@ -124,11 +114,6 @@ $error: #ff2d26;
         font-weight: bold;
         transition: 0.2s ease-in-out;
   }
-// #genderDiv {
-//   width: 50%;
-//   padding: 5px 5px 0px 5px;
-//   margin: 0px 5px 0px 5px;
-// }
 
 #inputRegisterPassword {
   position: relative;
@@ -137,41 +122,41 @@ $error: #ff2d26;
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
 
-  input {
-    position: relative;
-    width: 100%;
-    border: none;
-    font-size: 20px;
-    font-weight: bold;
-    outline: 0;
-    background: transparent;
-    box-shadow: none;
-  }
-  
-  #inputRegisterPasswordLabel {
-        position: absolute;
-        pointer-events: none;
-        top: 18px;
-        left: 20px;
-        font-size: 15px;
-        font-weight: bold;
-        transition: 0.2s ease-in-out;
-  }
+        input {
+          position: relative;
+          width: 100%;
+          border: none;
+          font-size: 20px;
+          font-weight: bold;
+          outline: 0;
+          background: transparent;
+          box-shadow: none;
+        }
+        
+        #inputRegisterPasswordLabel {
+              position: absolute;
+              pointer-events: none;
+              top: 18px;
+              left: 20px;
+              font-size: 15px;
+              font-weight: bold;
+              transition: 0.2s ease-in-out;
+        }
 
-  input:valid + #inputRegisterPasswordLabel {
-    top: 6px;
-    left: 5px;
-    margin-left: 0 !important;
-    font-size: 14px;
-    font-weight: normal;
-    color: $light;
-  }
+        input:valid + #inputRegisterPasswordLabel {
+          top: 6px;
+          left: 5px;
+          margin-left: 0 !important;
+          font-size: 14px;
+          font-weight: normal;
+          color: $light;
+        }
 
-  #inputRegisterProgressPassword{
-    border-bottom: 3px solid $primary;
-    width: 100%;
-    transition: width 0.6s ease-in-out;
-  }
+        #inputRegisterProgressPassword{
+          border-bottom: 1px solid $primary;
+          width: '';
+          transition: width 0.6s ease-in-out;
+        }
 }
 
 #inputRegisterConfirm {
@@ -181,39 +166,39 @@ $error: #ff2d26;
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
 
-  input {
-    position: relative;
-    width: 100%;
-    border: none;
-    font-size: 20px;
-    font-weight: bold;
-    outline: 0;
-    background: transparent;
-    box-shadow: none;
-  }
-  
-  #inputRegisterConfirmLabel {
-        position: absolute;
-        pointer-events: none;
-        top: 18px;
-        left: 20px;
-        font-size: 15px;
-        font-weight: bold;
-        transition: 0.2s ease-in-out;
-  }
+        input {
+          position: relative;
+          width: 100%;
+          border: none;
+          font-size: 20px;
+          font-weight: bold;
+          outline: 0;
+          background: transparent;
+          box-shadow: none;
+        }
+        
+        #inputRegisterConfirmLabel {
+              position: absolute;
+              pointer-events: none;
+              top: 18px;
+              left: 20px;
+              font-size: 15px;
+              font-weight: bold;
+              transition: 0.2s ease-in-out;
+        }
 
-  input:valid + #inputRegisterConfirmLabel {
-    top: 6px;
-    left: 5px;
-    margin-left: 0 !important;
-    font-size: 14px;
-    font-weight: normal;
-    color: $light;
-  }
+        input:valid + #inputRegisterConfirmLabel {
+          top: 6px;
+          left: 5px;
+          margin-left: 0 !important;
+          font-size: 14px;
+          font-weight: normal;
+          color: $light;
+        }
 
-  #inputRegisterProgressConfirm{
-    border-bottom: 3px solid $primary;
-    width: 100%;
-    transition: width 0.6s ease-in-out;
-  }
+        #inputRegisterProgressConfirm{
+          border-bottom: 1px solid $primary;
+          width: 100%;
+          transition: width 0.6s ease-in-out;
+        }
 }

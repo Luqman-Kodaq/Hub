@@ -9,7 +9,6 @@ use App\Http\Resources\User\UserResource;
 use App\Http\Resources\User\UserCollection;
 use App\User;
 use Illuminate\Support\Facades\Hash;
-use Image;
 use Auth;
 
 class UserRepository implements UserRepositoryInterface
@@ -31,7 +30,7 @@ class UserRepository implements UserRepositoryInterface
 
  public function all()
   {
-      return $this->user->all();
+      return $this->user->orderBy('created_at', 'desc')->paginate(5);
   }
 
   public function admin($id)

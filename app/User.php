@@ -2,14 +2,14 @@
 
 namespace App;
 
-use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laratrust\Traits\LaratrustUserTrait;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, LaratrustUserTrait, Notifiable;
+    use LaratrustUserTrait, Notifiable;
 
     protected $table = 'users';
     /**
@@ -32,8 +32,13 @@ class User extends Authenticatable
 
     public function posts()
     {
-        return $this->hasMany('App\Post', 'user_id');
+        return $this->hasMany('App\Post');
     }
+
+    // public function getAvatarPathAttribute()
+    // {
+    //     return asset('public/uploads/profile_photo/male.png');
+    // }
 
     public function comments()
     {
@@ -48,5 +53,15 @@ class User extends Authenticatable
     public function scopeOfStatusActive($query)
     {
         return $query->where('active', true);
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

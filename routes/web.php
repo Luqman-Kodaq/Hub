@@ -15,7 +15,6 @@
    	  ============ FRONTEND ===========
    ======================================== */
 
-// Route::get('/', 'PagesController@welcome')->name('pages');
 
 Route::get('/{any}', function(){
     return view('welcome');

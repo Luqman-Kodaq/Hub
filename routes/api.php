@@ -17,14 +17,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::group([ 'prefix' => 'auth'], function () {
-    Route::post('/register', 'AuthController@register');
-    // Route::post('login', 'AuthController@login');
-    // Route::post('logout', 'AuthController@logout');
-    // Route::post('refresh', 'AuthController@refresh');
-    // Route::post('me', 'AuthController@me');
+Route::post('/register', 'AuthController@register');
+Route::post('login', 'AuthController@login');
+Route::post('/upload-photo', 'UserController@uploadPhoto');
+Route::post('/upload-image', 'PostController@uploadImage');
 
-// });
 
 Route::group(['prefix' => 'manage'], function(){
     // User Controller
@@ -37,8 +34,7 @@ Route::group(['prefix' => 'manage'], function(){
     Route::apiResource('/profile', 'ProfileController');
 
     // Settings Controller
-    Route::get('/settings', 'SettingController@index')->name('setting.index');
-    Route::put('/setting/{id}', 'SettingController@update')->name('setting.update');
+    Route::apiResource('/settings', 'SettingController');
 
     // Role Controller
     Route::apiResource('/roles','RoleController');
@@ -53,9 +49,9 @@ Route::group(['prefix' => 'manage'], function(){
     Route::apiResource('/categories', 'CategoryController');
 });
 
-Route::get('posts/{post}/comments', 'CommentController@index')->name('comment.index');
+// Route::get('posts/{post}/comments', 'CommentController@index')->name('comment.index');
 
-Route::middleware('auth:api')->group(function () {
-    Route::get('/posts/unique', 'PostController@apiCheckUnique')->name('api.posts.unique');
-    Route::post('posts/{post}/comment', 'CommentController@store');
-});
+// Route::middleware('auth:api')->group(function () {
+//     Route::get('/posts/unique', 'PostController@apiCheckUnique')->name('api.posts.unique');
+//     Route::post('posts/{post}/comment', 'CommentController@store');
+// });

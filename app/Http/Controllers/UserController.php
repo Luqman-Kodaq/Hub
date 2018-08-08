@@ -12,6 +12,7 @@ use App\Http\Resources\User\UserResource;
 use App\Http\Resources\User\UserCollection;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use Image;
 
 class UserController extends Controller
 {
@@ -46,24 +47,28 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->gender = $request->gender;
+        $user->profile_photo = $request->profile_photo;
         $user->password = Hash::make($request->password);
-    
-        // Save the Image
+            
+            // if ($request->roles) {
+            // $user->syncRoles(explode(',', $request->roles));
+            // }
+
+            $user->save();
+            return response(['data' => new UserResource($user)], Response::HTTP_CREATED);
+    }
+
+    public function uploadPhoto(Request $request)
+    {
+            // Save the Image
             if ($request->hasFile('profile_photo')) {
             $image = $request->file('profile_photo');
             $filename = time(). '.' . $image->getClientOriginalExtension();
-            $location = public_path('uploads/profile_photo/' . $filename);
+            $location = "uploads/profile_photo/$filename";
             Image::make($image)->resize(70, 70)->save($location);
-    
-            $user->profile_photo = asset("uploads/profile_photo/$filename");
+
+            return response()->json(asset("$location"), Response::HTTP_CREATED);
             }
-            
-            if ($request->roles) {
-            $user->syncRoles(explode(',', $request->roles));
-            }
-    
-            $user->save();
-            return response(['data' => new UserResource($user)], Response::HTTP_CREATED);
     }
 
     public function makeAdmin(Request $request)
@@ -100,15 +105,8 @@ class UserController extends Controller
       $user = User::find($id);
       $user->name = $request->name;
       $user->email = $request->email;
+      $user->profile_photo = $request->profile_photo;
       $user->password = Hash::make($request->password);
-
-       // Save the Image
-       if($request->hasFile('profile_photo'))
-       {
-           Auth::user()->update([
-               'profile_photo' => $request->profile_photo->store('public/uploads/profile_photo')
-           ]);
-       }
 
        if ($request->roles) {
         $user->syncRoles(explode(',', $request->roles));

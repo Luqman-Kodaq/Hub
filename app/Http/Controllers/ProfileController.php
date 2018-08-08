@@ -10,7 +10,6 @@ use App\Http\Resources\Profile\ProfileResource;
 use App\Http\Resources\Profile\ProfileCollection;
 use Carbon\Carbon;
 use App\Profile;
-use App\Setting;
 use App\User;
 use Auth;
 
@@ -26,10 +25,20 @@ class ProfileController extends Controller
             return ProfileCollection::collection(Profile::first()->get());
     }
 
+    public function show($id)
+    {
+            $profile = Profile::find($id);
+
+            return new ProfileResource($profile);
+    }
+
     public function update(Profile $profile, Request $r)
     {
            $r['about'] = $r->bio;
            unset($r['bio']);
+
+           $r['user_id'] = $r->author;
+           unset($r['author']);
 
            $profile->update($r->all());
 

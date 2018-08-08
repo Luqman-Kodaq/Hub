@@ -15,8 +15,9 @@ class ProfileResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'author' => $this->user_id,
-            'bio' => $this->about,
+            'id' => $this->id,
+            'user_id' => $this->user_id,
+            'about' => $this->about,
             'facebook' => $this->facebook,
             'twitter' => $this->twitter,
             'instagram' => $this->instagram

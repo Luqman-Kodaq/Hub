@@ -17,7 +17,7 @@
 </head>
 <body>
   <div id="app">
-    <app></app>
+    {{--  <app></app>  --}}
   </div>
   @yield('vue')
   <script src="{{ asset('js/app.js') }}"></script>

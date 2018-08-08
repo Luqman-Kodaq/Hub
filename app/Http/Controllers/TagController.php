@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TagStoreRequest;
 use App\Http\Requests\TagUpdateRequest;
 use App\Repositories\User\TagRepositoryInterface;
-use App\Repositories\User\SettingRepositoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Resources\Tag\TagResource;
 use App\Http\Resources\Tag\TagCollection;
@@ -17,15 +16,12 @@ class TagController extends Controller
 {
 
     private $tag;
-    private $setting;
 
     public function __construct(
-        TagRepositoryInterface $tagRepository,
-        SettingRepositoryInterface $settingRepository
+        TagRepositoryInterface $tagRepository
     )
     {
         $this->tag = $tagRepository;
-        $this->setting = $settingRepository;
     }
     /**
      * Display a listing of the resource.

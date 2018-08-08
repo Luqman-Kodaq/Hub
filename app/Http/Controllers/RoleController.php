@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\RoleUpdateRequest;
 use App\Repositories\User\RoleRepositoryInterface;
 use App\Repositories\User\PermissionRepositoryInterface;
-use App\Repositories\User\SettingRepositoryInterface;
 use App\Http\Resources\Role\RoleResource;
 use App\Http\Resources\Role\RoleCollection;
 use Illuminate\Http\Request;
@@ -19,17 +18,14 @@ class RoleController extends Controller
 {
     private $role;
     private $permission;
-    private $setting;
 
     public function __construct(
             RoleRepositoryInterface $roleRepository,
-            PermissionRepositoryInterface $permissionRepository,
-            SettingRepositoryInterface $settingRepository
+            PermissionRepositoryInterface $permissionRepository
     )
     {
         $this->role = $roleRepository;
         $this->permission = $permissionRepository;
-        $this->setting = $settingRepository;
     }
 
     /**

@@ -11,9 +11,10 @@
                           <div class="form-group row">
                             <div class="col-md-12 col-xm-12">
                             <div class="form-group" id="inputRegisterName">
-                            <input id="name" type="text" class="form-control" v-model="register.name" name="name" required autofocus>
+                            <input id="name" type="text" class="form-control" v-model="register.name" name="name" autofocus>
                             <label id="inputRegisterNameLabel" for="name">Name</label>
-                            <div id="inputRegisterProgress"></div>                                
+                            <div id="inputRegisterProgress"></div>
+                            <small v-if="errors.name" class="text-danger">{{ errors.name[0] }}</small>
                         </div>
                         </div>
                         </div>
@@ -21,9 +22,10 @@
                         <div class="form-group row">
                             <div class="col-md-12 col-xm-12">
                             <div id="inputRegisterEmail" class="form-group">
-                            <input id="email" type="email" class="form-control" v-model="register.email" name="email"  required>
+                            <input id="email" type="email" class="form-control" v-model="register.email" name="email">
                             <label id="inputRegisterEmailLabel" for="email">E-Mail Address</label>
-                            <div id="inputRegisterProgressEmail"></div>                                
+                            <div id="inputRegisterProgressEmail"></div>
+                            <small v-if="errors.email" class="text-danger">{{ errors.email[0] }}</small>
                             </div>
                             </div>
                         </div>
@@ -31,16 +33,29 @@
                         <div class="form-group row">
                             <div class="col-md-12 col-xm-12">
                                 <div id="inputRegisterPassword" class="form-group">
-                                <input id="password" type="password" class="form-control" v-model="register.password" name="password" required>
+                                <input id="password" type="password" class="form-control" v-model="register.password" name="password">
                                 <label id="inputRegisterPasswordLabel" for="password">Password</label>
                                     <div id="inputRegisterProgressPassword"></div>
+                            <small v-if="errors.password" class="text-danger">{{ errors.password[0] }}</small>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-6 col-xm-12">
+
+                         <div class="form-group row">
+                            <div class="col-md-12 col-xm-12">
+                             <div id="inputRegisterConfirm" class="form-group">
+                                <input id="password-confirm" type="password" class="form-control" v-model="register.password_confirmation" name="password_confirmation">
+                            <label id="inputRegisterConfirmLabel" for="password-confirm">Confirm Password</label>
+                            <div id="inputRegisterProgressConfirm"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-12 col-xm-12">
                            <div class="form-group row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                             <select name="gender"
                             class="form-control select" v-model="register.gender">
                                 <option value="1">Male</option>
@@ -48,22 +63,12 @@
                             </select>
                             </div>
                         </div>
-                        </div>
-
-                        <!-- <div class="form-group row">
-                            <div class="col-md-12 col-xm-12">
-                             <div id="inputRegisterConfirm" class="form-group">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>                                
-                            <label id="inputRegisterConfirmLabel" for="password-confirm">Confirm Password</label>
-                            <div id="inputRegisterProgressConfirm"></div>
-                                </div>
-                            </div>
-                        </div> -->
+                        </div>                       
 
                         <div class="form-group row mb-0">
                             <div class="col-md-12 col-xm-12">
                                <div class="form-group">
-                                <button type="submit" class="btn btn-outline-primary btn-lg btn-block">
+                                <button type="submit" class="btn btn-outline-secondary btn-lg btn-block">
                                     REGISTER
                                 </button>
                             </div>
@@ -79,26 +84,37 @@
 
 <script>
     export default{
+        props: ['nextUrl'],
         data() {
             return {
                 register: {
                     name: "",
                     email: "",                    
                     password: "",
+                    password_confirmation: "",
                     gender: "1"
-                }
+                },
+                errors: {}
             }
         },
 
         methods: {
             registerUser() {
+                // if (this.register.password !== this.register.password_confirmation || this.register.password.length <= 0) {
+                //     this.register.password = ""
+                //     this.register.password_confirmation = ""
+                //     return alert('Passwords do not match');
+                // }
                 axios.post('api/register', this.register)
-                .then(response => {
-                    console.log(response);
+                .then(res => {
+                    let data = res.data;
+                    localStorage.setItem('credentials', JSON.stringify(data.data));
+                        this.$emit('loggedIn')
+                        let nextUrl = this.$route.params.nextUrl;
+                        this.$router.push((nextUrl != null ? nextUrl : '/'))
+                    console.log(data);
                 })
-                .catch(error => {
-                    console.log(error.response);
-                });
+                .catch((error) => this.errors = error.response.data.errors)
             }
         }
     }

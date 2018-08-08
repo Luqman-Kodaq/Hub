@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\UserRegisterRequest;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\LoginRequest;
+use Symfony\Component\HttpFoundation\Response;
 use App\Http\Controllers\Controller;
-use GuzzleHttp\Client;
 use App\User;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Auth;
 
 class AuthController extends Controller
 {
-    public function register(UserRegisterRequest $request)
+
+    public function register(RegisterRequest $request)
     {
         if($request->gender)
         {
@@ -26,26 +30,26 @@ class AuthController extends Controller
         $user->gender = $request->gender;
         $user->slug = str_slug($request->name);
         $user->profile_photo = $profile_photo;
+        $user->remember_token = str_random(60);
+        $user->admin = 0;
         $user->save();
-
-        $http = new Client;
-
-        $response = $http->post(url('oauth/token'), [
-            'form_params' => [
-                'grant_type' => 'password',
-                'client_id' => '6',
-                'client_secret' => 'FFgKSlV47xK6ixEa5G7tL84NYEsAVSolBeEN1Iqx',
-                'username' => $request->email,
-                'password' => $request->password,
-                'scope' => '',
-            ],
-        ]);
-
-        return response(['data' => json_decode((string) $response->getBody(), true)]);
+                
+        return response()->json(['data' => $user], Response::HTTP_CREATED);
     }
 
-    public function login()
+      public function login(LoginRequest $request)
     {
+        $credentials = $request->only('email', 'password', 'remember_token');
 
+        if($token=JWTAuth::attempt($credentials)) {
+            $response = [
+                'token' => $token,
+                'credentials' => Auth::user(),
+            ];
+
+                return response()->json(['data' =>$response], Response::HTTP_CREATED);
+        } else {
+            return response()->json(['error' => "Not Authenticated"], Response::HTTP_UNAUTHORIZED);
+        }
     }
 }

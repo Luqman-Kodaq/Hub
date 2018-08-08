@@ -15,13 +15,16 @@ class UserCollection extends Resource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'posts' => [
-                'counts' => $this->posts->count(),
-                'explore' => route('posts.index', $this->id),
-            ],
-            'profile' => route('profile.index', $this->id),
+            'status' => $this->admin ? 'Admin' : 'User',
+            'gender' => $this->gender ? 'Male' : 'Female',
+            'posts' => $this->posts->count(),
+            'slug' => $this->slug,
+            'profile' => $this->profile,
+            'profile_photo' => $this->profile_photo,
+            'created_at' => (string)$this->created_at->format('d/m/Y'),
         ];
     }
 }

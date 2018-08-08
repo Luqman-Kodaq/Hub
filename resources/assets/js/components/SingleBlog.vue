@@ -1,7 +1,8 @@
 <template>
 <div class="container">
-    <h5>{{ post.title }}</h5>
-    <img class="card-img-top" :src="post.image" :alt="post.title">
+    <h1>Hello Single Post</h1>
+    <!-- <img class="card-img-top" :src="post.image" :alt="post.title"> -->
+    <p>This is single post</p>
 </div>
 </template>
 

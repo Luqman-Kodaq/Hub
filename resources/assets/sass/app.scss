@@ -8,8 +8,12 @@
 // import Bootstrap
 @import "node_modules/bootstrap/scss/bootstrap";
 
+// import Font Awesome
+@import "node_modules/font-awesome/css/font-awesome";
+
 // Custom SASS Pages
 @import "nav";
 @import "body";
 @import "login";
 @import "register";
+@import "adminSidebar";

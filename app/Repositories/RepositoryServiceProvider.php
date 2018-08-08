@@ -63,10 +63,5 @@ class RepositoryServiceProvider extends ServiceProvider
         'App\Repositories\User\PostRepositoryInterface',
          'App\Repositories\User\PostRepository'
      );
-
-     $this->app->bind(
-        'App\Repositories\User\SettingRepositoryInterface',
-         'App\Repositories\User\SettingRepository'
-     );
     }
 }
