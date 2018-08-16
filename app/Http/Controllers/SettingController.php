@@ -22,6 +22,13 @@ class SettingController extends Controller
         return SettingCollection::collection(Setting::first()->get()); 
     }
 
+    public function show($id)
+    {
+            $setting = Setting::find($id);
+
+            return new SettingResource($setting);
+    }
+
     /**
      * Update the specified resource in storage.
      *

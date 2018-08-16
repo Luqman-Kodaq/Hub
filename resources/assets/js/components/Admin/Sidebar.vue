@@ -25,8 +25,15 @@
                   <li class="navlink"><router-link :to="{ name: 'AddTag' }" class="nav-link" active-class="active" style="cursor: pointer">Add Tag</router-link></li>
                   <li class="navlink"><router-link :to="{ name: 'Tag' }" class="nav-link" active-class="active" style="cursor: pointer">List Tag</router-link></li>
               </ul>
-               <li class="navlink"><router-link :to="{ name: 'Profile' }" class="nav-link" active-class="active" style="cursor: pointer">My Account</router-link></li>
-                <li class="navlink"><router-link :to="{ name: 'Settings' }" class="nav-link" active-class="active" style="cursor: pointer">System Settings</router-link></li>
+               <li href="#collapse-profile" data-toggle="collapse" aria-controls="collapse-pages" class="navlink"  style="cursor: pointer">My Profile</li>
+              <ul class="collapse collapseable" id="collapse-profile">
+                  <li class="navlink"><router-link :to="{ name: 'Profile' }" class="nav-link" active-class="active" style="cursor: pointer">Profile</router-link></li>
+              </ul>
+                <li href="#collapse-settings" data-toggle="collapse" aria-controls="collapse-pages" class="navlink"  style="cursor: pointer">System Settings</li>
+              <ul class="collapse collapseable" id="collapse-settings">
+                  <li class="navlink"><router-link :to="{ name: 'Settings' }" class="nav-link" active-class="active" style="cursor: pointer">Settings</router-link></li>
+                  <li class="navlink"><router-link :to="{ name: 'EditSettings' }" class="nav-link" active-class="active" style="cursor: pointer">Edit Settings</router-link></li>
+              </ul>
         </ul>
       </section>
     </aside>

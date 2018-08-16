@@ -7,7 +7,7 @@
             <small>Directory</small>
         </h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a><i class="fa fa-dashboard"></i> Home</a></li>
+          <li class="breadcrumb-item"><router-link :to="{ name: 'Dashboard' }"><i class="fa fa-dashboard"> Home</i></router-link></li>
             <li class="breadcrumb-item active">User</li>
         </ol>
     </section>
@@ -91,7 +91,7 @@ import Sidebar from './Sidebar'
                 }
             },
 
-            created() {
+            mounted() {
               this.fetchUsers();
             },
 
@@ -102,6 +102,7 @@ import Sidebar from './Sidebar'
                 axios.get(page_url)
                 .then(res => {
                   this.users = res.data.data;
+                  console.log(res.data.meta);
                   vm.makePagination(res.data.meta, res.data.links);
                 })
                 .catch((err) => this.errors = err.response.data.errors);

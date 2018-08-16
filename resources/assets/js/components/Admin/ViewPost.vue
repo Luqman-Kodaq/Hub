@@ -7,8 +7,9 @@
             <small>Directory</small>
         </h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="breadcrumb-item active">Post</li>
+            <li class="breadcrumb-item"><router-link :to="{ name: 'Dashboard' }"><i class="fa fa-dashboard"> Home</i></router-link></li>
+            <li class="breadcrumb-item"><router-link :to="{ name: 'Post' }">Post</router-link></li>
+            <li class="breadcrumb-item active pull-right">View</li>
         </ol>
     </section>
 
@@ -20,7 +21,7 @@
             <div class="card-header">
               <h3 class="card-title">Post Directory</h3>
               <div class="card-header-pills pull-right">
-                 <router-link :to="'/admin/user/edit/'+post.id" class="btn btn-outline-secondary btn-sm"><span class="fa fa-pencil"></span> Edit Post</router-link>
+                 <router-link :to="'/admin/post/edit/'+post.id" class="btn btn-outline-secondary btn-sm"><span class="fa fa-pencil"></span> Edit Post</router-link>
               </div>
               <!-- <div class="form-group">
                         <a href="{{ route('post.publish', ['id' => $post->id]) }}" class="btn btn-default" type="submit" role="button" name="published" value="1"><i class="fa fa-check"></i> Publish</a>
@@ -48,9 +49,9 @@
                         <div class="col-md-8 col-md-offset-1 col-xm-12">
                           <h1>{{ post.title }}</h1>
                           <hr>
-                          <!-- <i>"{!! post.excerpt !!}"</i> -->
+                          <i>"{{ post.excerpt }}"</i>
                           <hr>
-                          <!-- <p>{!! post.contents !!}</p> -->
+                          <p>{{ post.contents }}</p>
                           <hr>
                           <p>Category: {{ post.category }}</p>
                         <div class="tags">
@@ -89,14 +90,15 @@ import Sidebar from './Sidebar'
               .then(res => {
                 let data = res.data;
                 this.post = data;
+                // console.log(res.data);
               })
               .catch((err) => this.errors = err.response.data.errors);
+            }
             },
 
-              created() {
+              mounted() {
                     this.fetchPost(this.$route.params.id);
                   }
-            }
   }
 </script>
 <style scoped>

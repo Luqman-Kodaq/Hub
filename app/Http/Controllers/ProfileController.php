@@ -34,12 +34,6 @@ class ProfileController extends Controller
 
     public function update(Profile $profile, Request $r)
     {
-           $r['about'] = $r->bio;
-           unset($r['bio']);
-
-           $r['user_id'] = $r->author;
-           unset($r['author']);
-
            $profile->update($r->all());
 
             if($r->hasFile('profile_photo'))

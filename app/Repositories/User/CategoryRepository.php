@@ -24,7 +24,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 
     public function all()
     {
-        return $this->category->all();
+        return $this->category->orderBy('created_at', 'desc')->paginate(5);
     }
 
     public function store(Request $request){}

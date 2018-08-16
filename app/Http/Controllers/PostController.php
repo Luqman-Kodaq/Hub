@@ -50,7 +50,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Post $post)
+    public function store(Request $request)
     {
         // $request['user_id'] = $request->author;
         //    unset($request['author']);
@@ -61,24 +61,13 @@ class PostController extends Controller
         $post->excerpt = $request->excerpt;
         $post->contents = $request->contents;
         $post->category_id = $request->category_id;
-        $post->user_id = auth()->id();
+        $post->image = $request->image;
+        $post->user_id = $request->user_id;
 
       $post->tags()->sync($request->tags, false);
 
       $post->save();
       return response(['data' => new PostResource($post)], Response::HTTP_CREATED);
-
-        // $user = Auth::user();
-
-        // $post = $user->posts()->create([
-        //     'title' => $request->title,
-        //     'slug' => str_slug($request->title),
-        //     'excerpt' => $request->excerpt,
-        //     'contents' => $request->contents,
-        //     'category_id' => $request->category_id,
-        // ]);
-
-        // return response(['data' => new PostResource($post)], Response::HTTP_CREATED);
     }
 
     public function uploadImage(Request $request)
@@ -131,30 +120,22 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request['user_id'] = $request->author;
-           unset($request['author']);
+        // $request['user_id'] = $request->author;
+        //    unset($request['author']);
 
-           $post = Post::find($id);
+           $post = Post::findOrFail($id);
             $post->title = $request->title;
             $post->excerpt = $request->excerpt;
             $post->contents = $request->contents;
             $post->category_id = $request->category_id;
+            $post->image = $request->image;
             $post->user_id = $request->user_id;
-
-            if ($request->hasFile('image')) {
-             $image = $request->file('image');
-             $filename = time(). '.' . $image->getClientOriginalExtension();
-             $location = public_path('uploads/post_photo/' . $filename);
-             Image::make($image)->resize(800, 400)->save($location);
-     
-           $post->image = asset("uploads/post_photo/$filename");              
-           }          
 
            if (isset($request->tags)) {
              $post->tags()->sync($request->tags);
-         } else {
-             $post->tags()->sync(array());
-         }
+            } else {
+                $post->tags()->sync(array());
+            }
 
         $post->save();
        return response(['data' => new PostResource($post)], Response::HTTP_CREATED);

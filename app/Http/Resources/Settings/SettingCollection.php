@@ -15,7 +15,9 @@ class SettingCollection extends Resource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'site_name' => $this->site_name,
+            'address' => $this->address,
             'contact_us' => $this->contact_us,
             'contact_email' => $this->contact_email,
             'about_us' => $this->about_us,

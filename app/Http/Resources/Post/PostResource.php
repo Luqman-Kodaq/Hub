@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Post;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Tag\TagResource;
 
 class PostResource extends JsonResource
 {
@@ -15,6 +16,7 @@ class PostResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'slug' => $this->slug,
             'image' => $this->image,
             'title' => $this->title,
@@ -23,8 +25,11 @@ class PostResource extends JsonResource
             'like' => $this->like,
             'dislike' => $this->dislike,
             'user_id' => $this->user_id,
-            'category' => $this->category_id,
-            'tag' => $this->tags
+            'category' => $this->category->name,
+            'tag' => $this->whenPivotLoaded('post_tag', function() {
+                return $this->pivot->name;
+            }),
+            'created_at' => (string)$this->created_at
         ];
     }
 }

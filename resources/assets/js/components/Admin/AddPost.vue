@@ -7,7 +7,7 @@
             <small>Add</small>
         </h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><router-link :to="{ name: 'Home' }"><i class="fa fa-dashboard"> Home</i></router-link></li>
+            <li class="breadcrumb-item"><router-link :to="{ name: 'Dashboard' }"><i class="fa fa-dashboard"> Home</i></router-link></li>
             <li class="breadcrumb-item"><router-link :to="{ name: 'Post' }">Post</router-link></li>
             <li class="breadcrumb-item active pull-right">Add</li>
         </ol>
@@ -67,7 +67,7 @@
                               <div class="row">
                                     <div class="col-md-2">
                                       <div class="form-group">
-                                          <button class="btn btn-sm btn-success" type="submit" id="submit">
+                                          <button class="btn btn-sm btn-outline-secondary" type="submit" id="submit">
                                             <i class="fa fa-check"></i> Save Draft
                                         </button>
                                       </div>
@@ -83,15 +83,15 @@
             <!-- /.col -->
             <div class="col-md-3 col-xs-12">
                       <div class="card" style="border-radius: 5%">
-                        <img :src=user.profile_photo :alt=user.name style="border-radius: 5%">
+                        <img class="card-img-top" :src=user.profile_photo :alt=user.name style="border-radius: 5%">
                         <span class="hidden-xs"></span>
                         <div class="caption form-group">
                         <div class="form-group text-center">
                           <h3><strong>{{ user.name }}</strong></h3>
-                          <p>{{ user.profile.about }}</p>
+                          <p>{{profile }}</p>
                         </div>
                         <div class="form-group">
-                          <router-link :to="{ name: 'Post' }" class="btn btn-sm btn-info btn-block pull-right"><span class="fa fa-arrow-left"></span> Cancel</router-link>
+                          <router-link :to="{ name: 'Post' }" class="btn btn-sm btn-outline-info btn-block pull-right"><span class="fa fa-arrow-left"></span> Cancel</router-link>
                         </div>
                   </div>
                 </div>                  
@@ -125,10 +125,10 @@ export default {
             contents: '',
         },
         user: {},
+        profile: {},
         categories: [],
         tags: [],
-        errors: {},
-        isLoggedIn: localStorage.getItem('credentials') != null
+        errors: {}
     }
   },
 
@@ -188,6 +188,7 @@ export default {
                 .then(res => {
                     this.user = res.data;
                     this.addPost.user_id = res.data.id;
+                    this.profile = res.data.profile.about;
                   console.log(this.addPost.user_id);
                   console.log(this.user);
                 })

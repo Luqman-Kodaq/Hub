@@ -7,7 +7,7 @@
             <small>Add</small>
         </h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><router-link :to="{ name: 'Home' }"><i class="fa fa-dashboard"> Home</i></router-link></li>
+            <li class="breadcrumb-item"><router-link :to="{ name: 'Dashboard' }"><i class="fa fa-dashboard"> Home</i></router-link></li>
             <li class="breadcrumb-item"><router-link :to="{ name: 'Category' }">Category</router-link></li>
             <li class="breadcrumb-item active pull-right">Add</li>
         </ol>

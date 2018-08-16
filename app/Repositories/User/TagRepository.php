@@ -24,7 +24,7 @@ class TagRepository implements TagRepositoryInterface
 
     public function all()
     {
-        return $this->tag->all();
+        return $this->tag->orderBy('created_at', 'desc')->paginate(5);
     }
 
     public function store(Request $request){}

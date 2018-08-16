@@ -25,12 +25,7 @@ class PostRepository implements PostRepositoryInterface
 
     public function all()
     {
-        return $this->post->all();
-    }
-
-    public function paginate()
-    {
-        return $this->post->paginate(1);
+        return $this->post->orderBy('created_at', 'desc')->paginate(5);
     }
 
     public function latest()

@@ -7,7 +7,7 @@
             <small>Edit</small>
         </h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><router-link :to="{ name: 'Home' }"><i class="fa fa-dashboard"> Home</i></router-link></li>
+            <li class="breadcrumb-item"><router-link :to="{ name: 'Dashboard' }"><i class="fa fa-dashboard"> Home</i></router-link></li>
             <li class="breadcrumb-item"><router-link :to="{ name: 'User' }">User</router-link></li>
             <li class="breadcrumb-item active pull-right">Edit</li>
         </ol>

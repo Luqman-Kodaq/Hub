@@ -10,8 +10,6 @@ interface PostRepositoryInterface
 
   public function all();
 
-  public function paginate();
-
   public function latest();
 
   public function store(Request $request);

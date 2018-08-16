@@ -6,10 +6,12 @@ Slug.defaults.mode = "rfc3986";
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+
+Vue.use(VueRouter);
+
 import {routes} from './routes';
 import App from './App.vue';
 
-Vue.use(VueRouter);
 
 // Vue.use(VueAxios, axios);
 

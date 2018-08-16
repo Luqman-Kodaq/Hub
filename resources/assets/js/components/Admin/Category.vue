@@ -41,7 +41,6 @@
                                     <td>{{ category.created_at }}</td>
                                     <td class="text-right">
                                         <div class="btn-group">
-                                               <router-link :to="'/admin/category/show/'+category.id" class="btn btn-default"><i class="fa fa-eye"></i></router-link>
                                                 <router-link :to="'/admin/category/edit/'+category.id" class="btn btn-default"><i class="fa fa-pencil"></i></router-link>
                                                 <a @click="deleteCategory(category.id)" class="btn btn-default btn-sm"><i class="fa fa-trash"></i></a>
                                         </div>
@@ -85,7 +84,7 @@ import Sidebar from './Sidebar'
                 }
             },
 
-            created() {
+            mounted() {
               this.fetchCategory();
             },
 
@@ -95,8 +94,9 @@ import Sidebar from './Sidebar'
                 page_url = page_url || '/api/manage/categories'
                 axios.get(page_url)
                 .then(res => {
-                  this.categories = res.data;
-                  // console.log(res.data);
+                  let data = res.data;
+                  this.categories = res.data.data;
+                  // console.log(res.data.meta);
                   vm.makePagination(res.data.meta, res.data.links);
                 })
                 .catch((err) => this.errors = err.response);

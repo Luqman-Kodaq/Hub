@@ -15,6 +15,7 @@ class PostCollection extends Resource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'slug' => $this->slug,
             'image' => $this->image,
             'title' => $this->title,
@@ -22,9 +23,10 @@ class PostCollection extends Resource
             'contents' => $this->contents,
             'like' => $this->like,
             'dislike' => $this->dislike,
-            'user_id' => $this->user_id,
-            'category' => $this->category_id,
-            'tag' => $this->tags
+            'user_id' => $this->user->name,
+            'category' => $this->category->name,
+            'tag' => $this->tags,
+            'created_at' => (string)$this->created_at
         ];
     }
 }

@@ -15,7 +15,9 @@ class TagCollection extends Resource
     public function toArray($request)
     {
         return [
-            'name' => $this->name
+            'id' => $this->id,
+            'name' => $this->name,
+            'created_at' => (string) $this->created_at
         ];
     }
 }

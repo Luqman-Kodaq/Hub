@@ -11,12 +11,12 @@ class Tag extends Model
      *
      * @var array
      */
-    protected $hidden = [
-        'id', 'created_at', 'updated_at', 'pivot'
-    ];
+    // protected $hidden = [
+    //     'id', 'created_at', 'updated_at', 'pivot'
+    // ];
 
     public function posts()
     {
-    	return $this->belongsToMany('App\Post');
+    	return $this->belongsToMany('App\Post', 'post_tag');
     }
 }

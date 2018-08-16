@@ -19,13 +19,14 @@ import ViewUser from './components/Admin/ViewUser';
 import Category from './components/Admin/Category';
 import AddCategory from './components/Admin/AddCategory';
 import EditCategory from './components/Admin/EditCategory';
-import ViewCategory from './components/Admin/ViewCategory';
 import Tag from './components/Admin/Tag';
 import AddTag from './components/Admin/AddTag';
 import EditTag from './components/Admin/EditTag';
 import ViewTag from './components/Admin/ViewTag';
 import Profile from './components/Admin/Profile';
+import EditProfile from './components/Admin/EditProfile';
 import Settings from './components/Admin/Settings';
+import EditSettings from './components/Admin/EditSettings';
 
 
 
@@ -159,6 +160,14 @@ export const routes = [
       admin: true
   }},
   { 
+    path: '/admin/profile/edit/:id', 
+    component: EditProfile, 
+    name: 'EditProfile', 
+    meta: {
+      requiresAuth: true,
+      admin: true
+  }},
+  { 
     path: '/admin/settings', 
     component: Settings, 
     name: 'Settings', 
@@ -167,17 +176,17 @@ export const routes = [
       admin: true
   }},
   { 
-    path: '/admin/category', 
-    component: Category, 
-    name: 'Category', 
+    path: '/admin/settings/edit',
+    component: EditSettings, 
+    name: 'EditSettings', 
     meta: {
       requiresAuth: true,
       admin: true
   }},
   { 
-    path: '/admin/category/show/:id', 
-    component: ViewCategory, 
-    name: 'ViewCategory', 
+    path: '/admin/category', 
+    component: Category, 
+    name: 'Category', 
     meta: {
       requiresAuth: true,
       admin: true

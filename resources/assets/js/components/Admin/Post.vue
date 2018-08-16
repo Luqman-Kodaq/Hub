@@ -101,7 +101,8 @@ import Sidebar from './Sidebar'
                 page_url = page_url || '/api/manage/posts'
                 axios.get(page_url)
                 .then(res => {
-                  this.posts = res.data;
+                  this.posts = res.data.data;
+                  console.log(res.data.meta);
                   vm.makePagination(res.data.meta, res.data.links);
                 })
                 .catch((err) => this.errors = err.response.data.errors);
