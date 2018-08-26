@@ -24,7 +24,7 @@ class PostResource extends JsonResource
             'contents' => $this->contents,
             'like' => $this->like,
             'dislike' => $this->dislike,
-            'user_id' => $this->user_id,
+            'user_id' => $this->user,
             'category' => $this->category->name,
             'tag' => $this->whenPivotLoaded('post_tag', function() {
                 return $this->pivot->name;

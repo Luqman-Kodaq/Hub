@@ -1,38 +1,39 @@
 <template>
-<div id="app" class="container">
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-            <div class="container">
-            <ul class="navbar-nav" v-for="setting in settings" :key="setting.id">
-                <a class="navlink navbar-brand"><router-link :to="{ name: 'Home' }" class="nav-link" style="cursor: pointer">{{ setting.site_name }}</router-link></a>
-            </ul>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div id="app">
+    <!-- <div id="dark-overlay"> -->
+    <nav id="dark-overlay" class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container" v-for="setting in settings" :key="setting.id">
+            <!-- <ul class="navbar-nav" v-for="setting in settings" :key="setting.id"> -->
+                <router-link :to="{ name: 'Home' }" active-class="active" exact><a class="navbar-brand nav-link">{{ setting.site_name }}</a></router-link>
+            <!-- </ul> -->
+                <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse" >
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" id="navbarCollapse">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav  ml-auto navRoutes">
+                    <ul class="navbar-nav  ml-auto">
                         <li class="nav-item">
-                                <a class="navlink"><router-link :to="{ name: 'Home' }" class="nav-link" active-class="active" exact style="cursor: pointer">Home</router-link></a>
+                                <router-link :to="{ name: 'Home' }" active-class="active" exact style="cursor: pointer"><a>Home</a></router-link>
                         </li>
                         <li class="nav-item">
-                               <a class="navlink"><router-link :to="{ name: 'Blogs' }" class="nav-link" active-class="active" style="cursor: pointer">Blog</router-link></a>
+                               <router-link :to="{ name: 'Blogs' }" active-class="active" style="cursor: pointer"><a>Blog</a></router-link>
                         </li>          
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto navLogs">
+                    <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                             <li class="nav-item">
-                                <a class="navlink"><router-link :to="{ name: 'Login' }" class="nav-link" active-class="active" style="cursor: pointer" v-if="!isLoggedIn">Log In</router-link></a>
+                                <router-link :to="{ name: 'Login' }" active-class="active" style="cursor: pointer" v-if="!isLoggedIn"><a>Log In</a></router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="navlink"><router-link :to="{ name: 'Register' }" class="nav-link" active-class="active" style="cursor: pointer" v-if="!isLoggedIn">Sign Up</router-link></a>
+                                <router-link :to="{ name: 'Register' }" active-class="active" style="cursor: pointer" v-if="!isLoggedIn"><a>Sign Up</a></router-link>
                             </li>
                             <span v-if="isLoggedIn">
-                                <ul class="navbar-nav ml-auto navLogs">
+                                <ul class="navbar-nav ml-auto">
                                     <li class="nav-item">
-                                        <a class="nav-link" v-if="user_type == 0">Hi {{ name }}</a> <span class="caret"></span>
+                                        <a v-if="user_type == 0">Hi {{ name }}</a> <span class="caret"></span>
                                         <a class="nav-link" v-if="user_type == 1">{{ name }}</a> <span class="caret"></span>
                                     </li>
                                 <li class="nav-item dropdown">
@@ -51,9 +52,8 @@
                 </div>
             </div>
         </nav>
-        <main class="py-4">
+        <!-- </div> -->
         <router-view @loggedIn=change></router-view>
-        </main>
 </div>
 </template>
 
@@ -106,12 +106,5 @@
 </script>
 
 <style scoped>
-    nav {
-    opacity: 0.8;
-    font-size: 16px;
-    font-weight: bold;
-    text-transform: uppercase;
-    background: none;
-    height: 50px;
-    }
+
 </style>

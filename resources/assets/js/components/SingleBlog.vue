@@ -33,7 +33,7 @@ export default {
   data(){
     return {
         post: '',
-        user: ''
+        user: '',
     }
   },
 
@@ -41,30 +41,17 @@ export default {
       fetchSingle(id) {
         axios.get(`/api/manage/posts/${id}`)
           .then(res => {
-          this.post = res.data;
-          console.log(res);
-          })
-          .catch(err => {
-          console.log(err);
-      });
-      },
-
-      fetchUsers() {
-          let user = JSON.parse(localStorage.getItem('credentials'));
-          let id = user.data.credentials.id;
-          axios.get(`/api/manage/users/${id}`)
-          .then(res => {
-              this.user = res.data;
-              this.profile = res.data.profile;
-            // console.log(this.user);
+          let data = res.data;
+          this.post = data;
+          this.user = data.user_id
+          console.log(this.user);
           })
           .catch((err) => this.errors = err.response.data.errors);
-        },
+      }
   },
 
   mounted() {
     this.fetchSingle(this.$route.params.id);
-    this.fetchUsers();
   }
 }
 </script>

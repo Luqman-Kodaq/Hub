@@ -20,10 +20,10 @@ class PostCollection extends Resource
             'image' => $this->image,
             'title' => $this->title,
             'excerpt' => $this->excerpt,
-            'contents' => $this->contents,
+            'contents' => $this->when((strlen(strip_tags($this->contents)) > 50), substr(strip_tags($this->contents), 0, 50)),
             'like' => $this->like,
             'dislike' => $this->dislike,
-            'user_id' => $this->user->name,
+            'user_id' => $this->user,
             'category' => $this->category->name,
             'tag' => $this->tags,
             'created_at' => (string)$this->created_at
